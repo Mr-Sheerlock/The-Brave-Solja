@@ -46,4 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 0}
   HitEffect: {fileID: 1739973103786403867, guid: c2a8fcea1e5fb564e85af0a6968d533a, type: 3}
+  Laser: {fileID: 2640016344473655362, guid: 25a23ffe0ae9dc64dada7c2a0cf565c5, type: 3}
   FireForce: 50

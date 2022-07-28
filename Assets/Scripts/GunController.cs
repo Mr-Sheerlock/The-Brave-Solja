@@ -27,7 +27,7 @@ public class GunController : MonoBehaviour
         SearchRadius = 5;
         collectible = null;
         Destroy(weapon);
-        //weapon = null;
+        weapon = null;
     }
     private void Update()
     {
@@ -36,13 +36,14 @@ public class GunController : MonoBehaviour
 
     public void ShootWeapon(Transform shootingpoint)
     {
-
+        if(weapon)
         weapon.Shoot(shootingpoint);
 
     }
 
     public void DontShootWeapon()
     {
+        if(weapon)
         weapon.DontShoot();
     }
 
@@ -58,7 +59,7 @@ public class GunController : MonoBehaviour
             if (Physics2D.Raycast(transform.position, CollectibleSpawnOffset.normalized, SearchRadius, 8)) //bitmask 1000 layer 3 
             {
             
-                CollectibleSpawnOffset = new Vector2(Random.Range(3f, 4f), Random.Range(3f, 4f));
+                CollectibleSpawnOffset = new Vector2(Random.Range(3f, 4f), Random.Range(4f, 5f));
                 randomBools = new Vector2(Random.value > 0.5 ? 1:-1, Random.value > 0.5 ? 1 : -1);
                 CollectibleSpawnOffset *= randomBools;
                 Debug.Log("Did Hit");
@@ -77,7 +78,11 @@ public class GunController : MonoBehaviour
     }
     public void ChangeWeapon(Weapon collectedweapon)
     {
-        Destroy(weapon);
+        if (weapon)
+        {
+            Destroy(weapon.gameObject);
+
+        }
         weapon = collectedweapon;
     }
 

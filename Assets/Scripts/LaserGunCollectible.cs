@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PJCollectible : Collectible
+public class LaserGunCollectible : Collectible
 {
     float delay;
     private void Start()
@@ -27,8 +27,7 @@ public class PJCollectible : Collectible
             spriteRenderer.enabled = false;
             box.enabled = false;
             Weapon lol = Instantiate(weapon, transform.position, transform.rotation);
-            ((ProjectileGun)lol).timer = Time.time;
-
+            
             gunController.ChangeWeapon(lol);
             gunController.ChangeCollectible(this);
         }

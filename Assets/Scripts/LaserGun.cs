@@ -10,11 +10,8 @@ public class LaserGun : Weapon
     public LineRenderer lineRenderer;
 
     public GameObject HitEffect;
+    public GameObject Laser;
 
-    public float FireForce = 50f;
-
-    public static float Zrotaion = 90f;
-    Vector3 Euleroffset;//= new Vector3(0, 0, Zrotaion);
     Quaternion rotationoffset;
 
 
@@ -24,7 +21,6 @@ public class LaserGun : Weapon
         range = 20;
         damage = 1;
         //TimeSinceLastShoot = 0f;
-        //Euleroffset = new Vector3(0, 0, Zrotaion);
         numberofLasers = 1;
     }
     
@@ -32,7 +28,14 @@ public class LaserGun : Weapon
     {
 
         //linrenderer on 
-        //rotationoffset.eulerAngles = Euleroffset + shootingPoint.rotation.eulerAngles;
+        if(!lineRenderer)
+        {
+            GameObject laser = GameObject.Find("Laser(Clone)");
+            if(!laser)
+            laser = Instantiate(Laser, shootingPoint.position, rotationoffset);
+            lineRenderer=laser.GetComponent<LineRenderer>();
+
+        }
         lineRenderer.enabled = true;
         lineRenderer.widthMultiplier = 0.5f;
         lineRenderer.SetPosition(0, shootingPoint.position);
@@ -47,10 +50,6 @@ public class LaserGun : Weapon
         
         lineRenderer.SetPosition(1, (Vector2)shootingPoint.position+direction.normalized * range); //end
 
-        
-
-
-        //lineRenderer.SetPosition(1, shootingPoint.up* range);
         RaycastHit2D hit=Physics2D.CircleCast(shootingPoint.position, lineRenderer.widthMultiplier/2, direction, range);
 
         if (hit)
@@ -63,16 +62,18 @@ public class LaserGun : Weapon
             }
         }
 
-
-
-
-
+    
     }
 
-    
-    
+
+    private void OnDestroy()
+    {
+        DontShoot();
+    }
+
     public override void DontShoot() { 
-            
+         
+        if(lineRenderer)
         lineRenderer.enabled = false;
     }
 

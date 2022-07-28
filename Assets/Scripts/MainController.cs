@@ -37,8 +37,14 @@ public class MainController : MonoBehaviour
 
             gunController.ShootWeapon(Shootinpoint);
         }
+        else
+        {
+            gunController.DontShootWeapon();
+
+        }
         if (Input.GetMouseButtonUp(0))
         {
+            Debug.Log("lolNoShoot");
             gunController.DontShootWeapon();
         }
         

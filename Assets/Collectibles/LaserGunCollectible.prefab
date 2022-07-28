@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6709658573384354430}
   - component: {fileID: 6709658573384354431}
   - component: {fileID: 6709658573384354400}
-  - component: {fileID: 6709658573384354429}
+  - component: {fileID: -6823204411141192869}
   m_Layer: 0
   m_Name: LaserGunCollectible
   m_TagString: Collectible
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.8828125}
   m_EdgeRadius: 0
---- !u!114 &6709658573384354429
+--- !u!114 &-6823204411141192869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,10 +121,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6709658573384354401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e3571d9a74cf254aad5b94cff55666a, type: 3}
+  m_Script: {fileID: 11500000, guid: c05092579f1eba3458328b391ec4dd5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6709658573384354431}
   box: {fileID: 6709658573384354400}
-  weapon: {fileID: 3336290982689687542, guid: 9b394b0f7011c6548977bc45de675e2c, type: 3}
+  weapon: {fileID: 5998821449281549036, guid: 55ff0cc008c3ea441961618d9630ba49, type: 3}
   gunController: {fileID: 0}

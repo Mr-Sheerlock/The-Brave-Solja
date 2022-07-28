@@ -35,7 +35,7 @@ public class ProjectileGun : Weapon
     public override void Shoot(Transform shootingPoint)
     {
         //Debug.Log("Damage is ");
-        //Debug.Log(damage);
+        //Debug.Log(damage);;;;
         //Debug.Log("timer is ");
         //Debug.Log(timer);
         TimeSinceLastShoot = Time.time - timer;
@@ -43,6 +43,10 @@ public class ProjectileGun : Weapon
         //Debug.Log(TimeSinceLastShoot);
         if (TimeSinceLastShoot >= 0.2f)
         {
+            if (!bullet)
+            {
+                Debug.Log("Not Oki : ( ");
+            }
             Debug.Log("ShootGOWA");
             timer = Time.time;
             //rotationoffset.eulerAngles = Euleroffset ;
