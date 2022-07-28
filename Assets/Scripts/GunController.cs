@@ -7,10 +7,12 @@ public class GunController : MonoBehaviour
     public Weapon weapon;
     Vector2 mousePosition;
     Vector2 aimDirection;
+    int Damage;
 
 
     private void Start()
     {
+        Damage = 0;
         //weapon = GetComponent<ProjectileGun>();
     }
 
