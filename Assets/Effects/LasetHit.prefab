@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1739973103786403869}
   - component: {fileID: 1739973103786403866}
   m_Layer: 0
-  m_Name: ProjectileHitEffect
+  m_Name: LasetHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 0.1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -222,8 +222,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.7830189, g: 0.29038224, b: 0.07756319, a: 1}
-      maxColor: {r: 0.6981132, g: 0.07573871, b: 0.1640721, a: 1}
+      minColor: {r: 0.105329, g: 0.078431346, b: 0.78431374, a: 1}
+      maxColor: {r: 0.074509785, g: 0.36375415, b: 0.69803923, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

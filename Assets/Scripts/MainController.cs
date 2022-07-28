@@ -42,6 +42,7 @@ public class MainController : MonoBehaviour
             gunController.DontShootWeapon();
         }
         
+        
 
 
     }
@@ -61,4 +62,6 @@ public class MainController : MonoBehaviour
         rb.velocity = new Vector2(Horizontal, Vertical);
 
     }
+
+    
 }
