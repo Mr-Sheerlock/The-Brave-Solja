@@ -7,23 +7,18 @@ public class LaserGunCollectible : Collectible
     float delay;
     private void Start()
     {
-        //ReferencedScript refScript = GetComponent<ReferencedScript>();
         GameObject Player=GameObject.Find("Player");
         gunController = Player.GetComponent< GunController > ();
-
-        //gunController = GameObject.Find("Gun Controller");
+        CollectibleSpawnOffset = new Vector2(3, 3);
+        SearchRadius = 5;
     }
 
-    private void Update()
-    {
-        
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if ( other.tag == "Player")
         {
             //first tell the gunController to spawn the other object
-            Debug.Log("Trg");
+            Debug.Log("TrgLsr");
             spriteRenderer.enabled = false;
             box.enabled = false;
             Weapon lol = Instantiate(weapon, transform.position, transform.rotation);
@@ -34,15 +29,7 @@ public class LaserGunCollectible : Collectible
 
     }
 
-    public override void  Spawn(Vector2 newposition)
-    {
-        //bywsl le hena 3ady 
 
-
-        transform.position = newposition;
-        spriteRenderer.enabled = true;
-        box.enabled = true;
-    }
 
 
 }
