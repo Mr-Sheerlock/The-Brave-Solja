@@ -8,9 +8,9 @@ public class BulletBehaviour : MonoBehaviour
 
     float TimeSinceShot;
 
-    int damage;
+    public int damage;
 
-    void SetDamage(int x)
+    public void SetDamage(int x)
     {
         damage = x;
     }
