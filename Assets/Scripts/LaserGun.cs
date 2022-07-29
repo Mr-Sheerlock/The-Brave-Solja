@@ -24,7 +24,7 @@ public class LaserGun : Weapon
         numberofLasers = 1;
     }
     
-    public override void Shoot(Transform shootingPoint)
+    public override void Shoot(Transform ShootingPoint, Vector2 AimDirection)
     {
 
         //linrenderer on 
@@ -32,25 +32,17 @@ public class LaserGun : Weapon
         {
             GameObject laser = GameObject.Find("Laser(Clone)");
             if(!laser)
-            laser = Instantiate(Laser, shootingPoint.position, rotationoffset);
+            laser = Instantiate(Laser, ShootingPoint.position, rotationoffset);
             lineRenderer=laser.GetComponent<LineRenderer>();
 
         }
+
         lineRenderer.enabled = true;
         lineRenderer.widthMultiplier = 0.5f;
-        lineRenderer.SetPosition(0, shootingPoint.position);
+        lineRenderer.SetPosition(0, ShootingPoint.position); //start
+        lineRenderer.SetPosition(1, (Vector2)ShootingPoint.position+ AimDirection.normalized * range); //end
 
-        var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = mousePosition - (Vector2)shootingPoint.position;
-
-
-        lineRenderer.SetPosition(0, shootingPoint.position); //start
-
-        
-        
-        lineRenderer.SetPosition(1, (Vector2)shootingPoint.position+direction.normalized * range); //end
-
-        RaycastHit2D hit=Physics2D.CircleCast(shootingPoint.position, lineRenderer.widthMultiplier/2, direction, range);
+        RaycastHit2D hit=Physics2D.CircleCast(ShootingPoint.position, lineRenderer.widthMultiplier/2, AimDirection, range);
 
         if (hit)
         {

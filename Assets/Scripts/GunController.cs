@@ -23,10 +23,10 @@ public class GunController : MonoBehaviour
         weapon = null;
     }
 
-    public void ShootWeapon(Transform shootingpoint)
+    public void ShootWeapon(Transform shootingpoint,Vector2 aimDirection)
     {
         if(weapon)
-        weapon.Shoot(shootingpoint);
+        weapon.Shoot(shootingpoint,aimDirection);
 
     }
 
@@ -62,7 +62,7 @@ public class GunController : MonoBehaviour
         {
             Collectible temp = collectible;
             collectible = newcollectible;
-            //hanb3tlo el transform.position instead w howa hay3ml kol 7aga gowa 
+            
             temp.Spawn(transform.position);
 
         }

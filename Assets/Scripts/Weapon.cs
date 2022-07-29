@@ -11,7 +11,7 @@ public abstract class Weapon : MonoBehaviour
         damage = x;
     }
 
-    public abstract void Shoot(Transform shootingPoint);
+    public abstract void Shoot(Transform ShootingPoint,Vector2 AimDirection);
     public abstract void DontShoot();
 
     

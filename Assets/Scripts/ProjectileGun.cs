@@ -4,54 +4,47 @@ using UnityEngine;
 
 public class ProjectileGun : Weapon
 {
-    float minimumDelay;
-    float ForceofProjectile;
-    int numberofProjectiles;
 
+    int numberofProjectiles;
 
     ////////////timer//////////
     public float timer=0;
     float TimeSinceLastShoot;
 
+    ////////////Bullet//////////
     public GameObject bullet;
-
-    public float FireForce = 50f;
-
-    public static float Zrotaion = 90f;
-    Vector3 Euleroffset;//= new Vector3(0, 0, Zrotaion);
-    Quaternion rotationoffset;
+    public float FireForce;
+    public static float Zrotaion;
+    Vector3 AnglesOffset;
+    Quaternion BulletRotation;
 
     
     private void Start()
     {
+        FireForce = 5f;
+        Zrotaion = 90f;
         damage = 1;
         TimeSinceLastShoot = 0f;
-        Euleroffset = new Vector3(0, 0, Zrotaion);
+        AnglesOffset = new Vector3(0, 0, Zrotaion);
         numberofProjectiles = 1;
         timer = Time.time;
     }
     
 
-    public override void Shoot(Transform shootingPoint)
+    public override void Shoot(Transform ShootingPoint, Vector2 AimDirection)
     {
         TimeSinceLastShoot = Time.time - timer;
 
 
-        if (TimeSinceLastShoot >= 0.2f)
+        if (TimeSinceLastShoot >= 0.3f)
         {
-           
-            Debug.Log("ShootGOWA");
             timer = Time.time;
-            //rotationoffset.eulerAngles = Euleroffset ;
-
-            rotationoffset.eulerAngles = Euleroffset + shootingPoint.rotation.eulerAngles;
+            BulletRotation.eulerAngles = AnglesOffset + ShootingPoint.rotation.eulerAngles;
+            
             if (numberofProjectiles == 1)
-            {
-                
-                GameObject currentbullet = Instantiate(bullet, shootingPoint.position, rotationoffset);
-                currentbullet.GetComponent<Rigidbody2D>().AddForce(shootingPoint.up * FireForce, ForceMode2D.Impulse);
-
-
+            {   
+                GameObject currentbullet = Instantiate(bullet, ShootingPoint.position, BulletRotation);
+                currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
             }
             else
             {

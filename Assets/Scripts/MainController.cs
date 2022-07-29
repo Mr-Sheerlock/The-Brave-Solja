@@ -8,10 +8,11 @@ public class MainController : MonoBehaviour
     public float speed = 15f;
     public Rigidbody2D rb;
     float Horizontal, Vertical;
+    public Transform Shootinpoint;
+    
+    //shooting and aiming 
     Vector2 mousePosition;
     Vector2 aimDirection;
-    public Transform Shootinpoint;
-    //Vector2 Shootingpoint;
     public GunController gunController;
     
     
@@ -35,7 +36,7 @@ public class MainController : MonoBehaviour
 
             //Shootingpoint = (Vector2)shootinpoint.position;
 
-            gunController.ShootWeapon(Shootinpoint);
+            gunController.ShootWeapon(Shootinpoint, aimDirection);
         }
         else
         {

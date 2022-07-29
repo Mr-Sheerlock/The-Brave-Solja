@@ -19,7 +19,6 @@ public class PJCollectible : Collectible
         if ( other.tag == "Player")
         {
             //first tell the gunController to spawn the other object
-            Debug.Log("TrgPJ");
             spriteRenderer.enabled = false;
             box.enabled = false;
             Weapon lol = Instantiate(weapon, transform.position, transform.rotation);
