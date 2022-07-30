@@ -21,8 +21,8 @@ public class LaserGunCollectible : Collectible
             spriteRenderer.enabled = false;
             box.enabled = false;
             Weapon lol = Instantiate(weapon, transform.position, transform.rotation);
-            
-            gunController.ChangeWeapon(lol);
+            lol.name = "LaserGun(Player)";
+            gunController.ChangeWeapon(lol,true);
             gunController.ChangeCollectible(this);
         }
 

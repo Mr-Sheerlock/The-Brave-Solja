@@ -43,9 +43,9 @@ public class GunController : MonoBehaviour
     
     
     
-    public void ChangeWeapon(Weapon collectedweapon)
+    public void ChangeWeapon(Weapon collectedweapon, bool destroy)
     {
-        if (weapon)
+        if (weapon && destroy)
         {
             Destroy(weapon.gameObject);
 

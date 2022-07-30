@@ -24,7 +24,7 @@ public class PJCollectible : Collectible
             Weapon lol = Instantiate(weapon, transform.position, transform.rotation);
             ((ProjectileGun)lol).timer = Time.time;
 
-            gunController.ChangeWeapon(lol);
+            gunController.ChangeWeapon(lol,true);
             gunController.ChangeCollectible(this);
         }
 

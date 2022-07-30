@@ -30,7 +30,7 @@ public class ProjectileGun : Weapon
         Zrotaion = 90f;
         TimeSinceLastShoot = 0f;
         AnglesOffset = new Vector3(0, 0, Zrotaion);
-        numberofProjectiles = 2;
+        numberofProjectiles = 1;
         timer = Time.time;
         PeriodicTime = 0.3f;
     }
@@ -38,6 +38,11 @@ public class ProjectileGun : Weapon
     public void SetPeriodictime(float newtime)
     {
         PeriodicTime = newtime;
+    }
+
+    public void SetNumberOfProjectiles(int newnumber)
+    {
+        numberofProjectiles = newnumber;
     }
     public override void Shoot(Transform ShootingPoint, Vector2 AimDirection)
     {
@@ -109,6 +114,9 @@ public class ProjectileGun : Weapon
     
     public override void DontShoot() { }
 
-    
 
+    private void OnDestroy()
+    {
+        Debug.Log("3leek wa7ed lo l");
+    }
 }

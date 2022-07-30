@@ -35,16 +35,25 @@ public class BulletBehaviour : MonoBehaviour
     private void OnCollisionEnter2D( Collision2D other)
     {
 
-        GameObject lol = Instantiate(HitEffect, transform.position, transform.rotation);
+        //GameObject lol = Instantiate(HitEffect, transform.position, transform.rotation);
 
         //CallBack?????2
 
 
-
+        GameObject lol = Instantiate(HitEffect, transform.position, transform.rotation);
         if (other.collider.GetComponent<Health>())
         {
             other.collider.GetComponent<Health>().TakeDamage(damage);
         }
         Destroy(gameObject);  
     }
+
+
+    public void Collide()
+    {
+        GameObject lol = Instantiate(HitEffect, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
+
+
 }

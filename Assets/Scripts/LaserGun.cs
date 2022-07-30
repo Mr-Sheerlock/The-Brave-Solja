@@ -24,27 +24,43 @@ public class LaserGun : Weapon
         //TimeSinceLastShoot = 0f;
         timer = 0;
         LaserWidth = 0.5f;
+        if (!lineRenderer)
+        {
+            GameObject laser = GameObject.Find("Laser(Player)");
+            if (!laser)
+            {
+                laser = Instantiate(Laser, transform.position, rotationoffset);
+                laser.name = "Laser(Player)";
+            }
+            lineRenderer = laser.GetComponent<LineRenderer>();
+
+        }
     }
-    
+
+    //for Towers and Enemies
+    public void SetLaserName(string LaserName)
+    {
+        GameObject laser = GameObject.Find(LaserName);
+        if (!laser)
+        {
+            laser = Instantiate(Laser, transform.position, rotationoffset);
+            laser.name =LaserName;
+        }
+        lineRenderer = laser.GetComponent<LineRenderer>();
+        lineRenderer.name = LaserName;
+    }
     public override void Shoot(Transform ShootingPoint, Vector2 AimDirection)
     {
 
         //linrenderer on 
-        if(!lineRenderer)
-        {
-            GameObject laser = GameObject.Find("Laser(Clone)");
-            if(!laser)
-            laser = Instantiate(Laser, ShootingPoint.position, rotationoffset);
-            lineRenderer=laser.GetComponent<LineRenderer>();
-
-        }
+        
 
         lineRenderer.enabled = true;
         lineRenderer.widthMultiplier = LaserWidth;
         lineRenderer.SetPosition(0, ShootingPoint.position); //start
         lineRenderer.SetPosition(1, (Vector2)ShootingPoint.position+ AimDirection.normalized * range); //end
 
-        RaycastHit2D hit=Physics2D.CircleCast(ShootingPoint.position, lineRenderer.widthMultiplier/2, AimDirection, range,(1<<3) + (1<<7) );
+        RaycastHit2D hit=Physics2D.CircleCast(ShootingPoint.position, lineRenderer.widthMultiplier/2, AimDirection, range,(1<<3) + (1<<7) + (1<<8) );
 
         if (hit)
         {
@@ -56,7 +72,14 @@ public class LaserGun : Weapon
             {
                 hit.collider.GetComponent<Health>().TakeDamage(damage);
             }
-
+            if (hit.collider.tag == "Projectile")
+            {
+                if(hit.collider.gameObject.GetComponent< BulletBehaviour>())
+                {
+                    BulletBehaviour loler = hit.collider.gameObject.GetComponent<BulletBehaviour>();
+                    loler.Collide();
+                }
+            }
         }
 
 
