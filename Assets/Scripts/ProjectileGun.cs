@@ -11,6 +11,7 @@ public class ProjectileGun : Weapon
     ////////////timer//////////
     public float timer=0;
     float TimeSinceLastShoot;
+    float PeriodicTime;
 
     ////////////Bullet//////////
     public GameObject bullet;
@@ -23,7 +24,7 @@ public class ProjectileGun : Weapon
     
     private void Start()
     {
-        damage = 55;
+        damage = 5;
         gunWidth = 3f;
         FireForce = 5f;
         Zrotaion = 90f;
@@ -31,15 +32,19 @@ public class ProjectileGun : Weapon
         AnglesOffset = new Vector3(0, 0, Zrotaion);
         numberofProjectiles = 2;
         timer = Time.time;
+        PeriodicTime = 0.3f;
     }
     
-
+    public void SetPeriodictime(float newtime)
+    {
+        PeriodicTime = newtime;
+    }
     public override void Shoot(Transform ShootingPoint, Vector2 AimDirection)
     {
         TimeSinceLastShoot = Time.time - timer;
 
 
-        if (TimeSinceLastShoot >= 0.3f)
+        if (TimeSinceLastShoot >= PeriodicTime)
         {
             timer = Time.time;
             BulletRotation.eulerAngles = AnglesOffset + ShootingPoint.rotation.eulerAngles;
@@ -67,6 +72,8 @@ public class ProjectileGun : Weapon
 
                     }
                     GameObject currentbullet = Instantiate(bullet, ShootingPoint.position + (Vector3)Offset, BulletRotation);
+                    BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
+                    lol.SetDamage(damage);
                     currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
                 }
 
@@ -79,6 +86,8 @@ public class ProjectileGun : Weapon
                     magnitude += increment;
                     Offset = magnitude * (ShootingPoint.right);
                     GameObject currentbullet = Instantiate(bullet, ShootingPoint.position + (Vector3)Offset, BulletRotation);
+                    BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
+                    lol.SetDamage(damage);
                     currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
                 }
 
@@ -95,7 +104,6 @@ public class ProjectileGun : Weapon
         //set Damage
         BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
         lol.SetDamage(damage);
-
         currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
     }
     

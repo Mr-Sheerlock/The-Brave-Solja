@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class LaserGun : Weapon
 {
+    ///Specs/// 
     float timer;
-    int numberofLasers;
-    //float TimeSinceLastShoot;
+    float LaserWidth{get;set;}
+    
     public LineRenderer lineRenderer;
 
     public GameObject HitEffect;
@@ -21,7 +22,8 @@ public class LaserGun : Weapon
         range = 20;
         damage = 1;
         //TimeSinceLastShoot = 0f;
-        numberofLasers = 1;
+        timer = 0;
+        LaserWidth = 0.5f;
     }
     
     public override void Shoot(Transform ShootingPoint, Vector2 AimDirection)
@@ -38,23 +40,26 @@ public class LaserGun : Weapon
         }
 
         lineRenderer.enabled = true;
-        lineRenderer.widthMultiplier = 0.5f;
+        lineRenderer.widthMultiplier = LaserWidth;
         lineRenderer.SetPosition(0, ShootingPoint.position); //start
         lineRenderer.SetPosition(1, (Vector2)ShootingPoint.position+ AimDirection.normalized * range); //end
 
-        RaycastHit2D hit=Physics2D.CircleCast(ShootingPoint.position, lineRenderer.widthMultiplier/2, AimDirection, range);
+        RaycastHit2D hit=Physics2D.CircleCast(ShootingPoint.position, lineRenderer.widthMultiplier/2, AimDirection, range,(1<<3) + (1<<7) );
 
         if (hit)
         {
-            if(hit.collider.tag== "Walls")
-            {
-                lineRenderer.SetPosition(1, hit.point);
-                GameObject lol = Instantiate(HitEffect, hit.point, hit.transform.rotation);
 
+            lineRenderer.SetPosition(1, hit.point);
+            GameObject lol = Instantiate(HitEffect, hit.point, hit.transform.rotation);
+
+            if (hit.collider.GetComponent<Health>())
+            {
+                hit.collider.GetComponent<Health>().TakeDamage(damage);
             }
+
         }
 
-    
+
     }
 
 
@@ -63,9 +68,10 @@ public class LaserGun : Weapon
         DontShoot();
     }
 
-    public override void DontShoot() { 
-         
-        if(lineRenderer)
+    public override void DontShoot() {
+
+        timer = 0;
+        if (lineRenderer)
         lineRenderer.enabled = false;
     }
 

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MainController : MonoBehaviour
 {
+    ///Specs///
 
-    public float speed = 15f;
+    int damage;
+    public float speed;
     public Rigidbody2D rb;
     float Horizontal, Vertical;
     public Transform Shootinpoint;
@@ -22,8 +24,12 @@ public class MainController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        damage = 5;
+        gunController.SetDamage(damage);
+        speed = 15;
+
         aimOffset = 130f;
-        //offset = new Vector2(-1.49f, 1.64f);
+
     }
 
     // Update is called once per frame

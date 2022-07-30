@@ -15,6 +15,7 @@ public class BulletBehaviour : MonoBehaviour
         damage = x;
     }
 
+   
     private void Start()
     {
         TimeSinceShot = 0f;
@@ -33,17 +34,17 @@ public class BulletBehaviour : MonoBehaviour
     
     private void OnCollisionEnter2D( Collision2D other)
     {
-        if (other.collider.tag == "Walls")
+
+        GameObject lol = Instantiate(HitEffect, transform.position, transform.rotation);
+
+        //CallBack?????2
+
+
+
+        if (other.collider.GetComponent<Health>())
         {
-            GameObject lol = Instantiate(HitEffect, transform.position, transform.rotation);
-
-            //CallBack?????2
-
-            Destroy(gameObject);  
+            other.collider.GetComponent<Health>().TakeDamage(damage);
         }
-        //else if (other.tag == "Enemy")
-        //{
-
-        //}
+        Destroy(gameObject);  
     }
 }

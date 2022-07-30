@@ -13,20 +13,24 @@ public class GunController : MonoBehaviour
     //Collectible related stuff
     public Weapon weapon;
     public Collectible collectible;
- 
+    
+    public void SetDamage(int damage)
+    {
+        Damage = damage;
+    }
 
     void Start()
     {
         Damage = 1;
         collectible = null;
-        Destroy(weapon);
-        weapon = null;
     }
 
     public void ShootWeapon(Transform shootingpoint,Vector2 aimDirection)
     {
-        if(weapon)
-        weapon.Shoot(shootingpoint,aimDirection);
+        if (weapon)
+            weapon.Shoot(shootingpoint, aimDirection);
+        //else
+        //    Debug.Log("Lol no shoot");
 
     }
 
@@ -36,8 +40,6 @@ public class GunController : MonoBehaviour
         weapon.DontShoot();
     }
 
-    //RaycastHit hit;
-    //public LayerMask layermask;
     
     
     
@@ -49,6 +51,7 @@ public class GunController : MonoBehaviour
 
         }
         weapon = collectedweapon;
+        weapon.SetDamage(Damage);
     }
 
     public void ChangeCollectible(Collectible newcollectible)
