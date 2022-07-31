@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
+    [Header("Events")]
+    public UnityEvent CustomEvent;
     float timer = 0;
     int Maxhealth { get; set; }
     int CurrentHealth { get; set; }
@@ -45,13 +47,9 @@ public class Health : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
-            //Die();
+            CustomEvent.Invoke();
         }
     }
 
-    void Die()
-    {
-
-    }
 
 }

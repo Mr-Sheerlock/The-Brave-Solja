@@ -180,4 +180,9 @@ public class EnemyController : MonoBehaviour
         CurrentWeapon = Instantiate(weapontype);
         gunController.ChangeWeapon(CurrentWeapon, false);
     }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }

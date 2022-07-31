@@ -96,4 +96,18 @@ public class TowerController : MonoBehaviour
     private void FixedUpdate()
     {
     }
+
+    public void  Die()
+    {
+        Destroy(gameObject);
+    }
+
+
+    private void OnDestroy()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            Destroy(Weapons[i]);
+        }
+    }
 }

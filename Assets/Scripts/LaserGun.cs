@@ -60,7 +60,7 @@ public class LaserGun : Weapon
         lineRenderer.SetPosition(0, ShootingPoint.position); //start
         lineRenderer.SetPosition(1, (Vector2)ShootingPoint.position+ AimDirection.normalized * range); //end
 
-        RaycastHit2D hit=Physics2D.CircleCast(ShootingPoint.position, lineRenderer.widthMultiplier/2, AimDirection, range,(1<<3) + (1<<7) + (1<<8) );
+        RaycastHit2D hit=Physics2D.CircleCast(ShootingPoint.position, lineRenderer.widthMultiplier/2, AimDirection, range,(1<<3) + (1<<7) + (1<<8) +(1<<9));
 
         if (hit)
         {

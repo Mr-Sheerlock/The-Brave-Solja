@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3063219372810335488}
-  m_Layer: 0
-  m_Name: Laser Enemy
+  m_Layer: 9
+  m_Name: Projectile Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6114230048396816255}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BoundaryLEFT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6114230048416651818}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BoundaryDOWN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6114230049087217254}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6114230049315764266}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BoundaryRIGHT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6114230049329977206}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BoundaryUP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,8 @@ GameObject:
   - component: {fileID: 6114230049610096624}
   - component: {fileID: 6114230049610096627}
   - component: {fileID: 6114230049610096628}
-  m_Layer: 0
+  - component: {fileID: 1761157975710500113}
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +245,7 @@ MonoBehaviour:
   speed: 0
   rb: {fileID: 6114230049610096627}
   Shootinpoint: {fileID: 6114230049087217254}
-  weapontype: {fileID: 5998821449281549036, guid: 55ff0cc008c3ea441961618d9630ba49, type: 3}
+  weapontype: {fileID: 3336290982689687542, guid: 9b394b0f7011c6548977bc45de675e2c, type: 3}
   CurrentWeapon: {fileID: 0}
   BoundaryPoints:
   - {fileID: 6114230049329977206}
@@ -307,7 +308,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d978df4c7e81e6d4eb084d7849fd18a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f6fdb774052af8f48b32752bac3fe23a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -355,6 +356,34 @@ CircleCollider2D:
   m_Offset: {x: -0.23, y: 0.24}
   serializedVersion: 2
   m_Radius: 0.76
+--- !u!114 &1761157975710500113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6114230049610096626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742662118bfbf504888a3b8b586ece62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CustomEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6114230049610096630}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  HB: {fileID: 0}
 --- !u!1001 &6114230048382834742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -362,6 +391,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6114230049610096631}
     m_Modifications:
+    - target: {fileID: 6431026194016515085, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6431026194016515087, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -369,6 +402,10 @@ PrefabInstance:
     - target: {fileID: 6431026194667785882, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_Name
       value: Healthbar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431026194667785882, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6431026194667785883, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_RootOrder
@@ -413,6 +450,14 @@ PrefabInstance:
     - target: {fileID: 6431026194667785883, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431026194713693190, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431026194785784657, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}

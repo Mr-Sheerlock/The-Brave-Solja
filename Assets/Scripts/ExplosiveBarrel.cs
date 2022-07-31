@@ -4,54 +4,47 @@ using UnityEngine;
 
 public class ExplosiveBarrel : MonoBehaviour
 {
-    float timer = 0;
-    int Maxhealth { get; set; }
-    int CurrentHealth { get; set; }
-    int healregen { get; set; }
+    public Sprite explosion;
+    public BoxCollider2D collider;
+    float timeofExplosion;
+    float timer;
+    bool Exploded;
 
-    public HealthbarScript HB;
+    public SpriteRenderer Sr;
+    Health health;
     //GameObject Healthbar;
     // Start is called before the first frame update
     void Start()
     {
-        Maxhealth = 100;
-        CurrentHealth = 100;
-        healregen = 0;
+        health=GetComponent<Health>();
+        Exploded = false;
+        
+        timer = 0;
+        timeofExplosion = 0.3f;
 
-        HB = gameObject.GetComponentInChildren<HealthbarScript>();
-        //HB = 
-
+    }
+    private void Update()
+    {
+        if (Exploded)
+        {
+            timer += Time.deltaTime;
+            if(timer> timeofExplosion)
+            {
+                Destroy(gameObject);
+            }
+        }
+        
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+
+
+    public void Die()
     {
-        timer += Time.fixedDeltaTime;
-        if (timer >= 1)
-        {
-            CurrentHealth += healregen;
-            timer = 0;
-            if (HB)
-                (HB)?.SetSize((float)CurrentHealth / Maxhealth);
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        CurrentHealth -= damage;
-
-        (HB)?.SetSize((float)CurrentHealth / Maxhealth);
-
-        if (CurrentHealth <= 0)
-        {
-            CurrentHealth = 0;
-            //Die();
-        }
-    }
-
-    void Die()
-    {
-
+        collider.enabled = false;
+        Exploded = true;
+        Sr.sprite = explosion;
+        transform.localScale = new Vector2(10, 10);
     }
 
 }

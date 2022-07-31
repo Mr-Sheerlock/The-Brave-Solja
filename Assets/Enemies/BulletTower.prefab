@@ -139,6 +139,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742662118bfbf504888a3b8b586ece62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CustomEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7892938498936934325}
+        m_TargetAssemblyTypeName: TowerController, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   HB: {fileID: 5006820616803747412}
 --- !u!58 &7892938498936934320
 CircleCollider2D:
