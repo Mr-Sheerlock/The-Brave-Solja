@@ -56,14 +56,23 @@ public class EnemyController : MonoBehaviour
         TimeIdle = 5f;
         RangeOfSight = 10f;
         LenghtOfBoundingSquare = 5f;
+        SetUpBounds();
+        TargetPosition = transform.position;
     }
 
+    void GetBoundsFromParent()
+    {
+        //BoundaryPoints[0] = gameObject.Get ;
+        //BoundaryPoints[1]= ;
+        //BoundaryPoints[2] = ;
+        //BoundaryPoints[3]= ;
+    }
     void SetUpBounds()
     {
         BoundaryPoints[0].position= transform.position +new Vector3(0,LenghtOfBoundingSquare);
-        BoundaryPoints[1].position= transform.position + new Vector3(0, LenghtOfBoundingSquare);
+        BoundaryPoints[1].position= transform.position + new Vector3(0, -LenghtOfBoundingSquare);
         BoundaryPoints[2].position= transform.position + new Vector3(LenghtOfBoundingSquare,0);
-        BoundaryPoints[3].position= transform.position + new Vector3(LenghtOfBoundingSquare,0);
+        BoundaryPoints[3].position= transform.position + new Vector3(-LenghtOfBoundingSquare,0);
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -124,9 +133,6 @@ public class EnemyController : MonoBehaviour
     }
     void Move(Vector2 newPosition)
     {
-        //Horizontal = Input.GetAxisRaw("Horizontal") * speed;
-        //Vertical = Input.GetAxisRaw("Vertical") * speed;
-        //rb.velocity = new Vector2(Horizontal, Vertical);
         MovingDirection = newPosition - (Vector2)transform.position;
         rb.velocity = MovingDirection.normalized * speed;
 
@@ -165,7 +171,7 @@ public class EnemyController : MonoBehaviour
 
     void RandomizeVector2D(ref Vector2 Vec)
     {
-        Vec = new Vector2(Random.Range(0f, LenghtOfBoundingSquare), Random.Range(0f, LenghtOfBoundingSquare));
+        Vec = new Vector2(Random.Range(3f, LenghtOfBoundingSquare), Random.Range(3f, LenghtOfBoundingSquare));
         randomDirections = new Vector2(Random.value > 0.5 ? 1 : -1, Random.value > 0.5 ? 1 : -1);
         Vec *= randomDirections;
     }
