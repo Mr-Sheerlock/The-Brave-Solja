@@ -48,7 +48,7 @@ public class BulletBehaviour : MonoBehaviour
         Destroy(gameObject);  
     }
 
-
+    
     public void Collide()
     {
         GameObject lol = Instantiate(HitEffect, transform.position, transform.rotation);
