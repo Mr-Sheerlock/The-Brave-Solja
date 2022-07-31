@@ -27,8 +27,12 @@ public class EnemyController : MonoBehaviour
     float RangeOfSight;
     bool SpottedPlayer;
     float timer;
+    float MovingTimer;
+    float TimeActiveMoving;
     float TimeActiveShooting;
     float TimeIdle;
+
+    float aimOffset;
 
     //Memory time ??
 
@@ -43,6 +47,8 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Position is");
+        Debug.Log(transform.position);
         Player = GameObject.Find("Player");
         damage = 5;
         gunController.SetDamage(damage);
@@ -50,25 +56,31 @@ public class EnemyController : MonoBehaviour
         CurrentState = State.MOVE;
         SpottedPlayer = false;
         timer = 0f;
+        MovingTimer = 0f;
         SetWeapon();
         //BoundaryPoints= new Transform[4];
         TimeActiveShooting = 5f;
+        TimeActiveMoving = 10f;
         TimeIdle = 5f;
         RangeOfSight = 10f;
         LenghtOfBoundingSquare = 5f;
+        GetBoundsFromParent();
         SetUpBounds();
         TargetPosition = transform.position;
+        Offset = new Vector2(0, 0);
+        aimOffset = 130f;
     }
 
     void GetBoundsFromParent()
     {
-        //BoundaryPoints[0] = gameObject.Get ;
-        //BoundaryPoints[1]= ;
-        //BoundaryPoints[2] = ;
-        //BoundaryPoints[3]= ;
+        BoundaryPoints[0] = transform.parent.GetChild(1);
+        BoundaryPoints[1] = transform.parent.GetChild(2);
+        BoundaryPoints[2] = transform.parent.GetChild(3);
+        BoundaryPoints[3] = transform.parent.GetChild(4);
     }
     void SetUpBounds()
-    {
+    {   
+
         BoundaryPoints[0].position= transform.position +new Vector3(0,LenghtOfBoundingSquare);
         BoundaryPoints[1].position= transform.position + new Vector3(0, -LenghtOfBoundingSquare);
         BoundaryPoints[2].position= transform.position + new Vector3(LenghtOfBoundingSquare,0);
@@ -83,6 +95,7 @@ public class EnemyController : MonoBehaviour
         if (!SpottedPlayer)
         {
             timer = 0;
+            //MovingTimer+=Time.fixedDeltaTime;
             CurrentState = State.MOVE;
         }
         else
@@ -105,10 +118,11 @@ public class EnemyController : MonoBehaviour
         {
             case State.MOVE:
                 //randomize,validate
-                if (TargetPosition == (Vector2)transform.position)
+                if (Vector2.Distance(TargetPosition ,(Vector2)transform.position )<=0.1f)
                 {
                     while (!RandomizeValidPosition()) ;
-
+                    Debug.Log(TargetPosition);
+                    TimeActiveMoving = 0;
                 }
                 Move(TargetPosition);
                 break;
@@ -128,7 +142,7 @@ public class EnemyController : MonoBehaviour
         PlayerPosition = Player.transform.position;
         aimDirection = PlayerPosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        rb.rotation = aimAngle;
+        rb.rotation = aimAngle- aimOffset;
 
     }
     void Move(Vector2 newPosition)
@@ -145,12 +159,12 @@ public class EnemyController : MonoBehaviour
         RandomizeVector2D(ref Offset);
         TargetPosition = PlayerPosition + Offset;
 
-        if (BoundaryPoints[0].position.y < TargetPosition.y) { return false; }
-        if (BoundaryPoints[1].position.y > TargetPosition.y) { return false; }
-        if (BoundaryPoints[2].position.x < TargetPosition.x) { return false; }
-        if (BoundaryPoints[3].position.x > TargetPosition.x) { return false; }
+        if (BoundaryPoints[0].position.y < TargetPosition.y) {TargetPosition-=Offset; return false; }
+        if (BoundaryPoints[1].position.y > TargetPosition.y) {TargetPosition-=Offset; return false; }
+        if (BoundaryPoints[2].position.x < TargetPosition.x) {TargetPosition-=Offset; return false; }
+        if (BoundaryPoints[3].position.x > TargetPosition.x) {TargetPosition-=Offset; return false; }
 
-
+        
         return true;
 
     }

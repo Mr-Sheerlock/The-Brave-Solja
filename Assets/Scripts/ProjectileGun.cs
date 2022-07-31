@@ -117,6 +117,6 @@ public class ProjectileGun : Weapon
 
     private void OnDestroy()
     {
-        Debug.Log("3leek wa7ed lo l");
+        //Debug.Log("3leek wa7ed lo l");
     }
 }
