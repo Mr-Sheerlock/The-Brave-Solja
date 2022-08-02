@@ -2,76 +2,76 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class ChargerEnemyController : MonoBehaviour
 {
+
+
     int damage;
     public float speed;
     public Rigidbody2D rb;
-    public Transform Shootinpoint;
-    public Weapon weapontype;
-    public Weapon CurrentWeapon;
+
+    //color
+    public SpriteRenderer SR;
+    Color C;
 
     //Movement & Direction
     Vector2 MovingDirection;
     public Transform[] BoundaryPoints; //UP DOWN RIGHT LEFT
     Vector2 randomDirections;
-    public Vector2 Offset;
-    public Vector2 TargetPosition;
+    Vector2 Offset;
+    Vector2 TargetPosition;
     float LenghtOfBoundingSquare;
-    public Vector2 OriginalPos;
+    Vector2 OriginalPos;
 
     //shooting and aiming 
     GameObject Player;
     Vector2 PlayerPosition;
     Vector2 aimDirection;
-    public GunController gunController;
     public float RangeOfSight;
-    public bool SpottedPlayer;
-    public float timer;
+    bool SpottedPlayer;
+    float timer;
+    float MovingTimer;
+    float TimeActiveMoving;
     float TimeActiveShooting;
     float TimeIdle;
 
     float aimOffset;
 
 
-    //charger logic
-    float radiusOffset;
-
-    
     //Memory time ??
 
     enum State
     {
         IDLE = 0,
         MOVE = 1,
-        SHOOT = 2
+        CHARGE=2,
+        SHOOT = 3
     }
     State CurrentState;
 
 
     void Start()
     {
-        Debug.Log("LOLENEMYSTARY");
+        C = SR.color;
         Player = GameObject.Find("Player");
-        damage = 5;
-        gunController.SetDamage(damage);
+        damage = 10;
         speed = 5;
         CurrentState = State.MOVE;
         SpottedPlayer = false;
         timer = 0f;
-        SetWeapon();
+        MovingTimer = 0f;
         //BoundaryPoints= new Transform[4];
         TimeActiveShooting = 5f;
+        TimeActiveMoving = 10f;
         TimeIdle = 5f;
         RangeOfSight = 10f;
-        LenghtOfBoundingSquare = 5f;
+        LenghtOfBoundingSquare = 20f;
         GetBoundsFromParent();
         SetUpBounds();
         TargetPosition = transform.position;
         Offset = new Vector2(0, 0);
         aimOffset = 130f;
-        OriginalPos=transform.position;
-        radiusOffset = 0.2f;
+        OriginalPos = transform.position;
     }
 
     void GetBoundsFromParent()
@@ -82,12 +82,12 @@ public class EnemyController : MonoBehaviour
         BoundaryPoints[3] = transform.parent.GetChild(4);
     }
     void SetUpBounds()
-    {   
+    {
 
-        BoundaryPoints[0].position= transform.position +new Vector3(0,LenghtOfBoundingSquare);
-        BoundaryPoints[1].position= transform.position + new Vector3(0, -LenghtOfBoundingSquare);
-        BoundaryPoints[2].position= transform.position + new Vector3(LenghtOfBoundingSquare,0);
-        BoundaryPoints[3].position= transform.position + new Vector3(-LenghtOfBoundingSquare,0);
+        BoundaryPoints[0].position = transform.position + new Vector3(0, LenghtOfBoundingSquare);
+        BoundaryPoints[1].position = transform.position + new Vector3(0, -LenghtOfBoundingSquare);
+        BoundaryPoints[2].position = transform.position + new Vector3(LenghtOfBoundingSquare, 0);
+        BoundaryPoints[3].position = transform.position + new Vector3(-LenghtOfBoundingSquare, 0);
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -99,15 +99,13 @@ public class EnemyController : MonoBehaviour
         {
             timer = 0;
             //MovingTimer+=Time.fixedDeltaTime;
-            Debug.Log("State Set to Move");
             CurrentState = State.MOVE;
         }
         else
         {
-            rb.velocity = new Vector2(0, 0);
-            AimTowardsPlayer();
+            Aim();
             CurrentState = State.SHOOT;
-            //Debug.Log($"Kelma is {timer}");
+            Debug.Log($"Kelma is {timer}");
 
             if (timer > TimeActiveShooting)
             {
@@ -126,11 +124,12 @@ public class EnemyController : MonoBehaviour
         {
             case State.MOVE:
                 //randomize,validate
-                Debug.Log("I Am Moving");
-                if (Vector2.Distance(TargetPosition ,(Vector2)transform.position )<=0.1f)
+                
+                if (Vector2.Distance(TargetPosition, (Vector2)transform.position) <= 0.1f)
                 {
-                    if (checkboundary()) { 
-                    while (!RandomizeValidPosition()) ;
+                    if (checkboundary())
+                    {
+                        while (!RandomizeValidPosition()) ;
                     }
                     else
                     {
@@ -140,12 +139,18 @@ public class EnemyController : MonoBehaviour
                 }
                 Move(TargetPosition);
                 break;
+
+            case State.CHARGE:
+                
+                ChangeHuetoRed();
+                break;
+
             case State.SHOOT:
-                gunController.ShootWeapon(Shootinpoint, aimDirection);
+                Shoot();
                 break;
 
             case State.IDLE:
-                gunController.DontShootWeapon();
+                ChangeHuetoOriginal();
                 break;
 
             default:
@@ -155,21 +160,11 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    void AimTowardsPlayer()
+    void Aim()
     {
+        //mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         PlayerPosition = Player.transform.position;
         aimDirection = PlayerPosition - rb.position;
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        rb.rotation = aimAngle- aimOffset;
-        rb.angularVelocity = 0;
-
-    }
-
-
-    void AimTowardsPosition()
-    {
-
-        aimDirection = TargetPosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
         rb.rotation = aimAngle - aimOffset;
         rb.angularVelocity = 0;
@@ -177,7 +172,6 @@ public class EnemyController : MonoBehaviour
     }
     void Move(Vector2 newPosition)
     {
-        AimTowardsPosition();
         MovingDirection = newPosition - (Vector2)transform.position;
         rb.velocity = MovingDirection.normalized * speed;
 
@@ -190,12 +184,12 @@ public class EnemyController : MonoBehaviour
         RandomizeVector2D(ref Offset);
         TargetPosition = PlayerPosition + Offset;
 
-        if (BoundaryPoints[0].position.y < TargetPosition.y) {TargetPosition-=Offset; return false; }
-        if (BoundaryPoints[1].position.y > TargetPosition.y) {TargetPosition-=Offset; return false; }
-        if (BoundaryPoints[2].position.x < TargetPosition.x) {TargetPosition-=Offset; return false; }
-        if (BoundaryPoints[3].position.x > TargetPosition.x) {TargetPosition-=Offset; return false; }
+        if (BoundaryPoints[0].position.y < TargetPosition.y) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[1].position.y > TargetPosition.y) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[2].position.x < TargetPosition.x) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[3].position.x > TargetPosition.x) { TargetPosition -= Offset; return false; }
 
-        
+
         return true;
 
     }
@@ -210,7 +204,6 @@ public class EnemyController : MonoBehaviour
             if (collider.tag == "Player")
             {
                 SpottedPlayer = true;
-                Debug.Log("Spotted Player");
             }
         }
     }
@@ -221,10 +214,15 @@ public class EnemyController : MonoBehaviour
         randomDirections = new Vector2(Random.value > 0.5 ? 1 : -1, Random.value > 0.5 ? 1 : -1);
         Vec *= randomDirections;
     }
-    void SetWeapon()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        CurrentWeapon = Instantiate(weapontype);
-        gunController.ChangeWeapon(CurrentWeapon, false);
+        if (collision.collider.name == "Player")
+        {
+            if (collision.collider.GetComponent<Health>())
+            {
+                collision.collider.GetComponent<Health>().TakeDamage(damage);
+            }
+        }
     }
 
     public void Die()
@@ -241,4 +239,31 @@ public class EnemyController : MonoBehaviour
         return true;
 
     }
+
+    void Shoot()
+    {
+        
+
+        
+    }
+
+
+    void ChangeHuetoRed()
+    {
+        if (C.g != 0)
+        {
+            C = new Color(C.r, C.g - 1, C.b - 1);
+            SR.color = C;
+        }
+    }
+
+    void ChangeHuetoOriginal()
+    {
+        while (C.g != 255)
+        {
+            C = new Color(C.r, C.g + 1, C.b +1);
+            SR.color = C;
+        }
+    }
+
 }
