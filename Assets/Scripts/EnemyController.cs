@@ -18,13 +18,14 @@ public class EnemyController : MonoBehaviour
     Vector2 Offset;
     Vector2 TargetPosition;
     float LenghtOfBoundingSquare;
+    Vector2 OriginalPos;
 
     //shooting and aiming 
     GameObject Player;
     Vector2 PlayerPosition;
     Vector2 aimDirection;
     public GunController gunController;
-    float RangeOfSight;
+    public float RangeOfSight;
     bool SpottedPlayer;
     float timer;
     float MovingTimer;
@@ -34,6 +35,7 @@ public class EnemyController : MonoBehaviour
 
     float aimOffset;
 
+    
     //Memory time ??
 
     enum State
@@ -47,8 +49,6 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Position is");
-        Debug.Log(transform.position);
         Player = GameObject.Find("Player");
         damage = 5;
         gunController.SetDamage(damage);
@@ -69,6 +69,7 @@ public class EnemyController : MonoBehaviour
         TargetPosition = transform.position;
         Offset = new Vector2(0, 0);
         aimOffset = 130f;
+        OriginalPos=transform.position;
     }
 
     void GetBoundsFromParent()
@@ -105,6 +106,7 @@ public class EnemyController : MonoBehaviour
             if (timer > TimeActiveShooting)
             {
                 CurrentState = State.IDLE;
+                Debug.Log("LOLER");
             }
             if (timer > TimeActiveShooting + TimeIdle)
             {
@@ -120,15 +122,26 @@ public class EnemyController : MonoBehaviour
                 //randomize,validate
                 if (Vector2.Distance(TargetPosition ,(Vector2)transform.position )<=0.1f)
                 {
+                    if (checkboundary()) { 
                     while (!RandomizeValidPosition()) ;
-                    Debug.Log(TargetPosition);
                     TimeActiveMoving = 0;
+                    }
+                    else
+                    {
+                        //y7awl yrg3 el mohem 
+                        Move(OriginalPos);
+                    }
                 }
                 Move(TargetPosition);
                 break;
             case State.SHOOT:
                 gunController.ShootWeapon(Shootinpoint, aimDirection);
                 break;
+
+            case State.IDLE:
+                gunController.DontShootWeapon();
+                break;
+
             default:
                 //do nothing
                 break;
@@ -143,6 +156,7 @@ public class EnemyController : MonoBehaviour
         aimDirection = PlayerPosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
         rb.rotation = aimAngle- aimOffset;
+        rb.angularVelocity = 0;
 
     }
     void Move(Vector2 newPosition)
@@ -198,5 +212,15 @@ public class EnemyController : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    bool checkboundary()
+    {
+        if (BoundaryPoints[0].position.y <= transform.position.y) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[1].position.y >= transform.position.y) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[2].position.x <= transform.position.x) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[3].position.x >= transform.position.x) { TargetPosition -= Offset; return false; }
+        return true;
+
     }
 }
