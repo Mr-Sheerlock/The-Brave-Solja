@@ -74,9 +74,12 @@ public class TowerController : MonoBehaviour
     }
 
 
-    // Update is called once per frame
+    // Make a loop. One for each weapon type;
     void Update()
     {
+        //PJ Loop
+
+        //Laser Loop
         timer += Time.deltaTime;
         if (timer < 0.4)
         {

@@ -103,6 +103,8 @@ public class EnemyController : MonoBehaviour
         {
             Aim();
             CurrentState = State.SHOOT;
+            Debug.Log($"Kelma is {timer}");
+
             if (timer > TimeActiveShooting)
             {
                 CurrentState = State.IDLE;
