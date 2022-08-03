@@ -19,7 +19,7 @@ public class ChargerEnemyController : MonoBehaviour
     public Transform[] BoundaryPoints; //UP DOWN RIGHT LEFT
     Vector2 randomDirections;
     Vector2 Offset;
-    Vector2 TargetPosition;
+    public Vector2 TargetPosition;
     float LenghtOfBoundingSquare;
     Vector2 OriginalPos;
 
@@ -29,14 +29,15 @@ public class ChargerEnemyController : MonoBehaviour
     Vector2 aimDirection;
     public float RangeOfSight;
     bool SpottedPlayer;
-    float timer;
-    float MovingTimer;
-    float TimeActiveMoving;
-    float TimeActiveShooting;
-    float TimeIdle;
+    public  float timer;
+    float TimeStampIdle;
+    float TimeStampCharging;
 
     float aimOffset;
 
+    bool Shot;
+
+    Collider2D EnemyCollider;
 
     //Memory time ??
 
@@ -52,6 +53,7 @@ public class ChargerEnemyController : MonoBehaviour
 
     void Start()
     {
+        EnemyCollider = gameObject.GetComponent<Collider2D>();
         C = SR.color;
         Player = GameObject.Find("Player");
         damage = 10;
@@ -59,11 +61,6 @@ public class ChargerEnemyController : MonoBehaviour
         CurrentState = State.MOVE;
         SpottedPlayer = false;
         timer = 0f;
-        MovingTimer = 0f;
-        //BoundaryPoints= new Transform[4];
-        TimeActiveShooting = 5f;
-        TimeActiveMoving = 10f;
-        TimeIdle = 5f;
         RangeOfSight = 10f;
         LenghtOfBoundingSquare = 20f;
         GetBoundsFromParent();
@@ -72,6 +69,11 @@ public class ChargerEnemyController : MonoBehaviour
         Offset = new Vector2(0, 0);
         aimOffset = 130f;
         OriginalPos = transform.position;
+        Shot = false;
+
+        ///TimeStamps/////
+        TimeStampCharging = 4f;
+        TimeStampIdle = 10f;
     }
 
     void GetBoundsFromParent()
@@ -103,18 +105,30 @@ public class ChargerEnemyController : MonoBehaviour
         }
         else
         {
-            Aim();
-            CurrentState = State.SHOOT;
-            Debug.Log($"Kelma is {timer}");
+            AimTowardsPlayer();
+            //CurrentState = State.CHARGE;
 
-            if (timer > TimeActiveShooting)
+            if (timer < TimeStampCharging)
             {
-                CurrentState = State.IDLE;
-                Debug.Log("LOLER");
+                CurrentState = State.CHARGE;
+                Debug.Log("I am charging");
+                
             }
-            if (timer > TimeActiveShooting + TimeIdle)
+            else
+            {
+                if (!Shot)
+                {
+                    CurrentState = State.SHOOT;
+                }
+                else
+                {
+                    CurrentState = State.IDLE;
+                }
+            }
+            if (timer > TimeStampIdle)
             {
                 timer = 0;
+                Shot = false;
             }
         }
 
@@ -141,15 +155,21 @@ public class ChargerEnemyController : MonoBehaviour
                 break;
 
             case State.CHARGE:
-                
-                ChangeHuetoRed();
+                rb.velocity = Vector2.zero;
+                ChangeHuetoRed(timer);
+                Debug.Log("Applying Charging");
                 break;
 
             case State.SHOOT:
+                Shot = true;
                 Shoot();
                 break;
 
             case State.IDLE:
+                if(Vector2.Distance(TargetPosition, (Vector2)transform.position) <= 0.1f)
+                {
+                    rb.velocity = Vector3.zero;
+                }
                 ChangeHuetoOriginal();
                 break;
 
@@ -160,7 +180,7 @@ public class ChargerEnemyController : MonoBehaviour
 
     }
 
-    void Aim()
+    void AimTowardsPlayer()
     {
         //mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         PlayerPosition = Player.transform.position;
@@ -172,6 +192,7 @@ public class ChargerEnemyController : MonoBehaviour
     }
     void Move(Vector2 newPosition)
     {
+        AimTowardsPosition();
         MovingDirection = newPosition - (Vector2)transform.position;
         rb.velocity = MovingDirection.normalized * speed;
 
@@ -222,8 +243,24 @@ public class ChargerEnemyController : MonoBehaviour
             {
                 collision.collider.GetComponent<Health>().TakeDamage(damage);
             }
+            rb.velocity=Vector2.zero;
         }
+        if (collision.collider.tag == "Walls")
+        {
+            if (checkboundary())
+            {
+                while (!RandomizeValidPosition()) ;
+            }
+            else
+            {
+                //y7awl yrg3 el mohem 
+                Move(OriginalPos);
+                return;
+            }
+        }
+        Move(TargetPosition);
     }
+
 
     public void Die()
     {
@@ -242,18 +279,37 @@ public class ChargerEnemyController : MonoBehaviour
 
     void Shoot()
     {
-        
+        ((CircleCollider2D)EnemyCollider).radius += 0.4f;
 
-        
+        //SpawnSprite
+        speed += 10f;
+        TargetPosition= Player.transform.position;
+
+        Move(TargetPosition);
+
+
+        speed -= 10f;
+        ((CircleCollider2D)EnemyCollider).radius -= 0.4f;
     }
 
 
-    void ChangeHuetoRed()
+    void ChangeHuetoRed(float timer)
     {
+        //0-> 0
+        //TimeStampCharging->255
+
+        //colour= time*255/4
+        //if (C.g != 0 )
+        //{
+        //    C = new Color(C.r, C.g - 1, C.b - 1);
+        //    SR.color = C;
+        //}
         if (C.g != 0)
         {
-            C = new Color(C.r, C.g - 1, C.b - 1);
-            SR.color = C;
+            //Debug.Log($"shwyt text eshta {esm_el_variable}");
+            Debug.Log($"7esba is {255 - Mathf.Ceil(timer * 255 / TimeStampCharging)}");
+            C = new Color(C.r, 255 - Mathf.Ceil(timer * 255 / TimeStampCharging), 255 - Mathf.Ceil(timer * 255 / TimeStampCharging));
+            SR.color = C; 
         }
     }
 
@@ -265,5 +321,17 @@ public class ChargerEnemyController : MonoBehaviour
             SR.color = C;
         }
     }
+
+    void AimTowardsPosition()
+    {
+
+        aimDirection = TargetPosition - rb.position;
+        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+        rb.rotation = aimAngle - aimOffset;
+        rb.angularVelocity = 0;
+
+    }
+
+
 
 }

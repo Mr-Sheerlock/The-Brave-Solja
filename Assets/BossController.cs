@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class BossController : MonoBehaviour
 {
     int damage;
     public float speed;
@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour
     //charger logic
     float radiusOffset;
 
-    
+
     //Memory time ??
 
     enum State
@@ -69,7 +69,7 @@ public class EnemyController : MonoBehaviour
         TargetPosition = transform.position;
         Offset = new Vector2(0, 0);
         aimOffset = 130f;
-        OriginalPos=transform.position;
+        OriginalPos = transform.position;
         radiusOffset = 0.2f;
     }
 
@@ -81,12 +81,12 @@ public class EnemyController : MonoBehaviour
         BoundaryPoints[3] = transform.parent.GetChild(4);
     }
     void SetUpBounds()
-    {   
+    {
 
-        BoundaryPoints[0].position= transform.position +new Vector3(0,LenghtOfBoundingSquare);
-        BoundaryPoints[1].position= transform.position + new Vector3(0, -LenghtOfBoundingSquare);
-        BoundaryPoints[2].position= transform.position + new Vector3(LenghtOfBoundingSquare,0);
-        BoundaryPoints[3].position= transform.position + new Vector3(-LenghtOfBoundingSquare,0);
+        BoundaryPoints[0].position = transform.position + new Vector3(0, LenghtOfBoundingSquare);
+        BoundaryPoints[1].position = transform.position + new Vector3(0, -LenghtOfBoundingSquare);
+        BoundaryPoints[2].position = transform.position + new Vector3(LenghtOfBoundingSquare, 0);
+        BoundaryPoints[3].position = transform.position + new Vector3(-LenghtOfBoundingSquare, 0);
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -124,10 +124,11 @@ public class EnemyController : MonoBehaviour
         {
             case State.MOVE:
                 //randomize,validate
-                if (Vector2.Distance(TargetPosition ,(Vector2)transform.position )<=0.1f)
+                if (Vector2.Distance(TargetPosition, (Vector2)transform.position) <= 0.1f)
                 {
-                    if (checkboundary()) { 
-                    while (!RandomizeValidPosition()) ;
+                    if (checkboundary())
+                    {
+                        while (!RandomizeValidPosition()) ;
                     }
                     else
                     {
@@ -157,7 +158,7 @@ public class EnemyController : MonoBehaviour
         PlayerPosition = Player.transform.position;
         aimDirection = PlayerPosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        rb.rotation = aimAngle- aimOffset;
+        rb.rotation = aimAngle - aimOffset;
         rb.angularVelocity = 0;
 
     }
@@ -187,12 +188,12 @@ public class EnemyController : MonoBehaviour
         RandomizeVector2D(ref Offset);
         TargetPosition = PlayerPosition + Offset;
 
-        if (BoundaryPoints[0].position.y < TargetPosition.y) {TargetPosition-=Offset; return false; }
-        if (BoundaryPoints[1].position.y > TargetPosition.y) {TargetPosition-=Offset; return false; }
-        if (BoundaryPoints[2].position.x < TargetPosition.x) {TargetPosition-=Offset; return false; }
-        if (BoundaryPoints[3].position.x > TargetPosition.x) {TargetPosition-=Offset; return false; }
+        if (BoundaryPoints[0].position.y < TargetPosition.y) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[1].position.y > TargetPosition.y) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[2].position.x < TargetPosition.x) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[3].position.x > TargetPosition.x) { TargetPosition -= Offset; return false; }
 
-        
+
         return true;
 
     }
@@ -240,7 +241,7 @@ public class EnemyController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag=="Walls")
+        if (collision.collider.tag == "Walls")
         {
             if (checkboundary())
             {
