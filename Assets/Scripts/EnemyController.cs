@@ -177,8 +177,8 @@ public class EnemyController : MonoBehaviour
         AimTowardsPosition();
         MovingDirection = newPosition - (Vector2)transform.position;
         rb.velocity = MovingDirection.normalized * speed;
-
     }
+
 
     bool RandomizeValidPosition()
     {

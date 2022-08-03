@@ -318,7 +318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 32099681}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.8, y: 21.5, z: 0}
+  m_LocalPosition: {x: -21.94, y: 29.64, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1051,11 +1051,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408422200552918754, guid: dd9c1f63601e8404b993551bdb916e2d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.3
+      value: -2.72
       objectReference: {fileID: 0}
     - target: {fileID: 408422200552918754, guid: dd9c1f63601e8404b993551bdb916e2d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -19.1
+      value: -17.09
       objectReference: {fileID: 0}
     - target: {fileID: 408422200552918754, guid: dd9c1f63601e8404b993551bdb916e2d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2289,7 +2289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1791232187
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2772,7 +2772,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1333334, y: 1}
+    m_SensorSize: {x: 1.9328859, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2794,11 +2794,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998241, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.4
+      value: 25.27
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998241, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -34.2
+      value: -21.7
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998241, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2835,6 +2835,14 @@ PrefabInstance:
     - target: {fileID: 879289817440998252, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_Name
       value: Bottomless Pit
+      objectReference: {fileID: 0}
+    - target: {fileID: 879289817440998254, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 879289817440998255, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}

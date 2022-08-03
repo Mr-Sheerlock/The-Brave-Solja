@@ -36,8 +36,11 @@ public class ChargerEnemyController : MonoBehaviour
     float aimOffset;
 
     bool Shot;
+    float CheckhitDistance;
 
     Collider2D EnemyCollider;
+
+    float timeToReachTarget;
 
     //Memory time ??
 
@@ -53,6 +56,7 @@ public class ChargerEnemyController : MonoBehaviour
 
     void Start()
     {
+        CheckhitDistance = 2f;
         EnemyCollider = gameObject.GetComponent<Collider2D>();
         C = SR.color;
         Player = GameObject.Find("Player");
@@ -74,15 +78,10 @@ public class ChargerEnemyController : MonoBehaviour
         ///TimeStamps/////
         TimeStampCharging = 4f;
         TimeStampIdle = 10f;
+        timeToReachTarget = 0;
     }
 
-    void GetBoundsFromParent()
-    {
-        BoundaryPoints[0] = transform.parent.GetChild(1);
-        BoundaryPoints[1] = transform.parent.GetChild(2);
-        BoundaryPoints[2] = transform.parent.GetChild(3);
-        BoundaryPoints[3] = transform.parent.GetChild(4);
-    }
+   
     void SetUpBounds()
     {
 
@@ -125,7 +124,7 @@ public class ChargerEnemyController : MonoBehaviour
                     CurrentState = State.IDLE;
                 }
             }
-            if (timer > TimeStampIdle)
+            if (timer > timeToReachTarget + TimeStampIdle)
             {
                 timer = 0;
                 Shot = false;
@@ -157,7 +156,6 @@ public class ChargerEnemyController : MonoBehaviour
             case State.CHARGE:
                 rb.velocity = Vector2.zero;
                 ChangeHuetoRed(timer);
-                Debug.Log("Applying Charging");
                 break;
 
             case State.SHOOT:
@@ -166,17 +164,89 @@ public class ChargerEnemyController : MonoBehaviour
                 break;
 
             case State.IDLE:
-                if(Vector2.Distance(TargetPosition, (Vector2)transform.position) <= 0.1f)
+                if(Vector2.Distance(TargetPosition, (Vector2)transform.position) <= CheckhitDistance)
                 {
                     rb.velocity = Vector3.zero;
                 }
-                ChangeHuetoOriginal();
+                if(timer> TimeStampCharging+ timeToReachTarget)
+                {
+                    rb.velocity = Vector3.zero;
+                }
+                ChangeHuetoOriginal(timer);
                 break;
 
             default:
                 //do nothing
                 break;
         }
+
+    }
+
+    
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    bool checkboundary()
+    {
+        if (BoundaryPoints[0].position.y <= transform.position.y) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[1].position.y >= transform.position.y) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[2].position.x <= transform.position.x) { TargetPosition -= Offset; return false; }
+        if (BoundaryPoints[3].position.x >= transform.position.x) { TargetPosition -= Offset; return false; }
+        return true;
+
+    }
+    void GetBoundsFromParent()
+    {
+        BoundaryPoints[0] = transform.parent.GetChild(1);
+        BoundaryPoints[1] = transform.parent.GetChild(2);
+        BoundaryPoints[2] = transform.parent.GetChild(3);
+        BoundaryPoints[3] = transform.parent.GetChild(4);
+    }
+    void Shoot()
+    {
+        ((CircleCollider2D)EnemyCollider).radius += 0.4f;
+
+        //SpawnSprite
+        speed += 10f;
+        TargetPosition= Player.transform.position;
+
+        //calculate time to reach that position
+        timeToReachTarget = Vector2.Distance(transform.position, TargetPosition)/speed;
+
+        Move(TargetPosition);
+
+
+        speed -= 10f;
+        ((CircleCollider2D)EnemyCollider).radius -= 0.4f;
+    }
+
+
+    void ChangeHuetoRed(float timer)
+    {
+
+        //Debug.Log($"shwyt text eshta {esm_el_variable}");
+        float current = 1 - timer/ TimeStampCharging;
+        C = new Color(C.r, current, current);
+        SR.color = C;
+    }
+
+    void ChangeHuetoOriginal(float timer)
+    {
+        float current = (timer-4 )/TimeStampCharging;
+        C = new Color(C.r, current, current);
+        SR.color = C;
+        
+    }
+
+    void AimTowardsPosition()
+    {
+
+        aimDirection = TargetPosition - rb.position;
+        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+        rb.rotation = aimAngle - aimOffset;
+        rb.angularVelocity = 0;
 
     }
 
@@ -243,7 +313,7 @@ public class ChargerEnemyController : MonoBehaviour
             {
                 collision.collider.GetComponent<Health>().TakeDamage(damage);
             }
-            rb.velocity=Vector2.zero;
+            rb.velocity = Vector2.zero;
         }
         if (collision.collider.tag == "Walls")
         {
@@ -259,77 +329,6 @@ public class ChargerEnemyController : MonoBehaviour
             }
         }
         Move(TargetPosition);
-    }
-
-
-    public void Die()
-    {
-        Destroy(gameObject);
-    }
-
-    bool checkboundary()
-    {
-        if (BoundaryPoints[0].position.y <= transform.position.y) { TargetPosition -= Offset; return false; }
-        if (BoundaryPoints[1].position.y >= transform.position.y) { TargetPosition -= Offset; return false; }
-        if (BoundaryPoints[2].position.x <= transform.position.x) { TargetPosition -= Offset; return false; }
-        if (BoundaryPoints[3].position.x >= transform.position.x) { TargetPosition -= Offset; return false; }
-        return true;
-
-    }
-
-    void Shoot()
-    {
-        ((CircleCollider2D)EnemyCollider).radius += 0.4f;
-
-        //SpawnSprite
-        speed += 10f;
-        TargetPosition= Player.transform.position;
-
-        Move(TargetPosition);
-
-
-        speed -= 10f;
-        ((CircleCollider2D)EnemyCollider).radius -= 0.4f;
-    }
-
-
-    void ChangeHuetoRed(float timer)
-    {
-        //0-> 0
-        //TimeStampCharging->255
-
-        //colour= time*255/4
-        //if (C.g != 0 )
-        //{
-        //    C = new Color(C.r, C.g - 1, C.b - 1);
-        //    SR.color = C;
-        //}
-        if (C.g != 0)
-        {
-            //Debug.Log($"shwyt text eshta {esm_el_variable}");
-            Debug.Log($"7esba is {255 - Mathf.Ceil(timer * 255 / TimeStampCharging)}");
-            C = new Color(C.r, 255 - Mathf.Ceil(timer * 255 / TimeStampCharging), 255 - Mathf.Ceil(timer * 255 / TimeStampCharging));
-            SR.color = C; 
-        }
-    }
-
-    void ChangeHuetoOriginal()
-    {
-        while (C.g != 255)
-        {
-            C = new Color(C.r, C.g + 1, C.b +1);
-            SR.color = C;
-        }
-    }
-
-    void AimTowardsPosition()
-    {
-
-        aimDirection = TargetPosition - rb.position;
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        rb.rotation = aimAngle - aimOffset;
-        rb.angularVelocity = 0;
-
     }
 
 
