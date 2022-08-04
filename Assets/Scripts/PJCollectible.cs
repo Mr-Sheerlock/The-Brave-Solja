@@ -8,7 +8,7 @@ public class PJCollectible : Collectible
     {
         
         GameObject Player=GameObject.Find("Player");
-        gunController = Player.GetComponent< GunController > ();
+        gunController = Player.GetComponent< GunController > ();    
         CollectibleSpawnOffset = new Vector2(3, 3);
         SearchRadius = 5;
     }

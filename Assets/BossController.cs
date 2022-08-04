@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
+    int numberOfWeapons;
+    public static int Bosslasercount = 1; // a lasercount for making the laser names unique
     int damage;
     public float speed;
     public Rigidbody2D rb;
-    public Transform Shootinpoint;
-    public Weapon weapontype;
-    public Weapon CurrentWeapon;
+    public Transform[] Shootinpoints = new Transform[12];
+    public Weapon weapontype1;
+    public Weapon weapontype2;
+    public Weapon[] Weapons;
 
     //Movement & Direction
     Vector2 MovingDirection;
@@ -33,11 +36,13 @@ public class BossController : MonoBehaviour
 
     float aimOffset;
 
+    int numberofBullets;
+    float PeriodicTime;
 
     //charger logic
     float radiusOffset;
 
-
+    public float AmountOfRotation;
     //Memory time ??
 
     enum State
@@ -51,6 +56,9 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
+        AmountOfRotation = 25f;
+        Weapons = new Weapon[12];
+        SetWeapons();
         Player = GameObject.Find("Player");
         damage = 5;
         gunController.SetDamage(damage);
@@ -58,19 +66,20 @@ public class BossController : MonoBehaviour
         CurrentState = State.MOVE;
         SpottedPlayer = false;
         timer = 0f;
-        SetWeapon();
         //BoundaryPoints= new Transform[4];
         TimeActiveShooting = 5f;
-        TimeIdle = 5f;
-        RangeOfSight = 10f;
-        LenghtOfBoundingSquare = 5f;
+        TimeIdle = 3f;
+        RangeOfSight = 60f; //The assumption is that the boss has a very high range of sight and wont be active until some point
+        LenghtOfBoundingSquare = 20f; //keda keda doesn't move 
         GetBoundsFromParent();
         SetUpBounds();
         TargetPosition = transform.position;
         Offset = new Vector2(0, 0);
-        aimOffset = 130f;
+        aimOffset = 90f;
         OriginalPos = transform.position;
         radiusOffset = 0.2f;
+        numberofBullets = 1;
+        PeriodicTime = 0.6f;
     }
 
     void GetBoundsFromParent()
@@ -103,7 +112,7 @@ public class BossController : MonoBehaviour
         else
         {
             rb.velocity = new Vector2(0, 0);
-            AimTowardsPlayer();
+            //AimTowardsPlayer();
             CurrentState = State.SHOOT;
             //Debug.Log($"Kelma is {timer}");
 
@@ -123,27 +132,28 @@ public class BossController : MonoBehaviour
         switch (CurrentState)
         {
             case State.MOVE:
-                //randomize,validate
-                if (Vector2.Distance(TargetPosition, (Vector2)transform.position) <= 0.1f)
-                {
-                    if (checkboundary())
-                    {
-                        while (!RandomizeValidPosition()) ;
-                    }
-                    else
-                    {
-                        //y7awl yrg3 el mohem 
-                        Move(OriginalPos);
-                    }
-                }
-                Move(TargetPosition);
+                ////randomize,validate
+                //if (Vector2.Distance(TargetPosition, (Vector2)transform.position) <= 0.1f)
+                //{
+                //    if (checkboundary())
+                //    {
+                //        while (!RandomizeValidPosition()) ;
+                //    }
+                //    else
+                //    {
+                //        //y7awl yrg3 el mohem 
+                //        Move(OriginalPos);
+                //    }
+                //}
+                //Move(TargetPosition);
                 break;
             case State.SHOOT:
-                gunController.ShootWeapon(Shootinpoint, aimDirection);
+                rb.angularVelocity = 0;
+                ShootWeapons();
                 break;
 
             case State.IDLE:
-                gunController.DontShootWeapon();
+                DontShootWeapons();
                 break;
 
             default:
@@ -153,13 +163,37 @@ public class BossController : MonoBehaviour
 
     }
 
+    void ShootWeapons()
+    {
+        for (int i = 0; i <12; i++)
+        {
+            if (Shootinpoints[i])
+            {
+                gunController.ChangeWeapon(Weapons[i], false);
+                gunController.ShootWeapon(Shootinpoints[i], Shootinpoints[i].up);
+            }
+        }
+    }
+    void DontShootWeapons()
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            gunController.ChangeWeapon(Weapons[i], false);
+            gunController.DontShootWeapon();
+        }
+
+    }
     void AimTowardsPlayer()
     {
         PlayerPosition = Player.transform.position;
         aimDirection = PlayerPosition - rb.position;
+        aimDirection = aimDirection.normalized - new Vector2(Mathf.Cos(aimOffset), Mathf.Sin(aimOffset));
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        rb.rotation = aimAngle - aimOffset;
-        rb.angularVelocity = 0;
+
+        //aimAngle = aimAngle - aimOffset; //target angle
+        if(Mathf.Abs(rb.rotation - aimAngle )>=10)
+        transform.eulerAngles += new Vector3(0,0, aimAngle * AmountOfRotation*Time.fixedDeltaTime);
+        //rb.angularVelocity = 0;
 
     }
 
@@ -219,10 +253,25 @@ public class BossController : MonoBehaviour
         randomDirections = new Vector2(Random.value > 0.5 ? 1 : -1, Random.value > 0.5 ? 1 : -1);
         Vec *= randomDirections;
     }
-    void SetWeapon()
+    void SetWeapons()
     {
-        CurrentWeapon = Instantiate(weapontype);
-        gunController.ChangeWeapon(CurrentWeapon, false);
+        int i = 0;
+        for (i = 0; i < 11; i++)
+        {
+            //Debug.Log("lolerrere");
+            Weapon loler = Instantiate(weapontype1, transform.position, transform.rotation);
+            Weapons[i] = loler;
+
+            ((ProjectileGun)Weapons[i]).timer = Time.time;
+            ((ProjectileGun)Weapons[i]).SetNumberOfProjectiles(numberofBullets);
+            ((ProjectileGun)Weapons[i]).SetPeriodictime(PeriodicTime);
+
+        }
+
+        Weapon lol = Instantiate(weapontype2, transform.position, transform.rotation);
+        Weapons[i] = lol;
+        ((LaserGun)Weapons[i]).SetLaserName("BossLaser" + Bosslasercount.ToString());
+
     }
 
     public void Die()

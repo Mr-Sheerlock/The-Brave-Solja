@@ -25,6 +25,7 @@ public class GunController : MonoBehaviour
         collectible = null;
     }
 
+
     public void ShootWeapon(Transform shootingpoint,Vector2 aimDirection)
     {
         if (weapon)

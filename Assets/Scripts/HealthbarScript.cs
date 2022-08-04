@@ -7,10 +7,14 @@ public class HealthbarScript : MonoBehaviour
     public Transform bar;
 
     Quaternion initRot;
-
+    Vector2 initPositionDiff;
+    Vector2 ParentPos;
     void Start()
     {
         initRot = transform.rotation;
+        //get position relative to player
+        Transform Parenttrans = transform.parent.transform;
+        initPositionDiff = Parenttrans.position - transform.position;
     }
 
 
@@ -22,6 +26,7 @@ public class HealthbarScript : MonoBehaviour
     void Update()
     {
         transform.rotation = initRot;
-
+        ParentPos = transform.parent.transform.position;
+        transform.position = ParentPos - initPositionDiff;
     }
 }
