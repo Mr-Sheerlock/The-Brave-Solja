@@ -8,8 +8,8 @@ public class Health : MonoBehaviour
     public UnityEvent CustomEvent;
     float timer = 0;
     public int Maxhealth { get; set; }
-    public int CurrentHealth { get; set; }
-    int healregen { get; set; }
+    public float CurrentHealth { get; set; }
+    float healregen { get; set; }
 
     public HealthbarScript HB;
     //GameObject Healthbar;
@@ -38,9 +38,11 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
+
+        Debug.Log("Damage Taken is" + damage);
         
         (HB)?.SetSize((float)CurrentHealth / Maxhealth);
 

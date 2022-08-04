@@ -17,7 +17,7 @@ public class LaserGun : Weapon
 
 
     float range;
-    private void Start()
+    private void Awake()
     {
         range = 20;
         damage = 1;
@@ -71,7 +71,8 @@ public class LaserGun : Weapon
 
             if (hit.collider.GetComponent<Health>())
             {
-                hit.collider.GetComponent<Health>().TakeDamage(damage);
+                float LaserDamage = damage*Time.deltaTime*2;
+                hit.collider.GetComponent<Health>().TakeDamage(LaserDamage);
             }
             if (hit.collider.tag == "Projectile")
             {

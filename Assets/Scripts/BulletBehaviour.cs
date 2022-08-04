@@ -16,7 +16,7 @@ public class BulletBehaviour : MonoBehaviour
     }
 
    
-    private void Start()
+    private void Awake()
     {
         TimeSinceShot = 0f;
         damage = 1;

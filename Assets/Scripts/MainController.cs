@@ -5,7 +5,8 @@ using UnityEngine;
 public class MainController : MonoBehaviour
 {
     ///Specs///
-
+    public GameObject DieEffect;
+    public GameObject PlayerLight;
     int damage;
     public float speed;
     public Rigidbody2D rb;
@@ -24,8 +25,8 @@ public class MainController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        damage = 5;
-        gunController.SetDamage(damage);
+        damage = 10;
+        gunController.SetGCDamage(damage);
         speed = 15;
 
         aimOffset = 130f;
@@ -76,5 +77,10 @@ public class MainController : MonoBehaviour
 
     }
 
-    
+    public void Die()
+    {
+        Instantiate(DieEffect, transform.position, transform.rotation);
+        Instantiate(PlayerLight, transform.position,transform.rotation);
+        Destroy(gameObject);
+    }
 }

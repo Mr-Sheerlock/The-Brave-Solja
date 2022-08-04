@@ -21,8 +21,9 @@ public class ProjectileGun : Weapon
     Quaternion BulletRotation;
 
 
+
     
-    private void Start()
+    private void Awake()
     {
         damage = 5;
         gunWidth = 3f;
@@ -47,8 +48,7 @@ public class ProjectileGun : Weapon
     public override void Shoot(Transform ShootingPoint, Vector2 AimDirection)
     {
         TimeSinceLastShoot = Time.time - timer;
-
-
+    
         if (TimeSinceLastShoot >= PeriodicTime)
         {
             timer = Time.time;
@@ -56,6 +56,7 @@ public class ProjectileGun : Weapon
             
             if (numberofProjectiles == 1)
             {
+                //Mabywsl4 le hena
                 ShootSingle(ShootingPoint, AimDirection);
             }
             else
@@ -76,6 +77,7 @@ public class ProjectileGun : Weapon
                         Offset = -magnitude * (ShootingPoint.right);
 
                     }
+
                     GameObject currentbullet = Instantiate(bullet, ShootingPoint.position + (Vector3)Offset, BulletRotation);
                     BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
                     lol.SetDamage(damage);

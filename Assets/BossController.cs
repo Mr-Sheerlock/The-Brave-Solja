@@ -36,14 +36,15 @@ public class BossController : MonoBehaviour
 
     float aimOffset;
 
-    int numberofBullets;
-    float PeriodicTime;
+    float PeriodicTime=0.6f;
 
     //charger logic
     float radiusOffset;
 
     public float AmountOfRotation;
     //Memory time ??
+    int numberofBullets=1;
+
 
     enum State
     {
@@ -54,14 +55,14 @@ public class BossController : MonoBehaviour
     State CurrentState;
 
 
-    void Start()
+    void Awake()
     {
         AmountOfRotation = 25f;
         Weapons = new Weapon[12];
         SetWeapons();
         Player = GameObject.Find("Player");
         damage = 5;
-        gunController.SetDamage(damage);
+        gunController.SetGCDamage(damage);
         speed = 5;
         CurrentState = State.MOVE;
         SpottedPlayer = false;
@@ -78,8 +79,9 @@ public class BossController : MonoBehaviour
         aimOffset = 90f;
         OriginalPos = transform.position;
         radiusOffset = 0.2f;
-        numberofBullets = 1;
         PeriodicTime = 0.6f;
+        numberofBullets = 1;
+        //Debug.Log($"At start Nbullets is {numberofBullets}");
     }
 
     void GetBoundsFromParent()
@@ -112,14 +114,13 @@ public class BossController : MonoBehaviour
         else
         {
             rb.velocity = new Vector2(0, 0);
-            //AimTowardsPlayer();
+            AimTowardsPlayer();
             CurrentState = State.SHOOT;
             //Debug.Log($"Kelma is {timer}");
 
             if (timer > TimeActiveShooting)
             {
                 CurrentState = State.IDLE;
-                Debug.Log("LOLER");
             }
             if (timer > TimeActiveShooting + TimeIdle)
             {
@@ -171,6 +172,7 @@ public class BossController : MonoBehaviour
             {
                 gunController.ChangeWeapon(Weapons[i], false);
                 gunController.ShootWeapon(Shootinpoints[i], Shootinpoints[i].up);
+                //gunController.ShootWeapon(Shootinpoints[i], new Vector2(0,1));
             }
         }
     }
@@ -242,7 +244,6 @@ public class BossController : MonoBehaviour
             if (collider.tag == "Player")
             {
                 SpottedPlayer = true;
-                Debug.Log("Spotted Player");
             }
         }
     }
@@ -263,8 +264,12 @@ public class BossController : MonoBehaviour
             Weapons[i] = loler;
 
             ((ProjectileGun)Weapons[i]).timer = Time.time;
+            //Debug.Log($"BC Nprojs is {numberofBullets}");
             ((ProjectileGun)Weapons[i]).SetNumberOfProjectiles(numberofBullets);
-            ((ProjectileGun)Weapons[i]).SetPeriodictime(PeriodicTime);
+            ((ProjectileGun)Weapons[i]).SetPeriodictime(PeriodicTime); 
+            //SetNumberOfProjectiles
+
+
 
         }
 

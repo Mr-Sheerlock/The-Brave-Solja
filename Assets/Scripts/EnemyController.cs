@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
     {
         Player = GameObject.Find("Player");
         damage = 5;
-        gunController.SetDamage(damage);
+        gunController.SetGCDamage(damage);
         speed = 5;
         CurrentState = State.MOVE;
         SpottedPlayer = false;
@@ -124,6 +124,7 @@ public class EnemyController : MonoBehaviour
         {
             case State.MOVE:
                 //randomize,validate
+                gunController.DontShootWeapon(); 
                 if (Vector2.Distance(TargetPosition ,(Vector2)transform.position )<=0.1f)
                 {
                     if (checkboundary()) { 

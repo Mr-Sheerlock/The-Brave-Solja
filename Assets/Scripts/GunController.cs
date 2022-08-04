@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    Vector2 mousePosition;
-    Vector2 aimDirection;
 
-    int Damage;
+    public int Damage;
 
 
     //Collectible related stuff
     public Weapon weapon;
     public Collectible collectible;
     
-    public void SetDamage(int damage)
+    public void SetGCDamage(int damage)
     {
         Damage = damage;
     }
 
-    void Start()
+    void Awake()
     {
         Damage = 1;
         collectible = null;
+        if (weapon)
+        {
+            weapon.SetDamage(Damage);
+        }
     }
 
 
@@ -30,8 +32,8 @@ public class GunController : MonoBehaviour
     {
         if (weapon)
             weapon.Shoot(shootingpoint, aimDirection);
-        //else
-        //    Debug.Log("Lol no shoot");
+
+        //Debug.Log(shootingpoint.position);
 
     }
 
