@@ -44,5 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94c931b44552284788d044a7a15e031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 3324215902946191423, guid: edcab3aa4fee09341af9d92b8871857b, type: 3}
+  numberofProjectiles: 0
+  gunWidth: 0
+  timer: 0
+  bullet: {fileID: 2429362012319019166, guid: 9605903baccf172408266873db364618, type: 3}
   FireForce: 20
