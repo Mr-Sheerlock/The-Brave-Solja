@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8947115360808677089
+--- !u!1 &5998821449281549037
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9037895746885399189}
-  - component: {fileID: 3336290982689687542}
+  - component: {fileID: 5998821449281549039}
+  - component: {fileID: 5998821449281549036}
   m_Layer: 0
-  m_Name: Projectile Gun
+  m_Name: ELaser Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9037895746885399189
+--- !u!4 &5998821449281549039
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8947115360808677089}
+  m_GameObject: {fileID: 5998821449281549037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.14, y: -6.92, z: 0}
+  m_LocalPosition: {x: -4.103525, y: 0.494393, z: -0.039474808}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3336290982689687542
+--- !u!114 &5998821449281549036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8947115360808677089}
+  m_GameObject: {fileID: 5998821449281549037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f94c931b44552284788d044a7a15e031, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fdc21fdd9075504bb4e4ab7fd73ab17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  numberofProjectiles: 0
-  gunWidth: 0
-  timer: 0
-  bullet: {fileID: 7394238884734281542, guid: e79f09fe96771174ba0706ca593c1080, type: 3}
-  FireForce: 20
+  lineRenderer: {fileID: 0}
+  HitEffects:
+  - {fileID: 4023985159046190781, guid: ba7ffc0698d992f4c8f8c9efe2625c9a, type: 3}
+  - {fileID: 2269690565481716316, guid: c972dc6015f91a6489387260ddfe0471, type: 3}
+  ShootEffects:
+  - {fileID: 1765884408335156549, guid: 287058ec0614ef04a9ec2f27a81a0241, type: 3}
+  - {fileID: 4288109552701660961, guid: 1f18397f6b7edcd47acd6df9c6c7ed46, type: 3}
+  Laser: {fileID: 1316547944353504146, guid: d252cab7bb3e5ff489616f0539dfc3d1, type: 3}

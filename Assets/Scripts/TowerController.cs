@@ -16,6 +16,7 @@ public class TowerController : MonoBehaviour
     public GunController gunController;
 
     float timer;
+    float TimeShooting = 0.6f;
     public float AmountOfRotation;
 
 
@@ -26,6 +27,7 @@ public class TowerController : MonoBehaviour
         Damage = 1;
         numberofBullets = 1;
         PeriodicTime = 0.6f;
+        TimeShooting = 0.6f;
         Weapons = new Weapon[4];
         SetWeapons(weapontype);
         //are shooting points initialized ?? 
@@ -81,12 +83,12 @@ public class TowerController : MonoBehaviour
 
         //Laser Loop
         timer += Time.deltaTime;
-        if (timer < 0.4)
+        if (timer < TimeShooting)
         {
             ShootWeapons();
         }
 
-        if (timer > 0.4)
+        if (timer > TimeShooting)
         {
             DontShootWeapons();
         }

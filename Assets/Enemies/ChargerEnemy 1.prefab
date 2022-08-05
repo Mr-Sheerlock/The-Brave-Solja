@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1429626458999787218}
   - component: {fileID: 1429626458999787221}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 1429626459686221276}
   - component: {fileID: 1429626459686221277}
   - component: {fileID: 7920307692169181867}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1429626459719072434}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ChargerEnemy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,9 +456,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1429626459686221274}
     m_Modifications:
+    - target: {fileID: 6431026194016515085, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6431026194667785882, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_Name
       value: Healthbar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431026194667785882, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6431026194667785883, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_RootOrder
@@ -507,6 +515,14 @@ PrefabInstance:
     - target: {fileID: 6431026194667785883, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431026194713693190, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431026194785784657, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}

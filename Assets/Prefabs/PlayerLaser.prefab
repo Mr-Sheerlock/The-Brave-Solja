@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2640016344473655362
+--- !u!1 &1906686868115551529
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2640016344473655363}
-  - component: {fileID: 2640016344473655388}
+  - component: {fileID: 1906686868115551537}
+  - component: {fileID: 1906686868115551547}
   m_Layer: 7
-  m_Name: Laser 1
+  m_Name: PlayerLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2640016344473655363
+--- !u!4 &1906686868115551537
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2640016344473655362}
+  m_GameObject: {fileID: 1906686868115551529}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.103525, y: 0.494393, z: -0.039474808}
+  m_LocalPosition: {x: 16.705244, y: -22.079124, z: -0.039474808}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &2640016344473655388
+--- !u!120 &1906686868115551547
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2640016344473655362}
+  m_GameObject: {fileID: 1906686868115551529}
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -52,7 +52,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc0559c40af97ca48b82e37795755670, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74,8 +74,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 12.560698, y: -14.55721, z: 0}
-  - {x: 12.972126, y: 0.675892, z: 0}
+  - {x: -5.2232213, y: -18.615452, z: 0}
+  - {x: -14.777897, y: -13.792632, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.5
@@ -83,8 +83,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.20670319
-        value: 0.50943756
+        time: 0.28770092
+        value: 0.42142868
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -96,17 +96,17 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.1529404, b: 0.735849, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 31033
+      ctime0: 43754
       ctime1: 65535
-      ctime2: 0
+      ctime2: 65535
       ctime3: 0
       ctime4: 0
       ctime5: 0

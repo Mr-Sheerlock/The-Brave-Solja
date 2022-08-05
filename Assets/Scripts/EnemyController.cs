@@ -32,11 +32,12 @@ public class EnemyController : MonoBehaviour
     float TimeIdle;
 
     float aimOffset;
-
-
+    int numberofBullets;
+    float PeriodicTime;
     //charger logic
     float radiusOffset;
 
+    public static int laserCount=0;
     
     //Memory time ??
 
@@ -51,6 +52,9 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        laserCount = 0;
+        PeriodicTime = 0.6f;
+        numberofBullets = 1;
         Player = GameObject.Find("Player");
         damage = 5;
         gunController.SetGCDamage(damage);
@@ -223,6 +227,19 @@ public class EnemyController : MonoBehaviour
     {
         CurrentWeapon = Instantiate(weapontype);
         gunController.ChangeWeapon(CurrentWeapon, false);
+        if (CurrentWeapon as ProjectileGun)
+        {
+
+            ((ProjectileGun)CurrentWeapon).timer = Time.time;
+            ((ProjectileGun)CurrentWeapon).SetNumberOfProjectiles(numberofBullets);
+            ((ProjectileGun)CurrentWeapon).SetPeriodictime(PeriodicTime);
+        }
+        else
+        if (CurrentWeapon as LaserGun)
+        {
+            ((LaserGun)CurrentWeapon).SetLaserName("Enemy Laser" + laserCount);
+            laserCount++;
+        }
     }
 
     public void Die()

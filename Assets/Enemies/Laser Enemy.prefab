@@ -210,7 +210,7 @@ MonoBehaviour:
   speed: 0
   rb: {fileID: 4416160275682481660}
   Shootinpoint: {fileID: 4416160275156522089}
-  weapontype: {fileID: 5998821449281549036, guid: 55ff0cc008c3ea441961618d9630ba49, type: 3}
+  weapontype: {fileID: 5998821449281549036, guid: 536ecef0d0c3cfd43900990ff91752de, type: 3}
   CurrentWeapon: {fileID: 0}
   BoundaryPoints:
   - {fileID: 4416160274829843833}
@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30b129b046ba474d8d6b8bb0fcc02ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 0
   weapon: {fileID: 0}
   collectible: {fileID: 0}
 --- !u!212 &4416160275682481663

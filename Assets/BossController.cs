@@ -114,7 +114,6 @@ public class BossController : MonoBehaviour
         else
         {
             rb.velocity = new Vector2(0, 0);
-            AimTowardsPlayer();
             CurrentState = State.SHOOT;
             //Debug.Log($"Kelma is {timer}");
 
@@ -150,6 +149,7 @@ public class BossController : MonoBehaviour
                 break;
             case State.SHOOT:
                 rb.angularVelocity = 0;
+                //AimTowardsPlayer();
                 ShootWeapons();
                 break;
 
@@ -272,7 +272,8 @@ public class BossController : MonoBehaviour
 
 
         }
-
+        
+       
         Weapon lol = Instantiate(weapontype2, transform.position, transform.rotation);
         Weapons[i] = lol;
         ((LaserGun)Weapons[i]).SetLaserName("BossLaser" + Bosslasercount.ToString());

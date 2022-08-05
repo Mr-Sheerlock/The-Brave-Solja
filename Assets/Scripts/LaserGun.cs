@@ -10,11 +10,24 @@ public class LaserGun : Weapon
     
     public LineRenderer lineRenderer;
 
-    public GameObject HitEffect;
+    public List<GameObject> HitEffects;
+    public List<GameObject> ShootEffects;
     public GameObject Laser;
 
     Quaternion rotationoffset;
 
+    public void AddHitEffect(string PrefName)
+    {
+        HitEffects.Add( GameObject.Find(PrefName));
+    }
+    public void AddShootEffect(string PrefName)
+    {
+        ShootEffects.Add(GameObject.Find(PrefName));
+    }
+
+    
+
+    
 
     float range;
     private void Awake()
@@ -24,17 +37,6 @@ public class LaserGun : Weapon
         //TimeSinceLastShoot = 0f;
         timer = 0;
         LaserWidth = 0.5f;
-        if (!lineRenderer)
-        {
-            GameObject laser = GameObject.Find("Laser(Player)");
-            if (!laser)
-            {
-                laser = Instantiate(Laser, transform.position, rotationoffset);
-                laser.name = "Laser(Player)";
-            }
-            lineRenderer = laser.GetComponent<LineRenderer>();
-
-        }
     }
 
     //for Towers and Enemies
@@ -58,6 +60,11 @@ public class LaserGun : Weapon
         lineRenderer.enabled = true;
         lineRenderer.widthMultiplier = LaserWidth;
         lineRenderer.SetPosition(0, ShootingPoint.position); //start
+
+        for (int i = 0; i < ShootEffects.Count; i++)
+        {
+            GameObject lol = Instantiate(ShootEffects[i], ShootingPoint.position, ShootingPoint.transform.rotation);
+        }
         lineRenderer.SetPosition(1, (Vector2)ShootingPoint.position+ AimDirection.normalized * range); //end
 
         RaycastHit2D hit = Physics2D.CircleCast(ShootingPoint.position, lineRenderer.widthMultiplier / 2, AimDirection, range, (1 << 3) + (1 << 7) + (1 << 8) + (1 << 9));
@@ -67,7 +74,10 @@ public class LaserGun : Weapon
         {
 
             lineRenderer.SetPosition(1, hit.point);
-            GameObject lol = Instantiate(HitEffect, hit.point, hit.transform.rotation);
+            for(int i =0; i < HitEffects.Count; i++)
+            {
+                GameObject lol = Instantiate(HitEffects[i], hit.point, hit.transform.rotation);
+            }
 
             if (hit.collider.GetComponent<Health>())
             {
