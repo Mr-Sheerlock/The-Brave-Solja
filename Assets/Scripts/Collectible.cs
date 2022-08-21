@@ -9,12 +9,17 @@ public abstract class Collectible : MonoBehaviour
     public Weapon weapon;
     public GunController gunController;
 
+
+    [SerializeField] protected GameObject light_pref;
+    [SerializeField]protected GameObject _light;
+
     protected Vector2 CollectibleSpawnOffset;
     protected float SearchRadius;
     Vector2 randomDirections;
 
     protected Vector3 Position;
     protected Vector3 tempPosition;
+
     protected void CheckforValidPosition ()
     {
         //1000 layer 3 
@@ -60,6 +65,7 @@ public abstract class Collectible : MonoBehaviour
         Position = InitialSpawnPosition;
         CheckforValidPosition();
         transform.position = Position;
+        _light=Instantiate(light_pref,transform.position,transform.rotation);
         spriteRenderer.enabled = true;
         box.enabled = true;
 

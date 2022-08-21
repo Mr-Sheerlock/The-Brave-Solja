@@ -84,14 +84,14 @@ public class ProjectileGun : Weapon
                     currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
                 }
 
-                if(i % 2 == 1)
+                if(i % 2 == 0)
                 {
                     ShootSingle(ShootingPoint, AimDirection);
                 }
                 else
                 {
-                    magnitude += increment;
-                    Offset = magnitude * (ShootingPoint.right);
+                    //magnitude += increment;
+                    Offset = -magnitude * (ShootingPoint.right);
                     GameObject currentbullet = Instantiate(bullet, ShootingPoint.position + (Vector3)Offset, BulletRotation);
                     BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
                     lol.SetDamage(damage);
@@ -107,13 +107,18 @@ public class ProjectileGun : Weapon
     void ShootSingle(Transform ShootingPoint, Vector2 AimDirection)
     {
         GameObject currentbullet = Instantiate(bullet, ShootingPoint.position, BulletRotation);
-
         //set Damage
         BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
         lol.SetDamage(damage);
         currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
     }
     
+
+
+    public void SetBullet(GameObject newBullet)
+    {
+        bullet = newBullet;
+    }
     public override void DontShoot() { }
 
 

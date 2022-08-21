@@ -110,6 +110,7 @@ public class BossController : MonoBehaviour
             timer = 0;
             //MovingTimer+=Time.fixedDeltaTime;
             CurrentState = State.MOVE;
+            DontShootWeapons(); 
         }
         else
         {
@@ -277,7 +278,7 @@ public class BossController : MonoBehaviour
         Weapon lol = Instantiate(weapontype2, transform.position, transform.rotation);
         Weapons[i] = lol;
         ((LaserGun)Weapons[i]).SetLaserName("BossLaser" + Bosslasercount.ToString());
-
+        DontShootWeapons();
     }
 
     public void Die()

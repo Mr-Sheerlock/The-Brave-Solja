@@ -11,6 +11,8 @@ public class GunController : MonoBehaviour
     //Collectible related stuff
     public Weapon weapon;
     public Collectible collectible;
+    [SerializeField] GameObject bullet;
+
     
     public void SetGCDamage(int damage)
     {
@@ -55,6 +57,13 @@ public class GunController : MonoBehaviour
         }
         weapon = collectedweapon;
         weapon.SetDamage(Damage);
+        if (gameObject.tag == "Player" && bullet!=null)
+        {
+            if (weapon.GetComponent<ProjectileGun>())
+            {
+                ((ProjectileGun)weapon).SetBullet(bullet);  
+            }
+        }
     }
 
     public void ChangeCollectible(Collectible newcollectible)

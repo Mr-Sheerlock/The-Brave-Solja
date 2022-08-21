@@ -11,6 +11,7 @@ public class PJCollectible : Collectible
         gunController = Player.GetComponent< GunController > ();    
         CollectibleSpawnOffset = new Vector2(3, 3);
         SearchRadius = 5;
+        _light = transform.GetChild(0).gameObject;
     }
 
 
@@ -19,12 +20,13 @@ public class PJCollectible : Collectible
         if ( other.tag == "Player")
         {
             //first tell the gunController to spawn the other object
+            Destroy(_light);
             spriteRenderer.enabled = false;
             box.enabled = false;
-            Weapon lol = Instantiate(weapon, transform.position, transform.rotation);
-            ((ProjectileGun)lol).timer = Time.time;
+            Weapon temp = Instantiate(weapon, transform.position, transform.rotation);
+            ((ProjectileGun)temp).timer = Time.time;
 
-            gunController.ChangeWeapon(lol,true);
+            gunController.ChangeWeapon(temp,true);
             gunController.ChangeCollectible(this);
         }
 

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.75
-  m_Color: {r: 0.85882354, g: 0.1263153, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.1263153, b: 0.85882354, a: 1}
   m_Intensity: 0.89
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 7394238884734281552}
   - component: {fileID: 7394238884734281517}
   m_Layer: 7
-  m_Name: Bullet
+  m_Name: PBullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,7 +188,7 @@ SpriteRenderer:
   m_SortingLayerID: -2054343113
   m_SortingLayer: -1
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: cd011e25ce933d047829f30af84866e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a434cc68006622540949d4cdf62f301d, type: 3}
   m_Color: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -216,7 +216,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.51, y: 1.44}
+    oldSize: {x: 2.49, y: 1.44}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -258,5 +258,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06fa25532c2cc334987b8c6a6cc2b660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitEffect: {fileID: 1739973103786403867, guid: a8225f676e6b2b94e804292a8cb4b28e, type: 3}
+  HitEffect: {fileID: 6685601576653271057, guid: 6d625c9acc87fbd4ba00a4ec61bfb442, type: 3}
   damage: 0
