@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
-    [Header("Events")]
-    public UnityEvent CustomEvent;
     float timer = 0;
     public int Maxhealth { get; set; }
-    public float CurrentHealth { get; set; }
+    [SerializeField] public float CurrentHealth;
     float healregen { get; set; }
+    
+    [Header("Events")]
+    public UnityEvent CustomEvent;
 
     public HealthbarScript HB;
     //GameObject Healthbar;
@@ -42,7 +43,7 @@ public class Health : MonoBehaviour
     {
         CurrentHealth -= damage;
 
-        Debug.Log("Damage Taken is" + damage);
+        //Debug.Log("Damage Taken is" + damage);
         
         (HB)?.SetSize((float)CurrentHealth / Maxhealth);
 

@@ -273,4 +273,8 @@ public class EnemyController : MonoBehaviour
         }
         Move(TargetPosition);
     }
+    private void OnDestroy()
+    {
+        Destroy(CurrentWeapon);
+    }
 }

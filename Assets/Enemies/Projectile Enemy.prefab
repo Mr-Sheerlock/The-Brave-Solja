@@ -228,8 +228,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30b129b046ba474d8d6b8bb0fcc02ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 0
   weapon: {fileID: 0}
   collectible: {fileID: 0}
+  bullet: {fileID: 0}
 --- !u!212 &8317232109912184769
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -331,6 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742662118bfbf504888a3b8b586ece62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentHealth: 0
   CustomEvent:
     m_PersistentCalls:
       m_Calls:
@@ -432,14 +435,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8317232110437029456}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.67, y: 1.53, z: -0.014436156}
+  m_LocalRotation: {x: -0, y: -0, z: 0.38936576, w: 0.9210832}
+  m_LocalPosition: {x: -1.61, y: 1.6, z: -0.014436156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8317232109912184774}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45.83}
 --- !u!1 &8317232111378125332
 GameObject:
   m_ObjectHideFlags: 0

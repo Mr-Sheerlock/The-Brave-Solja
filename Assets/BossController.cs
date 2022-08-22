@@ -6,8 +6,8 @@ public class BossController : MonoBehaviour
 {
     int numberOfWeapons;
     public static int Bosslasercount = 1; // a lasercount for making the laser names unique
-    int damage;
-    public float speed;
+    int damage=5;
+    public float speed=5;
     public Rigidbody2D rb;
     public Transform[] Shootinpoints = new Transform[12];
     public Weapon weapontype1;
@@ -32,7 +32,6 @@ public class BossController : MonoBehaviour
     public bool SpottedPlayer;
     public float timer;
     float TimeActiveShooting;
-    float TimeIdle;
 
     float aimOffset;
 
@@ -41,7 +40,8 @@ public class BossController : MonoBehaviour
     //charger logic
     float radiusOffset;
 
-    public float AmountOfRotation;
+    float TimeIdle=0;
+    float AmountOfRotation= 0.5f;
     //Memory time ??
     int numberofBullets=1;
 
@@ -57,19 +57,16 @@ public class BossController : MonoBehaviour
 
     void Awake()
     {
-        AmountOfRotation = 25f;
         Weapons = new Weapon[12];
         SetWeapons();
         Player = GameObject.Find("Player");
-        damage = 5;
         gunController.SetGCDamage(damage);
-        speed = 5;
         CurrentState = State.MOVE;
         SpottedPlayer = false;
         timer = 0f;
         //BoundaryPoints= new Transform[4];
         TimeActiveShooting = 5f;
-        TimeIdle = 3f;
+        //TimeIdle = 3f;
         RangeOfSight = 60f; //The assumption is that the boss has a very high range of sight and wont be active until some point
         LenghtOfBoundingSquare = 20f; //keda keda doesn't move 
         GetBoundsFromParent();
@@ -150,7 +147,7 @@ public class BossController : MonoBehaviour
                 break;
             case State.SHOOT:
                 rb.angularVelocity = 0;
-                //AimTowardsPlayer();
+                AimTowardsPlayer();
                 ShootWeapons();
                 break;
 
@@ -189,14 +186,28 @@ public class BossController : MonoBehaviour
     void AimTowardsPlayer()
     {
         PlayerPosition = Player.transform.position;
-        aimDirection = PlayerPosition - rb.position;
-        aimDirection = aimDirection.normalized - new Vector2(Mathf.Cos(aimOffset), Mathf.Sin(aimOffset));
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+        aimDirection = PlayerPosition - (Vector2)transform.position;
+        Quaternion toRotation = Quaternion.LookRotation(transform.up, aimDirection);
+        //Debug.Log("rotation.z is " + (transform.rotation.z));
+        //Debug.Log("toRot.z is " + (toRotation.z));
+        Debug.Log("transform.up is " + (transform.up));
+        Debug.Log("aimDirection.normalized is " + (aimDirection.normalized));
 
-        //aimAngle = aimAngle - aimOffset; //target angle
-        if(Mathf.Abs(rb.rotation - aimAngle )>=10)
-        transform.eulerAngles += new Vector3(0,0, aimAngle * AmountOfRotation*Time.fixedDeltaTime);
-        //rb.angularVelocity = 0;
+        //Debug.Log("Differnce is "+ (Mathf.Abs((toRotation.z < 0 ? toRotation.z * 180 + 360 : toRotation.z * 180) - transform.rotation.z)));
+        Debug.Log("Differnce is "+ (Mathf.Abs(((Vector2)transform.up-aimDirection.normalized).magnitude)));
+        //if (Mathf.Abs((toRotation.z<0 ? toRotation.z*180+360 : toRotation.z * 180) - transform.rotation.z) < 3)
+        if (((Vector2)transform.up - aimDirection.normalized).magnitude > 0.025)
+        {
+            toRotation.x = 0;
+            toRotation.y = 0;
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, AmountOfRotation * Time.fixedDeltaTime);
+        }
+        else
+        {
+            Debug.Log("d5lt gowa :3 UwU w ana mw2f");
+
+        }
+
 
     }
 
@@ -311,5 +322,14 @@ public class BossController : MonoBehaviour
             }
         }
         Move(TargetPosition);
+    }
+
+
+    private void OnDestroy()
+    {
+        for (int i = 0; i < Weapons.Length; i++)
+        {
+            Destroy(Weapons[i].gameObject);
+        }
     }
 }

@@ -15,7 +15,7 @@ public class ProjectileGun : Weapon
 
     ////////////Bullet//////////
     public GameObject bullet;
-    public float FireForce;
+    [SerializeField] float FireForce;
     public static float Zrotaion;
     Vector3 AnglesOffset;
     Quaternion BulletRotation;
@@ -27,7 +27,7 @@ public class ProjectileGun : Weapon
     {
         damage = 5;
         gunWidth = 3f;
-        FireForce = 5f;
+        FireForce = 20f;
         Zrotaion = 90f;
         TimeSinceLastShoot = 0f;
         AnglesOffset = new Vector3(0, 0, Zrotaion);
@@ -57,7 +57,7 @@ public class ProjectileGun : Weapon
             if (numberofProjectiles == 1)
             {
                 //Mabywsl4 le hena
-                ShootSingle(ShootingPoint, AimDirection);
+                ShootSingle(ShootingPoint.position, AimDirection);
             }
             else
             {
@@ -78,24 +78,26 @@ public class ProjectileGun : Weapon
 
                     }
 
-                    GameObject currentbullet = Instantiate(bullet, ShootingPoint.position + (Vector3)Offset, BulletRotation);
-                    BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
-                    lol.SetDamage(damage);
-                    currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
+                    //GameObject currentbullet = Instantiate(bullet, ShootingPoint.position + (Vector3)Offset, BulletRotation);
+                    //BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
+                    //lol.SetDamage(damage);
+                    //currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
+                    ShootSingle((Vector2)ShootingPoint.position + Offset, AimDirection);
                 }
 
                 if(i % 2 == 0)
                 {
-                    ShootSingle(ShootingPoint, AimDirection);
+                    ShootSingle(ShootingPoint.position, AimDirection);
                 }
                 else
                 {
                     //magnitude += increment;
                     Offset = -magnitude * (ShootingPoint.right);
-                    GameObject currentbullet = Instantiate(bullet, ShootingPoint.position + (Vector3)Offset, BulletRotation);
-                    BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
-                    lol.SetDamage(damage);
-                    currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
+                    ShootSingle((Vector2)ShootingPoint.position + Offset, AimDirection);
+                    //GameObject currentbullet = Instantiate(bullet, ShootingPoint.position + (Vector3)Offset, BulletRotation);
+                    //BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
+                    //lol.SetDamage(damage);
+                    //currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
                 }
 
 
@@ -104,13 +106,17 @@ public class ProjectileGun : Weapon
         }
     }
 
-    void ShootSingle(Transform ShootingPoint, Vector2 AimDirection)
+    void ShootSingle(Vector2 ShootingPoint, Vector2 AimDirection)
     {
-        GameObject currentbullet = Instantiate(bullet, ShootingPoint.position, BulletRotation);
+        GameObject currentbullet = Instantiate(bullet, ShootingPoint, BulletRotation);
         //set Damage
         BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
         lol.SetDamage(damage);
-        currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
+        if (AimDirection == Vector2.zero)
+        {
+            AimDirection = transform.up;
+        }
+        currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection.normalized * FireForce, ForceMode2D.Impulse);
     }
     
 
