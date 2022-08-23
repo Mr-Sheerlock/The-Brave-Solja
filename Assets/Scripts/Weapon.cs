@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public  int damage;
+    [SerializeField] protected int damage=5;
 
     public virtual void SetDamage(int x)
     {

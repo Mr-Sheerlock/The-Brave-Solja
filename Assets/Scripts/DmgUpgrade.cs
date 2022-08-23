@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NBulletsUpgrade : Upgrade
+public class DmgUpgrade : Upgrade
 {
-    [SerializeField] int BulletsToAdd=1;    
+
+
+
+    [SerializeField] int DamagetoAdd = 5;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -29,7 +32,8 @@ public class NBulletsUpgrade : Upgrade
         {
             Sr.enabled = false;
             collider.enabled = false;
-            mainController.IncNProjectiles(BulletsToAdd);
+            //((ProjectileGun)gunController.weapon).SetNumberOfProjectiles(((ProjectileGun)gunController.weapon).numberofProjectiles+1);
+            mainController.IncDamage(DamagetoAdd);
         }
         else
         {
@@ -37,4 +41,3 @@ public class NBulletsUpgrade : Upgrade
         }
     }
 }
-

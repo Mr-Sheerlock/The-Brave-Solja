@@ -5,35 +5,28 @@ using UnityEngine;
 public class ProjectileGun : Weapon
 {
     ////////////Specs//////////
-    public int numberofProjectiles;
-    public float gunWidth;
+    [SerializeField] int numberofProjectiles = 1;
+    [SerializeField] float gunWidth=3f;
 
     ////////////timer//////////
     public float timer=0;
-    float TimeSinceLastShoot;
-    float PeriodicTime;
+    float TimeSinceLastShoot=0;
+    float PeriodicTime= 0.3f;
 
     ////////////Bullet//////////
     public GameObject bullet;
-    [SerializeField] float FireForce;
-    public static float Zrotaion;
-    Vector3 AnglesOffset;
+    float FireForce=30f;
+    public static float Zrotaion=90f;
+    Vector3 AnglesOffset=new Vector3(0, 0, Zrotaion);
     Quaternion BulletRotation;
 
 
 
     
     private void Awake()
-    {
-        damage = 5;
-        gunWidth = 3f;
-        FireForce = 20f;
-        Zrotaion = 90f;
-        TimeSinceLastShoot = 0f;
-        AnglesOffset = new Vector3(0, 0, Zrotaion);
-        numberofProjectiles = 1;
+    {   
         timer = Time.time;
-        PeriodicTime = 0.3f;
+        gunWidth = 3f;
     }
     
     public void SetPeriodictime(float newtime)
@@ -44,6 +37,7 @@ public class ProjectileGun : Weapon
     public void SetNumberOfProjectiles(int newnumber)
     {
         numberofProjectiles = newnumber;
+        gunWidth = numberofProjectiles;
     }
     public override void Shoot(Transform ShootingPoint, Vector2 AimDirection)
     {
@@ -56,7 +50,6 @@ public class ProjectileGun : Weapon
             
             if (numberofProjectiles == 1)
             {
-                //Mabywsl4 le hena
                 ShootSingle(ShootingPoint.position, AimDirection);
             }
             else
@@ -77,11 +70,6 @@ public class ProjectileGun : Weapon
                         Offset = -magnitude * (ShootingPoint.right);
 
                     }
-
-                    //GameObject currentbullet = Instantiate(bullet, ShootingPoint.position + (Vector3)Offset, BulletRotation);
-                    //BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
-                    //lol.SetDamage(damage);
-                    //currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
                     ShootSingle((Vector2)ShootingPoint.position + Offset, AimDirection);
                 }
 
@@ -91,13 +79,8 @@ public class ProjectileGun : Weapon
                 }
                 else
                 {
-                    //magnitude += increment;
                     Offset = -magnitude * (ShootingPoint.right);
                     ShootSingle((Vector2)ShootingPoint.position + Offset, AimDirection);
-                    //GameObject currentbullet = Instantiate(bullet, ShootingPoint.position + (Vector3)Offset, BulletRotation);
-                    //BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();
-                    //lol.SetDamage(damage);
-                    //currentbullet.GetComponent<Rigidbody2D>().AddForce(AimDirection * FireForce, ForceMode2D.Impulse);
                 }
 
 

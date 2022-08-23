@@ -5,7 +5,7 @@ using UnityEngine;
 public class LaserGun : Weapon
 {
     ///Specs/// 
-    float LaserWidth{get;set;}
+    [SerializeField] float LaserWidth;
     
     public LineRenderer lineRenderer;
 
@@ -27,7 +27,9 @@ public class LaserGun : Weapon
     public override void  SetDamage(int x)
     {
         damage = x;
-        LaserWidth = Mathf.Max(0.6f,0.2f+ damage/15); //0.2 -> 0.6
+        LaserWidth = Mathf.Min(1f,0.4f+ damage/15); //0.2 -> 0.6
+        if(lineRenderer != null)
+        lineRenderer.widthMultiplier = LaserWidth;
     }
 
 
@@ -58,15 +60,15 @@ public class LaserGun : Weapon
 
         //linrenderer on 
         
+        for (int i = 0; i < ShootEffects.Count; i++)
+        {
+            GameObject lol = Instantiate(ShootEffects[i], ShootingPoint.position - ShootingPoint.up * 0.5f, ShootingPoint.transform.rotation);
+        }
 
         lineRenderer.enabled = true;
         //lineRenderer.widthMultiplier = LaserWidth;
         lineRenderer.SetPosition(0, ShootingPoint.position-ShootingPoint.up*0.5f); //start
 
-        for (int i = 0; i < ShootEffects.Count; i++)
-        {
-            GameObject lol = Instantiate(ShootEffects[i], ShootingPoint.position - ShootingPoint.up * 0.5f, ShootingPoint.transform.rotation);
-        }
         lineRenderer.SetPosition(1, (Vector2)ShootingPoint.position+ AimDirection.normalized * range); //end
 
         RaycastHit2D hit = Physics2D.CircleCast(ShootingPoint.position, lineRenderer.widthMultiplier / 2, AimDirection, range, (1 << 3) + (1 << 7) + (1 << 8) + (1 << 9));

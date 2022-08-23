@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 953436783547277129}
   - component: {fileID: 953436783547277128}
-  - component: {fileID: 953436783547277130}
   - component: {fileID: 953436783547277131}
+  - component: {fileID: 1351847917793117480}
   m_Layer: 0
   m_Name: Damage
   m_TagString: Untagged
@@ -86,21 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &953436783547277130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953436783547277135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5843e373aa97e0946ba27e8c90fbe6e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Sr: {fileID: 953436783547277128}
-  collider: {fileID: 953436783547277131}
-  gunController: {fileID: 0}
 --- !u!58 &953436783547277131
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -117,3 +102,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.67
+--- !u!114 &1351847917793117480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953436783547277135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8f55919a2fe0245bea1ae1fd95c009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sr: {fileID: 953436783547277128}
+  collider: {fileID: 953436783547277131}
+  DamagetoAdd: 5

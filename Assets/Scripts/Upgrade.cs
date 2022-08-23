@@ -6,9 +6,17 @@ public abstract class Upgrade : MonoBehaviour
 {
     public SpriteRenderer Sr;
     public CircleCollider2D collider;
-    public GunController gunController;
+    static protected GameObject Player;
+    static protected MainController mainController;
 
-
+    private void Awake()
+    {
+        if(Player == null)
+        {
+            Player = GameObject.FindGameObjectWithTag("Player");
+            mainController = Player.GetComponent<MainController>();
+        }
+    }
     void Start()
     {
         

@@ -18,7 +18,7 @@ public class GunController : MonoBehaviour
         Nprojectiles = nproj;
         if(weapon != null && weapon as ProjectileGun)
         {
-            ((ProjectileGun)weapon).numberofProjectiles = Nprojectiles;
+            ((ProjectileGun)weapon).SetNumberOfProjectiles ( Nprojectiles);
         }
     }
     public void SetGCDamage(int damage)
@@ -26,7 +26,7 @@ public class GunController : MonoBehaviour
         Damage = damage;
         if(weapon!=null)
         {
-            weapon.damage= Damage;
+            weapon.SetDamage( Damage);
         }
     }
 
@@ -72,6 +72,7 @@ public class GunController : MonoBehaviour
             if (weapon.GetComponent<ProjectileGun>())
             {
                 ((ProjectileGun)weapon).SetBullet(bullet);  
+                ((ProjectileGun)weapon).SetNumberOfProjectiles(Nprojectiles);  
             }
         }
         

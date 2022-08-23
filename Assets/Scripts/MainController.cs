@@ -81,15 +81,20 @@ public class MainController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void IncDamage(float addend)
+    public void  IncDamage(float addend)
     {
         damage += addend;
         gunController.SetGCDamage((int)damage);
     }
     
-    void IncNProjectiles(int addend)
+    public void IncNProjectiles(int addend)
     {
         numberofProjectiles+= addend;
-        gunController.SetGCDamage((int)damage);
+        if (numberofProjectiles > 15)
+        {
+            numberofProjectiles = 15;  //Max number 
+        }
+
+        gunController.SetNprojectiles(numberofProjectiles);
     }
 }

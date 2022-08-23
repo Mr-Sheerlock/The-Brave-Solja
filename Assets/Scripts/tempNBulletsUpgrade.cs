@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class tempNBulletsUpgrade : Upgrade
 {
-
+    [SerializeField] int BulletsToAdd = 3;
     float timer;
     public float upgradeTime;
     bool Active;
@@ -14,19 +14,20 @@ public class tempNBulletsUpgrade : Upgrade
     {
         timer = 0f;
         upgradeTime = 5f;
-        GameObject Player = GameObject.Find("Player");
-        gunController = Player.GetComponent<GunController>();
         Active = false;
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        if (!Active) timer = 0f;
-        if (timer > upgradeTime)
+        //timer += Time.deltaTime;
+        if (Active)
         {
-            Degrade();
+            StartCoroutine(WaitForDegrade());
         }
+        //if (timer > upgradeTime)
+        //{
+        //    Degrade();
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -34,6 +35,7 @@ public class tempNBulletsUpgrade : Upgrade
         if (other.tag == "Player")
         {
             Upgrade();
+            Active = true; 
         }
 
     }
@@ -48,11 +50,11 @@ public class tempNBulletsUpgrade : Upgrade
 
     void Upgrade()
     {
-        if (gunController.weapon as ProjectileGun)
+        if (Player.GetComponent<MainController>())
         {
             Sr.enabled = false;
             collider.enabled = false;
-            ((ProjectileGun)gunController.weapon).SetNumberOfProjectiles(((ProjectileGun)gunController.weapon).numberofProjectiles + 3);
+            mainController.IncNProjectiles(BulletsToAdd); 
             timer = 0f;
             Active = true;
 
@@ -62,9 +64,17 @@ public class tempNBulletsUpgrade : Upgrade
             Sr.color = new Color(Sr.color.r, Sr.color.g, Sr.color.b, 0.4f);
         }
     }
+
+
+    IEnumerator WaitForDegrade()
+    {
+        yield return new WaitForSeconds(upgradeTime);
+        Degrade();
+    }
+
     void Degrade()
     {
-        ((ProjectileGun)gunController.weapon).SetNumberOfProjectiles(((ProjectileGun)gunController.weapon).numberofProjectiles - 3);
-        Destroy(gameObject);   
+        mainController.IncNProjectiles(-BulletsToAdd);
+        Destroy(gameObject);
     }
 }
