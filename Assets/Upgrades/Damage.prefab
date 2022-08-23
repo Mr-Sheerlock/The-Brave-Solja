@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 953436783547277130}
   - component: {fileID: 953436783547277131}
   m_Layer: 0
-  m_Name: NumberofBulletsUpgrade
+  m_Name: Damage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8cfa440b9b14b8045b556116a604078d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 508ca87269a36c5419ae50bc3fb9ba00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

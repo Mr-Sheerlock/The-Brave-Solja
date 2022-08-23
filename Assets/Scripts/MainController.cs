@@ -7,7 +7,8 @@ public class MainController : MonoBehaviour
     ///Specs///
     public GameObject DieEffect;
     public GameObject PlayerLight;
-    [SerializeField]int damage=10;
+    [SerializeField]float damage=10;
+    int numberofProjectiles=1;
     [SerializeField]float speed=15;
     public Rigidbody2D rb;
     float Horizontal, Vertical;
@@ -25,7 +26,7 @@ public class MainController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gunController.SetGCDamage(damage);
+        gunController.SetGCDamage((int)damage);
 
     }
 
@@ -78,5 +79,17 @@ public class MainController : MonoBehaviour
         Instantiate(DieEffect, transform.position, transform.rotation);
         Instantiate(PlayerLight, transform.position,transform.rotation);
         Destroy(gameObject);
+    }
+
+    void IncDamage(float addend)
+    {
+        damage += addend;
+        gunController.SetGCDamage((int)damage);
+    }
+    
+    void IncNProjectiles(int addend)
+    {
+        numberofProjectiles+= addend;
+        gunController.SetGCDamage((int)damage);
     }
 }

@@ -1319,7 +1319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3614787183475191401, guid: 151805b9bb273a54e961d0199fd516b4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3614787183475191404, guid: 151805b9bb273a54e961d0199fd516b4, type: 3}
       propertyPath: m_RootOrder
@@ -1374,6 +1374,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1495362752}
     m_Modifications:
+    - target: {fileID: 408422200552918752, guid: dd9c1f63601e8404b993551bdb916e2d, type: 3}
+      propertyPath: m_Radius
+      value: 0.65
+      objectReference: {fileID: 0}
     - target: {fileID: 408422200552918754, guid: dd9c1f63601e8404b993551bdb916e2d, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2731,7 +2735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DieEffect: {fileID: 351542266971115188, guid: 0225f0cda44e1f943b81fc382392dad0, type: 3}
   PlayerLight: {fileID: 2597895915468000729, guid: 3ba1ebc6786d95349ae9f5cc0c37c117, type: 3}
-  damage: 0
+  damage: 10
   speed: 15
   rb: {fileID: 808039418}
   Shootinpoint: {fileID: 1654241449}
@@ -2802,7 +2806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Maxhealth: 100
-  CurrentHealth: 1000
+  CurrentHealth: 100
   healregen: 0
   OnDeath:
     m_PersistentCalls:
@@ -3211,7 +3215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4013680941695174327, guid: 40f0995a3d6e0b644a3f991ae10f9425, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40f0995a3d6e0b644a3f991ae10f9425, type: 3}

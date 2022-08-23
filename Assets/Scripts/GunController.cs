@@ -5,23 +5,33 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
 
-    public int Damage;
-
+    int Damage=1;
+    int Nprojectiles=1;
 
     //Collectible related stuff
     public Weapon weapon;
     public Collectible collectible;
     [SerializeField] GameObject bullet;
 
-    
+    public void SetNprojectiles(int nproj)
+    {
+        Nprojectiles = nproj;
+        if(weapon != null && weapon as ProjectileGun)
+        {
+            ((ProjectileGun)weapon).numberofProjectiles = Nprojectiles;
+        }
+    }
     public void SetGCDamage(int damage)
     {
         Damage = damage;
+        if(weapon!=null)
+        {
+            weapon.damage= Damage;
+        }
     }
 
     void Awake()
     {
-        Damage = 1;
         collectible = null;
         if (weapon)
         {
