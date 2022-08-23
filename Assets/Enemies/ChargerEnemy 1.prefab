@@ -397,7 +397,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742662118bfbf504888a3b8b586ece62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CustomEvent:
+  Maxhealth: 100
+  CurrentHealth: 100
+  healregen: 0
+  OnDeath:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1429626459686221279}
@@ -412,6 +415,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  On50percent:
+    m_PersistentCalls:
+      m_Calls: []
   HB: {fileID: 3291237810544547995}
 --- !u!1 &1429626459719072435
 GameObject:
@@ -424,7 +430,7 @@ GameObject:
   - component: {fileID: 1429626459719072434}
   m_Layer: 9
   m_Name: ChargerEnemy 1
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,11 +6,11 @@ public class ExplosiveBarrel : MonoBehaviour
 {
     public Sprite explosion;
     public BoxCollider2D collider;
-    float timeofExplosion;
-    float timer;
+    [SerializeField]float timeofExplosion= 0.3f;
+    [SerializeField]int ExplosionDamage = 50;
+    float timer=0;
     bool Exploded;
     bool damageDone;
-    int ExplosionDamage;
 
     public SpriteRenderer Sr;
     Health health;
@@ -21,10 +21,6 @@ public class ExplosiveBarrel : MonoBehaviour
         health = GetComponent<Health>();
         Exploded = false;
         damageDone = false;
-
-        timer = 0;
-        timeofExplosion = 0.3f;
-        ExplosionDamage = 50;
 
     }
     private void Update()

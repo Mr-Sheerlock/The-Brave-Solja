@@ -7,27 +7,22 @@ public class TowerController : MonoBehaviour
 
     ///Specs///
     public static int  lasercount=1; // a lasercount for making the laser names unique
-    int Damage;
-    int numberofBullets;
+    int Damage=5;
+    int numberofBullets = 1;
     public Transform[] Shootinpoints= new Transform[4];
     Weapon[] Weapons;
     public Weapon weapontype;
-    float PeriodicTime;
+    float PeriodicTime = 0.6f;
     public GunController gunController;
 
     float timer;
     float TimeShooting = 0.6f;
-    public float AmountOfRotation;
+    float AmountOfRotation = 50f;
 
 
     void Start()
     {
-        AmountOfRotation = 50f;
         timer = 0;
-        Damage = 1;
-        numberofBullets = 1;
-        PeriodicTime = 0.6f;
-        TimeShooting = 0.6f;
         Weapons = new Weapon[4];
         SetWeapons(weapontype);
         //are shooting points initialized ?? 

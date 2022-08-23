@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4013680941695174321}
   m_Layer: 3
   m_Name: BulletTower
-  m_TagString: Untagged
+  m_TagString: Towers
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
   collectible: {fileID: 0}
+  bullet: {fileID: 0}
 --- !u!114 &4013680941695174320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742662118bfbf504888a3b8b586ece62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CustomEvent:
+  Maxhealth: 100
+  CurrentHealth: 100
+  healregen: 0
+  OnDeath:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4013680941695174324}
@@ -155,6 +159,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  On50percent:
+    m_PersistentCalls:
+      m_Calls: []
   HB: {fileID: 2252328544743690069}
 --- !u!58 &4013680941695174321
 CircleCollider2D:

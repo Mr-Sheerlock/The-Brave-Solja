@@ -207,7 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36c53337b3a8a7b44b1f1fe68d434e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  damage: 5
+  speed: 5
   rb: {fileID: 4416160275682481660}
   Shootinpoint: {fileID: 4416160275156522089}
   weapontype: {fileID: 5998821449281549036, guid: 536ecef0d0c3cfd43900990ff91752de, type: 3}
@@ -219,9 +220,10 @@ MonoBehaviour:
   - {fileID: 4416160273892615536}
   Offset: {x: 0, y: 0}
   TargetPosition: {x: 0, y: 0}
+  LenghtOfBoundingSquare: 5
   OriginalPos: {x: 0, y: 0}
   gunController: {fileID: 4416160275682481662}
-  RangeOfSight: 0
+  RangeOfSight: 10
   SpottedPlayer: 0
   timer: 0
 --- !u!114 &4416160275682481662
@@ -236,9 +238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30b129b046ba474d8d6b8bb0fcc02ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
   weapon: {fileID: 0}
   collectible: {fileID: 0}
+  bullet: {fileID: 0}
 --- !u!212 &4416160275682481663
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -340,7 +342,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742662118bfbf504888a3b8b586ece62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CustomEvent:
+  Maxhealth: 100
+  CurrentHealth: 100
+  healregen: 0
+  OnDeath:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4416160275682481657}
@@ -355,6 +360,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  On50percent:
+    m_PersistentCalls:
+      m_Calls: []
   HB: {fileID: 0}
 --- !u!1 &7607496259135419743
 GameObject:
@@ -478,7 +486,7 @@ GameObject:
   - component: {fileID: 4832921229777043215}
   m_Layer: 9
   m_Name: Laser Enemy
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

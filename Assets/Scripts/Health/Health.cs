@@ -19,7 +19,17 @@ public class Health : MonoBehaviour
     void Start()
     {
 
-        HB = gameObject.GetComponentInChildren<HealthbarScript>();        
+        HB = gameObject.GetComponentInChildren<HealthbarScript>();      
+        //if(gameObject.CompareTag("Enemies"))
+        //{
+            
+        //}else if (gameObject.CompareTag("Towers"))
+        //{
+
+        //}else if ( gameObject.CompareTag("Player"))
+        //{
+            
+        //}
     }
 
 
