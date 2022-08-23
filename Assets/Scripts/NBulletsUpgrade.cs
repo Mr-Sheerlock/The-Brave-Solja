@@ -30,6 +30,7 @@ public class NBulletsUpgrade : Upgrade
             Sr.enabled = false;
             collider.enabled = false;
             mainController.IncNProjectiles(BulletsToAdd);
+            Destroy(gameObject);
         }
         else
         {

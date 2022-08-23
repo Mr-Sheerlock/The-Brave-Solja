@@ -58,13 +58,13 @@ public class LaserGun : Weapon
     public override void Shoot(Transform ShootingPoint, Vector2 AimDirection)
     {
 
-        //linrenderer on 
-        
+        //Shoot Effects
         for (int i = 0; i < ShootEffects.Count; i++)
         {
             GameObject lol = Instantiate(ShootEffects[i], ShootingPoint.position - ShootingPoint.up * 0.5f, ShootingPoint.transform.rotation);
         }
 
+        //linrenderer on 
         lineRenderer.enabled = true;
         //lineRenderer.widthMultiplier = LaserWidth;
         lineRenderer.SetPosition(0, ShootingPoint.position-ShootingPoint.up*0.5f); //start

@@ -34,6 +34,7 @@ public class DmgUpgrade : Upgrade
             collider.enabled = false;
             //((ProjectileGun)gunController.weapon).SetNumberOfProjectiles(((ProjectileGun)gunController.weapon).numberofProjectiles+1);
             mainController.IncDamage(DamagetoAdd);
+            Destroy(gameObject);
         }
         else
         {
