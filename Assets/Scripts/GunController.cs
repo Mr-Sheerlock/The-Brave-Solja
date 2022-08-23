@@ -64,6 +64,7 @@ public class GunController : MonoBehaviour
                 ((ProjectileGun)weapon).SetBullet(bullet);  
             }
         }
+        
     }
 
     public void ChangeCollectible(Collectible newcollectible)

@@ -5,7 +5,6 @@ using UnityEngine;
 public class LaserGun : Weapon
 {
     ///Specs/// 
-    float timer;
     float LaserWidth{get;set;}
     
     public LineRenderer lineRenderer;
@@ -25,18 +24,21 @@ public class LaserGun : Weapon
         ShootEffects.Add(GameObject.Find(PrefName));
     }
 
-    
+    public override void  SetDamage(int x)
+    {
+        damage = x;
+        LaserWidth = Mathf.Max(0.6f,0.2f+ damage/15); //0.2 -> 0.6
+    }
 
-    
+
 
     float range;
     private void Awake()
     {
         range = 20;
-        damage = 1;
+        SetDamage(1);
         //TimeSinceLastShoot = 0f;
-        timer = 0;
-        LaserWidth = 0.5f;
+        //LaserWidth = 0.5f;
     }
 
     //for Towers and Enemies
@@ -45,7 +47,7 @@ public class LaserGun : Weapon
         GameObject laser = GameObject.Find(LaserName);
         if (!laser)
         {
-            laser = Instantiate(Laser, transform.position, rotationoffset);
+            laser = Instantiate(Laser, transform.position, rotationoffset,transform);
             laser.name =LaserName;
         }
         lineRenderer = laser.GetComponent<LineRenderer>();
@@ -58,12 +60,12 @@ public class LaserGun : Weapon
         
 
         lineRenderer.enabled = true;
-        lineRenderer.widthMultiplier = LaserWidth;
-        lineRenderer.SetPosition(0, ShootingPoint.position); //start
+        //lineRenderer.widthMultiplier = LaserWidth;
+        lineRenderer.SetPosition(0, ShootingPoint.position-ShootingPoint.up*0.5f); //start
 
         for (int i = 0; i < ShootEffects.Count; i++)
         {
-            GameObject lol = Instantiate(ShootEffects[i], ShootingPoint.position, ShootingPoint.transform.rotation);
+            GameObject lol = Instantiate(ShootEffects[i], ShootingPoint.position - ShootingPoint.up * 0.5f, ShootingPoint.transform.rotation);
         }
         lineRenderer.SetPosition(1, (Vector2)ShootingPoint.position+ AimDirection.normalized * range); //end
 
@@ -105,7 +107,6 @@ public class LaserGun : Weapon
 
     public override void DontShoot() {
 
-        timer = 0;
         if (lineRenderer)
         lineRenderer.enabled = false;
     }

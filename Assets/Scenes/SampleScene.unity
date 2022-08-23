@@ -1380,11 +1380,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408422200552918754, guid: dd9c1f63601e8404b993551bdb916e2d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.174404
+      value: 6.61
       objectReference: {fileID: 0}
     - target: {fileID: 408422200552918754, guid: dd9c1f63601e8404b993551bdb916e2d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.819958
+      value: 9.07
       objectReference: {fileID: 0}
     - target: {fileID: 408422200552918754, guid: dd9c1f63601e8404b993551bdb916e2d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2273,22 +2273,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742662118bfbf504888a3b8b586ece62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Maxhealth: 100
   CurrentHealth: 0
-  CustomEvent:
+  healregen: 0
+  OnDeath:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 630942680}
-        m_TargetAssemblyTypeName: ExplosiveBarrel, Assembly-CSharp
-        m_MethodName: Die
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  On50percent:
+    m_PersistentCalls:
+      m_Calls: []
   HB: {fileID: 1657005233}
 --- !u!114 &630942680
 MonoBehaviour:
@@ -2499,7 +2492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &687355825
 Transform:
   m_ObjectHideFlags: 0
@@ -2738,6 +2731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DieEffect: {fileID: 351542266971115188, guid: 0225f0cda44e1f943b81fc382392dad0, type: 3}
   PlayerLight: {fileID: 2597895915468000729, guid: 3ba1ebc6786d95349ae9f5cc0c37c117, type: 3}
+  damage: 0
   speed: 15
   rb: {fileID: 808039418}
   Shootinpoint: {fileID: 1654241449}
@@ -2807,22 +2801,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742662118bfbf504888a3b8b586ece62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Maxhealth: 100
   CurrentHealth: 1000
-  CustomEvent:
+  healregen: 0
+  OnDeath:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 808039417}
-        m_TargetAssemblyTypeName: MainController, Assembly-CSharp
-        m_MethodName: Die
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  On50percent:
+    m_PersistentCalls:
+      m_Calls: []
   HB: {fileID: 0}
 --- !u!1 &861342071
 GameObject:
@@ -2980,7 +2967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7653727215325090615, guid: 577d84a7f8138e743a07e0ef98a6f3b8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577d84a7f8138e743a07e0ef98a6f3b8, type: 3}
@@ -3886,6 +3873,7 @@ MonoBehaviour:
   RangeOfSight: 0
   SpottedPlayer: 0
   timer: 0
+  AmountOfRotation: 0.5
 --- !u!50 &1791232191
 Rigidbody2D:
   serializedVersion: 4
@@ -3935,13 +3923,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742662118bfbf504888a3b8b586ece62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Maxhealth: 100
   CurrentHealth: 0
-  CustomEvent:
+  healregen: 0
+  OnDeath:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1791232190}
         m_TargetAssemblyTypeName: BossController, Assembly-CSharp
         m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  On50percent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1791232190}
+        m_TargetAssemblyTypeName: BossController, Assembly-CSharp
+        m_MethodName: IncRotation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4188,7 +4193,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1420233, y: 1}
+    m_SensorSize: {x: 1.7284144, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4215,11 +4220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998241, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.9
+      value: 42.17
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998241, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -30.8
+      value: -30.05
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998241, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4409,7 +4414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1429626459719072435, guid: 7ca543bbab7c1b0448ddaf6c59f6f631, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6656846314079980133, guid: 7ca543bbab7c1b0448ddaf6c59f6f631, type: 3}
       propertyPath: m_Layer

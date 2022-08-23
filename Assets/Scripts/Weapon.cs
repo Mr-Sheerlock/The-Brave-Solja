@@ -6,7 +6,7 @@ public abstract class Weapon : MonoBehaviour
 {
     public  int damage;
 
-    public void SetDamage(int x)
+    public virtual void SetDamage(int x)
     {
         damage = x;
     }

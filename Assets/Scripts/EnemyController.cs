@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    int damage;
-    public float speed;
-    public Rigidbody2D rb;
-    public Transform Shootinpoint;
-    public Weapon weapontype;
-    public Weapon CurrentWeapon;
+    [SerializeField] int damage=5;
+    [SerializeField] float speed=5f;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] Transform Shootinpoint;
+    [SerializeField] Weapon weapontype;
+    [SerializeField] Weapon CurrentWeapon;
 
     //Movement & Direction
     Vector2 MovingDirection;
-    public Transform[] BoundaryPoints; //UP DOWN RIGHT LEFT
+    [SerializeField] Transform[] BoundaryPoints; //UP DOWN RIGHT LEFT
     Vector2 randomDirections;
-    public Vector2 Offset;
-    public Vector2 TargetPosition;
-    float LenghtOfBoundingSquare;
+    [SerializeField] Vector2 Offset= Vector2.zero;
+    [SerializeField] Vector2 TargetPosition;
+    [SerializeField] float LenghtOfBoundingSquare = 5f;
     public Vector2 OriginalPos;
 
     //shooting and aiming 
@@ -25,17 +25,15 @@ public class EnemyController : MonoBehaviour
     Vector2 PlayerPosition;
     Vector2 aimDirection;
     public GunController gunController;
-    public float RangeOfSight;
-    public bool SpottedPlayer;
+    [SerializeField] float RangeOfSight=10f;
+    [SerializeField] bool SpottedPlayer=false;
     public float timer;
-    float TimeActiveShooting;
-    float TimeIdle;
+    float TimeActiveShooting = 5f;
+    float TimeIdle=5f;
 
-    float aimOffset;
-    int numberofBullets;
-    float PeriodicTime;
-    //charger logic
-    float radiusOffset;
+    float aimOffset=130f;
+    int numberofBullets=1;
+    float PeriodicTime=0.6f;
 
     public static int laserCount=0;
     
@@ -52,29 +50,16 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        laserCount = 0;
-        PeriodicTime = 0.6f;
-        numberofBullets = 1;
         Player = GameObject.Find("Player");
-        damage = 5;
         gunController.SetGCDamage(damage);
-        speed = 5;
         CurrentState = State.MOVE;
-        SpottedPlayer = false;
         timer = 0f;
         SetWeapon();
         //BoundaryPoints= new Transform[4];
-        TimeActiveShooting = 5f;
-        TimeIdle = 5f;
-        RangeOfSight = 10f;
-        LenghtOfBoundingSquare = 5f;
         GetBoundsFromParent();
         SetUpBounds();
         TargetPosition = transform.position;
-        Offset = new Vector2(0, 0);
-        aimOffset = 130f;
         OriginalPos=transform.position;
-        radiusOffset = 0.2f;
     }
 
     void GetBoundsFromParent()
@@ -225,7 +210,7 @@ public class EnemyController : MonoBehaviour
     }
     void SetWeapon()
     {
-        CurrentWeapon = Instantiate(weapontype);
+        CurrentWeapon = Instantiate(weapontype,transform);
         gunController.ChangeWeapon(CurrentWeapon, false);
         if (CurrentWeapon as ProjectileGun)
         {

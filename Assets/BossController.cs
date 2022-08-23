@@ -37,11 +37,9 @@ public class BossController : MonoBehaviour
 
     float PeriodicTime=0.6f;
 
-    //charger logic
-    float radiusOffset;
 
     float TimeIdle=0;
-    float AmountOfRotation= 0.5f;
+    [SerializeField]float AmountOfRotation= 0.5f;
     //Memory time ??
     int numberofBullets=1;
 
@@ -75,7 +73,6 @@ public class BossController : MonoBehaviour
         Offset = new Vector2(0, 0);
         aimOffset = 90f;
         OriginalPos = transform.position;
-        radiusOffset = 0.2f;
         PeriodicTime = 0.6f;
         numberofBullets = 1;
         //Debug.Log($"At start Nbullets is {numberofBullets}");
@@ -188,14 +185,12 @@ public class BossController : MonoBehaviour
         PlayerPosition = Player.transform.position;
         aimDirection = PlayerPosition - (Vector2)transform.position;
         Quaternion toRotation = Quaternion.LookRotation(transform.up, aimDirection);
-        //Debug.Log("rotation.z is " + (transform.rotation.z));
-        //Debug.Log("toRot.z is " + (toRotation.z));
+      
         Debug.Log("transform.up is " + (transform.up));
         Debug.Log("aimDirection.normalized is " + (aimDirection.normalized));
 
-        //Debug.Log("Differnce is "+ (Mathf.Abs((toRotation.z < 0 ? toRotation.z * 180 + 360 : toRotation.z * 180) - transform.rotation.z)));
         Debug.Log("Differnce is "+ (Mathf.Abs(((Vector2)transform.up-aimDirection.normalized).magnitude)));
-        //if (Mathf.Abs((toRotation.z<0 ? toRotation.z*180+360 : toRotation.z * 180) - transform.rotation.z) < 3)
+       
         if (((Vector2)transform.up - aimDirection.normalized).magnitude > 0.025)
         {
             toRotation.x = 0;
@@ -272,7 +267,7 @@ public class BossController : MonoBehaviour
         for (i = 0; i < 11; i++)
         {
             //Debug.Log("lolerrere");
-            Weapon loler = Instantiate(weapontype1, transform.position, transform.rotation);
+            Weapon loler = Instantiate(weapontype1, transform.position, transform.rotation,transform);
             Weapons[i] = loler;
 
             ((ProjectileGun)Weapons[i]).timer = Time.time;
@@ -324,6 +319,10 @@ public class BossController : MonoBehaviour
         Move(TargetPosition);
     }
 
+    public void IncRotation()
+    {
+        AmountOfRotation += 0.1f;
+    }
 
     private void OnDestroy()
     {

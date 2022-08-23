@@ -7,8 +7,8 @@ public class MainController : MonoBehaviour
     ///Specs///
     public GameObject DieEffect;
     public GameObject PlayerLight;
-    int damage;
-    public float speed;
+    [SerializeField]int damage=10;
+    [SerializeField]float speed=15;
     public Rigidbody2D rb;
     float Horizontal, Vertical;
     public Transform Shootinpoint;
@@ -19,17 +19,13 @@ public class MainController : MonoBehaviour
     public GunController gunController;
     
     
-    float aimOffset;
+    float aimOffset=130f;
 
     //Vector2 offset;
     // Start is called before the first frame update
     void Start()
     {
-        damage = 10;
         gunController.SetGCDamage(damage);
-        speed = 15;
-
-        aimOffset = 130f;
 
     }
 

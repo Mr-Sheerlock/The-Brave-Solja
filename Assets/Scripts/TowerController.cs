@@ -38,7 +38,7 @@ public class TowerController : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             //Debug.Log("lolerrere");
-            Weapon lol = Instantiate(weapon, transform.position, transform.rotation);
+            Weapon lol = Instantiate(weapon, transform.position, transform.rotation,transform);
             Weapons[i] = lol;
             if (Weapons[i] as ProjectileGun)
             {

@@ -5,28 +5,24 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     float timer = 0;
-    public int Maxhealth { get; set; }
-    [SerializeField] public float CurrentHealth;
-    float healregen { get; set; }
+    [SerializeField] int Maxhealth=100;
+    [SerializeField]  float CurrentHealth=100;
+    [SerializeField] float healregen=0;
     
     [Header("Events")]
-    public UnityEvent CustomEvent;
+    public UnityEvent OnDeath;
+    public UnityEvent On50percent;
 
     public HealthbarScript HB;
     //GameObject Healthbar;
-    // Start is called before the first frame update
+    
     void Start()
     {
-        Maxhealth = 100;
-        CurrentHealth = 100;
-        healregen = 0;
 
-        HB = gameObject.GetComponentInChildren<HealthbarScript>();
-        //HB = 
-        
+        HB = gameObject.GetComponentInChildren<HealthbarScript>();        
     }
 
-    // Update is called once per frame
+
     void FixedUpdate()
     {
         timer += Time.fixedDeltaTime;
@@ -46,11 +42,16 @@ public class Health : MonoBehaviour
         //Debug.Log("Damage Taken is" + damage);
         
         (HB)?.SetSize((float)CurrentHealth / Maxhealth);
-
+        if (CurrentHealth / Maxhealth <= 0.5f)
+        {
+            On50percent.Invoke();
+            //gets invoked once.
+            On50percent.RemoveAllListeners();
+        }
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
-            CustomEvent.Invoke();
+            OnDeath.Invoke();
         }
     }
 
