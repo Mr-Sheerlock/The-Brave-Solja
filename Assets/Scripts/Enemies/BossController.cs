@@ -6,7 +6,7 @@ public class BossController : MonoBehaviour
 {
     int numberOfWeapons;
     public static int Bosslasercount = 1; // a lasercount for making the laser names unique
-    int damage=5;
+    [SerializeField] int damage=5;
     public float speed=5;
     public Rigidbody2D rb;
     public Transform[] Shootinpoints = new Transform[12];
@@ -20,7 +20,7 @@ public class BossController : MonoBehaviour
     Vector2 randomDirections;
     public Vector2 Offset;
     public Vector2 TargetPosition;
-    float LenghtOfBoundingSquare;
+    float LenghtOfBoundingSquare=20;
     public Vector2 OriginalPos;
 
     //shooting and aiming 
@@ -28,12 +28,12 @@ public class BossController : MonoBehaviour
     Vector2 PlayerPosition;
     Vector2 aimDirection;
     public GunController gunController;
-    public float RangeOfSight;
+    float RangeOfSight=60f;
     public bool SpottedPlayer;
     public float timer;
-    float TimeActiveShooting;
+    float TimeActiveShooting=5f;
 
-    float aimOffset;
+    float aimOffset=90f;
 
     float PeriodicTime=0.6f;
 
@@ -57,25 +57,17 @@ public class BossController : MonoBehaviour
     {
         Weapons = new Weapon[12];
         SetWeapons();
-        Player = GameObject.Find("Player");
+        Player = GameObject.FindGameObjectWithTag("Player");
         gunController.SetGCDamage(damage);
         CurrentState = State.MOVE;
         SpottedPlayer = false;
         timer = 0f;
         //BoundaryPoints= new Transform[4];
-        TimeActiveShooting = 5f;
-        //TimeIdle = 3f;
-        RangeOfSight = 60f; //The assumption is that the boss has a very high range of sight and wont be active until some point
-        LenghtOfBoundingSquare = 20f; //keda keda doesn't move 
         GetBoundsFromParent();
         SetUpBounds();
         TargetPosition = transform.position;
         Offset = new Vector2(0, 0);
-        aimOffset = 90f;
         OriginalPos = transform.position;
-        PeriodicTime = 0.6f;
-        numberofBullets = 1;
-        //Debug.Log($"At start Nbullets is {numberofBullets}");
     }
 
     void GetBoundsFromParent()
@@ -263,26 +255,22 @@ public class BossController : MonoBehaviour
     }
     void SetWeapons()
     {
-        int i = 0;
+        int i ;
         for (i = 0; i < 11; i++)
         {
-            //Debug.Log("lolerrere");
             Weapon loler = Instantiate(weapontype1, transform.position, transform.rotation,transform);
             Weapons[i] = loler;
-
+            Weapons[i].SetDamage(damage);
             ((ProjectileGun)Weapons[i]).timer = Time.time;
-            //Debug.Log($"BC Nprojs is {numberofBullets}");
             ((ProjectileGun)Weapons[i]).SetNumberOfProjectiles(numberofBullets);
             ((ProjectileGun)Weapons[i]).SetPeriodictime(PeriodicTime); 
-            //SetNumberOfProjectiles
-
-
 
         }
         
        
         Weapon lol = Instantiate(weapontype2, transform.position, transform.rotation);
         Weapons[i] = lol;
+        Weapons[i].SetDamage(damage);
         ((LaserGun)Weapons[i]).SetLaserName("BossLaser" + Bosslasercount.ToString());
         DontShootWeapons();
     }

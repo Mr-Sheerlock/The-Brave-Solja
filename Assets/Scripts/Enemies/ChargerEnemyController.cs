@@ -59,7 +59,7 @@ public class ChargerEnemyController : MonoBehaviour
         CheckhitDistance = 2f;
         EnemyCollider = gameObject.GetComponent<Collider2D>();
         C = SR.color;
-        Player = GameObject.Find("Player");
+        Player = GameObject.FindGameObjectWithTag("Player");
         damage = 10;
         speed = 5;
         CurrentState = State.MOVE;

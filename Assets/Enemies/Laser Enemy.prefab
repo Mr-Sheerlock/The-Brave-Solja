@@ -374,7 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7607496259135419737}
   - component: {fileID: 7607496259135419736}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

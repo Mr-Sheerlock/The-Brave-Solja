@@ -7,7 +7,7 @@ public class TowerController : MonoBehaviour
 
     ///Specs///
     public static int  lasercount=1; // a lasercount for making the laser names unique
-    int Damage=5;
+    [SerializeField] int Damage=5;
     int numberofBullets = 1;
     public Transform[] Shootinpoints= new Transform[4];
     Weapon[] Weapons;
@@ -32,9 +32,9 @@ public class TowerController : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            //Debug.Log("lolerrere");
             Weapon lol = Instantiate(weapon, transform.position, transform.rotation,transform);
             Weapons[i] = lol;
+            Weapons[i].SetDamage(Damage);
             if (Weapons[i] as ProjectileGun)
             {
 

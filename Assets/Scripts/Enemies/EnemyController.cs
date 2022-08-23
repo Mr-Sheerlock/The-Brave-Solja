@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     Vector2 MovingDirection;
     [SerializeField] Transform[] BoundaryPoints; //UP DOWN RIGHT LEFT
     Vector2 randomDirections;
-    [SerializeField] Vector2 Offset= Vector2.zero;
+    Vector2 Offset= Vector2.zero;
     [SerializeField] Vector2 TargetPosition;
     [SerializeField] float LenghtOfBoundingSquare = 5f;
     public Vector2 OriginalPos;
@@ -50,16 +50,14 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        Player = GameObject.Find("Player");
-        gunController.SetGCDamage(damage);
-        CurrentState = State.MOVE;
-        timer = 0f;
+        Player = GameObject.FindGameObjectWithTag("Player");
         SetWeapon();
-        //BoundaryPoints= new Transform[4];
         GetBoundsFromParent();
         SetUpBounds();
         TargetPosition = transform.position;
         OriginalPos=transform.position;
+        CurrentState = State.MOVE;
+        timer = 0f;
     }
 
     void GetBoundsFromParent()
@@ -77,7 +75,27 @@ public class EnemyController : MonoBehaviour
         BoundaryPoints[2].position= transform.position + new Vector3(LenghtOfBoundingSquare,0);
         BoundaryPoints[3].position= transform.position + new Vector3(-LenghtOfBoundingSquare,0);
     }
-    // Update is called once per frame
+
+    void SetWeapon()
+    {
+        CurrentWeapon = Instantiate(weapontype, transform);
+        gunController.ChangeWeapon(CurrentWeapon, false);
+        gunController.SetGCDamage(damage);
+        if (CurrentWeapon as ProjectileGun)
+        {
+
+            ((ProjectileGun)CurrentWeapon).timer = Time.time;
+            ((ProjectileGun)CurrentWeapon).SetNumberOfProjectiles(numberofBullets);
+            ((ProjectileGun)CurrentWeapon).SetPeriodictime(PeriodicTime);
+        }
+        else
+        if (CurrentWeapon as LaserGun)
+        {
+            ((LaserGun)CurrentWeapon).SetLaserName("Enemy Laser" + laserCount);
+            laserCount++;
+        }
+    }
+    
     void FixedUpdate()
     {
         timer += Time.fixedDeltaTime;
@@ -208,24 +226,7 @@ public class EnemyController : MonoBehaviour
         randomDirections = new Vector2(Random.value > 0.5 ? 1 : -1, Random.value > 0.5 ? 1 : -1);
         Vec *= randomDirections;
     }
-    void SetWeapon()
-    {
-        CurrentWeapon = Instantiate(weapontype,transform);
-        gunController.ChangeWeapon(CurrentWeapon, false);
-        if (CurrentWeapon as ProjectileGun)
-        {
-
-            ((ProjectileGun)CurrentWeapon).timer = Time.time;
-            ((ProjectileGun)CurrentWeapon).SetNumberOfProjectiles(numberofBullets);
-            ((ProjectileGun)CurrentWeapon).SetPeriodictime(PeriodicTime);
-        }
-        else
-        if (CurrentWeapon as LaserGun)
-        {
-            ((LaserGun)CurrentWeapon).SetLaserName("Enemy Laser" + laserCount);
-            laserCount++;
-        }
-    }
+    
 
     public void Die()
     {

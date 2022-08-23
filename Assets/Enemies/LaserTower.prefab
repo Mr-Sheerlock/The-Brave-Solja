@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 840067140391887643}
   - component: {fileID: 6941157429966054055}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tower Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 3614787183475191405}
   - component: {fileID: 3614787183475191406}
   - component: {fileID: 3614787183475191407}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: LaserTower
   m_TagString: Towers
   m_Icon: {fileID: 0}
@@ -224,7 +224,6 @@ MonoBehaviour:
   - {fileID: 3614787183630523728}
   weapontype: {fileID: 5998821449281549036, guid: 536ecef0d0c3cfd43900990ff91752de, type: 3}
   gunController: {fileID: 3614787183475191405}
-  AmountOfRotation: 0
 --- !u!114 &3614787183475191405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,7 +298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3614787183630523728}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: ShootingPoint1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3614787183873629083}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: ShootingPoint1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3614787184045608386}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: ShootingPoint1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3614787184761988670}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: ShootingPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +422,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6431026194016515085, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6431026194016515087, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_SortingOrder
@@ -435,7 +434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6431026194667785882, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6431026194667785883, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_RootOrder
@@ -483,11 +482,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6431026194713693190, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6431026194785784657, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eabec22594fbc9409b6e9a74545d7f8, type: 3}

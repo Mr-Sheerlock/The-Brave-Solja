@@ -25,7 +25,7 @@ public class BulletBehaviour : MonoBehaviour
     void Update()
     {
         TimeSinceShot += Time.deltaTime;
-        if(TimeSinceShot >5f)
+        if(TimeSinceShot >3f)
         {
             Destroy(gameObject);
         }
