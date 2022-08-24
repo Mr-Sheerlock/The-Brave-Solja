@@ -51,6 +51,8 @@ public class BossController : MonoBehaviour
     [SerializeField] float Delay_Between_Waves=5;
     [SerializeField] float MineDelay=2f;
     bool SpawnedMines=false;
+
+    [SerializeField] bool DropsMines = false;   // false for bombs, true for mines
     //Memory time ??
     #endregion
 
@@ -335,6 +337,7 @@ public class BossController : MonoBehaviour
         {
             GameObject lol = Instantiate(Mine, Player.position, Player.rotation);
             lol.GetComponent<Mine>().SetTimeIdle(MineDelay);
+            lol.GetComponent<Mine>().SetIsMine(DropsMines);
 
             yield return new WaitForSeconds(Delay_Between_Mines);
         }

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
-    [SerializeField] float MineDamage=20f;
+    float MineDamage=20f;
     float MineRadius=2.6f;
     [SerializeField] CircleCollider2D Collider;
     [SerializeField] MineLight light;
+    [SerializeField] SpriteRenderer MineSquareRenderer;
     [SerializeField] GameObject MineEffect;
 
     [SerializeField] float TimeIdle = 0f;
-
+    bool isMine=true;
 
 
     private void Awake()
@@ -20,19 +21,38 @@ public class Mine : MonoBehaviour
     }
     void Start()
     {
-        
-        Collider.radius = MineRadius;   
+        if (!isMine)
+        {
+            MineSquareRenderer.enabled = false;
+        }
+        Collider.radius = MineRadius;
         light?.SetRadius(MineRadius);
-        Debug.Log("Time Idle is " + TimeIdle);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        StartCoroutine(ActivateCollider());
+        if (isMine)
+        {
+            StartCoroutine(ActivateCollider());
+        }
+        else{
+            StartCoroutine(WaitThenExplode());
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Explode();
+    }
+
+    IEnumerator ActivateCollider()
+    {
+        yield return new WaitForSeconds(TimeIdle);
+        Collider.enabled = true;
+    }
+
+    void Explode()
     {
         //damage
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, MineRadius, 1 << 8);
@@ -50,11 +70,10 @@ public class Mine : MonoBehaviour
         //destroy
         Destroy(gameObject);
     }
-
-    IEnumerator ActivateCollider()
+    IEnumerator WaitThenExplode()
     {
         yield return new WaitForSeconds(TimeIdle);
-        Collider.enabled = true;
+        Explode();
     }
 
     public void SetTimeIdle(float newTime)
@@ -62,4 +81,14 @@ public class Mine : MonoBehaviour
         TimeIdle = newTime;
         Debug.Log("Time Idle inside function is " + TimeIdle);
     }
+
+    public void SetDamage(float damage)
+    {
+        MineDamage = damage;
+    }
+    public void SetIsMine(bool value)
+    {
+        isMine = value;
+    }
+
 }

@@ -4091,7 +4091,8 @@ MonoBehaviour:
   damage: 5
   speed: 0
   AmountOfRotation: 0.5
-  Delay_Between_Mines: 2
+  Delay_Between_Mines: 0.2
+  Delay_Between_Waves: 1
   MineDelay: 2
 --- !u!50 &1791232191
 Rigidbody2D:
@@ -4688,11 +4689,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5803422418907014284, guid: 160d3fc1688625945adcfa57143d5f26, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.91
+      value: 16.07
       objectReference: {fileID: 0}
     - target: {fileID: 5803422418907014284, guid: 160d3fc1688625945adcfa57143d5f26, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -28.81
+      value: -28.26
       objectReference: {fileID: 0}
     - target: {fileID: 5803422418907014284, guid: 160d3fc1688625945adcfa57143d5f26, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4732,11 +4733,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5803422418907014285, guid: 160d3fc1688625945adcfa57143d5f26, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5969631276102643613, guid: 160d3fc1688625945adcfa57143d5f26, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7037684877362833748, guid: 160d3fc1688625945adcfa57143d5f26, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 160d3fc1688625945adcfa57143d5f26, type: 3}
