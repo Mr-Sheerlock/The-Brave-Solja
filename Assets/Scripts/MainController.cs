@@ -49,7 +49,6 @@ public class MainController : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("lolNoShoot");
             gunController.DontShootWeapon();
         }
         

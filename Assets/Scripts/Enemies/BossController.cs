@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    int numberOfWeapons;
+    #region LogicHandling
     public static int Bosslasercount = 1; // a lasercount for making the laser names unique
-    [SerializeField] int damage=5;
-    public float speed=5;
-    public Rigidbody2D rb;
-    public Transform[] Shootinpoints = new Transform[12];
-    public Weapon weapontype1;
-    public Weapon weapontype2;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] Transform[] Shootinpoints = new Transform[12];
+    [SerializeField] Weapon weapontype1;
+    [SerializeField] Weapon weapontype2;
     public Weapon[] Weapons;
+    [SerializeField]GameObject Mine;
+    #endregion
 
+    #region Movement&Direction
     //Movement & Direction
     Vector2 MovingDirection;
     public Transform[] BoundaryPoints; //UP DOWN RIGHT LEFT
@@ -22,9 +23,10 @@ public class BossController : MonoBehaviour
     public Vector2 TargetPosition;
     float LenghtOfBoundingSquare=20;
     public Vector2 OriginalPos;
+    #endregion
 
-    //shooting and aiming 
-    GameObject Player;
+    #region Shooting&Aiming
+    static Transform Player;
     Vector2 PlayerPosition;
     Vector2 aimDirection;
     public GunController gunController;
@@ -32,16 +34,23 @@ public class BossController : MonoBehaviour
     public bool SpottedPlayer;
     public float timer;
     float TimeActiveShooting=5f;
-
     float aimOffset=90f;
-
     float PeriodicTime=0.6f;
+    #endregion
 
-
-    float TimeIdle=0;
+    #region Stats
+    [SerializeField] int damage=5;
+    public float speed=5;
+    float TimeIdle =0;
     [SerializeField]float AmountOfRotation= 0.5f;
-    //Memory time ??
     int numberofBullets=1;
+    //Mines
+    int Max_N_Mines=3;
+    int Current_Mines = 0;
+    [SerializeField] float Delay_Between_Mines=1;
+    [SerializeField] float MineDelay=2;
+    //Memory time ??
+    #endregion
 
 
     enum State
@@ -57,7 +66,7 @@ public class BossController : MonoBehaviour
     {
         Weapons = new Weapon[12];
         SetWeapons();
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
         gunController.SetGCDamage(damage);
         CurrentState = State.MOVE;
         SpottedPlayer = false;
@@ -100,6 +109,8 @@ public class BossController : MonoBehaviour
         }
         else
         {
+            StartCoroutine(SpawnMines());
+            
             rb.velocity = new Vector2(0, 0);
             CurrentState = State.SHOOT;
             //Debug.Log($"Kelma is {timer}");
@@ -178,10 +189,10 @@ public class BossController : MonoBehaviour
         aimDirection = PlayerPosition - (Vector2)transform.position;
         Quaternion toRotation = Quaternion.LookRotation(transform.up, aimDirection);
       
-        Debug.Log("transform.up is " + (transform.up));
-        Debug.Log("aimDirection.normalized is " + (aimDirection.normalized));
+        //Debug.Log("transform.up is " + (transform.up));
+        //Debug.Log("aimDirection.normalized is " + (aimDirection.normalized));
 
-        Debug.Log("Differnce is "+ (Mathf.Abs(((Vector2)transform.up-aimDirection.normalized).magnitude)));
+        //Debug.Log("Differnce is "+ (Mathf.Abs(((Vector2)transform.up-aimDirection.normalized).magnitude)));
        
         if (((Vector2)transform.up - aimDirection.normalized).magnitude > 0.025)
         {
@@ -191,7 +202,7 @@ public class BossController : MonoBehaviour
         }
         else
         {
-            Debug.Log("d5lt gowa :3 UwU w ana mw2f");
+            //Debug.Log("d5lt gowa :3 UwU w ana mw2f");
 
         }
 
@@ -311,6 +322,23 @@ public class BossController : MonoBehaviour
     {
         AmountOfRotation += 0.1f;
     }
+
+    IEnumerator SpawnMines()
+    {
+        while (Current_Mines < Max_N_Mines)
+        {
+            Debug.Log("Current mines is " + Current_Mines);
+            Debug.Log("Spawn Gowa");
+            GameObject lol = Instantiate(Mine, Player.position, Player.rotation);
+            Current_Mines++;
+            lol.GetComponent<Mine>().SetTimeIdle(MineDelay);
+            yield return new WaitForSeconds(Delay_Between_Mines);
+        }
+        Current_Mines = 0;
+        yield return new WaitForSeconds(0);
+    }
+    
+
 
     private void OnDestroy()
     {

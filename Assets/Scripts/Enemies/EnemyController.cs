@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] int damage=5;
-    [SerializeField] float speed=5f;
+    
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform Shootinpoint;
     [SerializeField] Weapon weapontype;
@@ -17,7 +16,6 @@ public class EnemyController : MonoBehaviour
     Vector2 randomDirections;
     Vector2 Offset= Vector2.zero;
     [SerializeField] Vector2 TargetPosition;
-    [SerializeField] float LenghtOfBoundingSquare = 5f;
     public Vector2 OriginalPos;
 
     //shooting and aiming 
@@ -25,19 +23,27 @@ public class EnemyController : MonoBehaviour
     Vector2 PlayerPosition;
     Vector2 aimDirection;
     public GunController gunController;
-    [SerializeField] float RangeOfSight=10f;
     [SerializeField] bool SpottedPlayer=false;
     public float timer;
+
+    float aimOffset=130f;
+    
+
+    public static int laserCount=0;
+
+    //Memory time ??
+    #region Stats
+    [SerializeField] int damage = 5;
+    [SerializeField] float speed = 5f;
+    [SerializeField] float RangeOfSight=10f;
+    int numberofBullets = 1;
+    float PeriodicTime = 0.6f;
+    [SerializeField] float LenghtOfBoundingSquare = 5f;
     float TimeActiveShooting = 5f;
     float TimeIdle=5f;
 
-    float aimOffset=130f;
-    int numberofBullets=1;
-    float PeriodicTime=0.6f;
+    #endregion
 
-    public static int laserCount=0;
-    
-    //Memory time ??
 
     enum State
     {
