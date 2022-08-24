@@ -60,5 +60,6 @@ public class Mine : MonoBehaviour
     public void SetTimeIdle(float newTime)
     {
         TimeIdle = newTime;
+        Debug.Log("Time Idle inside function is " + TimeIdle);
     }
 }

@@ -48,7 +48,9 @@ public class BossController : MonoBehaviour
     int Max_N_Mines=3;
     int Current_Mines = 0;
     [SerializeField] float Delay_Between_Mines=1;
-    [SerializeField] float MineDelay=2;
+    [SerializeField] float Delay_Between_Waves=5;
+    [SerializeField] float MineDelay=2f;
+    bool SpawnedMines=false;
     //Memory time ??
     #endregion
 
@@ -109,11 +111,14 @@ public class BossController : MonoBehaviour
         }
         else
         {
-            StartCoroutine(SpawnMines());
+            if(!SpawnedMines)
+            {
+                StartCoroutine(SpawnMines());
+            }
             
             rb.velocity = new Vector2(0, 0);
             CurrentState = State.SHOOT;
-            //Debug.Log($"Kelma is {timer}");
+            
 
             if (timer > TimeActiveShooting)
             {
@@ -325,19 +330,18 @@ public class BossController : MonoBehaviour
 
     IEnumerator SpawnMines()
     {
-        while (Current_Mines < Max_N_Mines)
+        SpawnedMines = true;
+        for (int i=0; i < Max_N_Mines; i++)
         {
-            Debug.Log("Current mines is " + Current_Mines);
-            Debug.Log("Spawn Gowa");
             GameObject lol = Instantiate(Mine, Player.position, Player.rotation);
-            Current_Mines++;
             lol.GetComponent<Mine>().SetTimeIdle(MineDelay);
+
             yield return new WaitForSeconds(Delay_Between_Mines);
         }
-        Current_Mines = 0;
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(Delay_Between_Waves);
+        SpawnedMines = false;
     }
-    
+
 
 
     private void OnDestroy()
