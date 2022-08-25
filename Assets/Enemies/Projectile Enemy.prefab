@@ -199,8 +199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36c53337b3a8a7b44b1f1fe68d434e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  speed: 5
   rb: {fileID: 8317232109912184770}
   Shootinpoint: {fileID: 8317232110437029463}
   weapontype: {fileID: 3336290982689687542, guid: 9b394b0f7011c6548977bc45de675e2c, type: 3}
@@ -210,14 +208,15 @@ MonoBehaviour:
   - {fileID: 8317232111378125339}
   - {fileID: 8317232110212657179}
   - {fileID: 8317232111400036174}
-  Offset: {x: 0, y: 0}
   TargetPosition: {x: 0, y: 0}
-  LenghtOfBoundingSquare: 5
   OriginalPos: {x: 0, y: 0}
   gunController: {fileID: 8317232109912184768}
-  RangeOfSight: 10
   SpottedPlayer: 0
   timer: 0
+  damage: 5
+  speed: 5
+  RangeOfSight: 15
+  LenghtOfBoundingSquare: 5
 --- !u!114 &8317232109912184768
 MonoBehaviour:
   m_ObjectHideFlags: 0

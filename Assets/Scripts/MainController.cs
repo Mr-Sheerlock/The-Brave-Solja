@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class MainController : MonoBehaviour
 {
-    ///Specs///
-    public GameObject DieEffect;
-    public GameObject PlayerLight;
+    
+    #region Specs
     [SerializeField]float damage=10;
     int numberofProjectiles=1;
     [SerializeField]float speed=15;
+    #endregion
+
+
+    #region Logic Handling
+    public GameObject DieEffect;
+    public GameObject PlayerLight;
     public Rigidbody2D rb;
     float Horizontal, Vertical;
     public Transform Shootinpoint;
     
-    //shooting and aiming 
+    #endregion
+
+    #region Shooting&Aiming
     Vector2 mousePosition;
     Vector2 aimDirection;
     public GunController gunController;
-    
-    
     float aimOffset=130f;
+    #endregion
+    //shooting and aiming 
+    
 
     //Vector2 offset;
     // Start is called before the first frame update
@@ -51,8 +59,11 @@ public class MainController : MonoBehaviour
         {
             gunController.DontShootWeapon();
         }
-        
-        
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+
+        }
 
 
     }

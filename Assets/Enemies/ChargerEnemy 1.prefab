@@ -346,7 +346,7 @@ MonoBehaviour:
   - {fileID: 1429626458930349571}
   - {fileID: 1429626459267941220}
   TargetPosition: {x: 0, y: 0}
-  RangeOfSight: 0
+  RangeOfSight: 15
   timer: 0
 --- !u!50 &1429626459686221276
 Rigidbody2D:
