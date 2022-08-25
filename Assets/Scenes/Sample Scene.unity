@@ -2718,10 +2718,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37b2ccc975ba6143b1eddd07483f55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DieEffect: {fileID: 351542266971115188, guid: 0225f0cda44e1f943b81fc382392dad0, type: 3}
-  PlayerLight: {fileID: 2597895915468000729, guid: 3ba1ebc6786d95349ae9f5cc0c37c117, type: 3}
   damage: 10
   speed: 15
+  DieEffect: {fileID: 351542266971115188, guid: 0225f0cda44e1f943b81fc382392dad0, type: 3}
+  PlayerLight: {fileID: 2597895915468000729, guid: 3ba1ebc6786d95349ae9f5cc0c37c117, type: 3}
   rb: {fileID: 808039418}
   Shootinpoint: {fileID: 1654241449}
   gunController: {fileID: 808039420}
@@ -4417,7 +4417,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.2387218, y: 1}
+    m_SensorSize: {x: 1.9590747, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

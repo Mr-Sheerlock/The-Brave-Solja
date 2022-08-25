@@ -36,4 +36,15 @@ public class LevelManager : MonoBehaviour
         }
         
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void LoadMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
 }
