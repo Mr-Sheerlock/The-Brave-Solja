@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] GameObject Player;
     [SerializeField] GameObject PauseMenu;
-
+    [SerializeField] AudioClip BossClip;
 
     public void PauseToggle()
     {
@@ -47,4 +47,11 @@ public class LevelManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
+    public void MusicChange()
+    {
+        var AS = gameObject.GetComponent<AudioSource>();
+        AS.Stop();
+        AS.clip = BossClip;
+        AS.Play();
+    }
 }
