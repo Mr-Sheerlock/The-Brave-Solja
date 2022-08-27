@@ -19,6 +19,7 @@ public class TowerController : MonoBehaviour
     float TimeShooting = 0.6f;
     float AmountOfRotation = 50f;
 
+    [SerializeField] GameObject DeathEffect;
 
     void Start()
     {
@@ -99,6 +100,7 @@ public class TowerController : MonoBehaviour
 
     public void  Die()
     {
+        GameObject lol = Instantiate(DeathEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 

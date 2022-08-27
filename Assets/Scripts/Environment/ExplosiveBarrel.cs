@@ -4,59 +4,33 @@ using UnityEngine;
 
 public class ExplosiveBarrel : MonoBehaviour
 {
-    public Sprite explosion;
-    public BoxCollider2D collider;
-    [SerializeField]float timeofExplosion= 0.3f;
+    
+   
     [SerializeField]int ExplosionDamage = 50;
-    float timer=0;
-    bool Exploded;
-    bool damageDone;
+    [SerializeField]float  ExplosionRadius= 5;  //5 to 7 bkteero
+    [SerializeField] GameObject [] ExplosionEffects;
 
-    public SpriteRenderer Sr;
-    Health health;
-    //GameObject Healthbar;
-    // Start is called before the first frame update
-    void Start()
-    {
-        health = GetComponent<Health>();
-        Exploded = false;
-        damageDone = false;
 
-    }
-    private void Update()
+    public void Explode()
     {
-        if (Exploded)
+        //might need to change the layermask
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 6f, 1 << 8);
+
+        foreach (Collider2D collider in colliders)
         {
-            if (!damageDone)
+            if (collider.GetComponent<Health>())
             {
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 6f, 1 << 8);
-
-                foreach (Collider2D collider in colliders)
-                {
-                    if (collider.GetComponent<Health>())
-                    {
-                        collider.GetComponent<Health>().TakeDamage(ExplosionDamage);
-                    }
-                }
-                damageDone = true;
-            }
-            
-            timer += Time.deltaTime;
-            if (timer > timeofExplosion)
-            {
-                Destroy(gameObject);
+                collider.GetComponent<Health>().TakeDamage(ExplosionDamage);
             }
         }
 
-        // Update is called once per frame
-    }
-
-        public void Die()
+        for(int i = 0; i < ExplosionEffects.Length; i++)
         {
-            collider.enabled = false;
-            Exploded = true;
-            Sr.sprite = explosion;
-            transform.localScale = new Vector2(10, 10);
+            Instantiate(ExplosionEffects[i],transform.position,transform.rotation);
+            //Set Particle Sizes
         }
+
+        Destroy(gameObject);
+    }
 
 }

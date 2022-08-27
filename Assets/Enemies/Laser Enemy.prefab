@@ -211,6 +211,7 @@ MonoBehaviour:
   Shootinpoint: {fileID: 4416160275156522089}
   weapontype: {fileID: 5998821449281549036, guid: 536ecef0d0c3cfd43900990ff91752de, type: 3}
   CurrentWeapon: {fileID: 0}
+  DeathEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
   BoundaryPoints:
   - {fileID: 4416160274829843833}
   - {fileID: 4416160273948037157}
@@ -344,6 +345,7 @@ MonoBehaviour:
   Maxhealth: 100
   CurrentHealth: 100
   healregen: 0
+  fiftypercent: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls:

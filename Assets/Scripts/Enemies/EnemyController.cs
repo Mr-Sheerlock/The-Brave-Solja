@@ -9,8 +9,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Transform Shootinpoint;
     [SerializeField] Weapon weapontype;
     [SerializeField] Weapon CurrentWeapon;
+    [SerializeField] GameObject DeathEffect;
+
 
     //Movement & Direction
+    #region Movement & Direction
     Vector2 MovingDirection;
     [SerializeField] Transform[] BoundaryPoints; //UP DOWN RIGHT LEFT
     Vector2 randomDirections;
@@ -18,6 +21,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Vector2 TargetPosition;
     public Vector2 OriginalPos;
 
+    #endregion
+
+
+    #region Shooting & aiming
     //shooting and aiming 
     GameObject Player;
     Vector2 PlayerPosition;
@@ -25,13 +32,12 @@ public class EnemyController : MonoBehaviour
     public GunController gunController;
     [SerializeField] bool SpottedPlayer=false;
     public float timer;
-
     float aimOffset=130f;
-    
+    #endregion
 
     public static int laserCount=0;
 
-    //Memory time ??
+    //Memory time ?? Mommy Time??? ??
     #region Stats
     [SerializeField] int damage = 5;
     [SerializeField] float speed = 5f;
@@ -236,6 +242,7 @@ public class EnemyController : MonoBehaviour
 
     public void Die()
     {
+        GameObject lol = Instantiate(DeathEffect, transform.position, transform.rotation);
         Destroy(gameObject);
     }
 

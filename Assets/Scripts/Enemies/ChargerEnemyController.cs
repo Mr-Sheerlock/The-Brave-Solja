@@ -43,6 +43,7 @@ public class ChargerEnemyController : MonoBehaviour
     float timeToReachTarget;
 
     //Memory time ??
+    [SerializeField] GameObject DeathEffect;
 
     enum State
     {
@@ -185,6 +186,7 @@ public class ChargerEnemyController : MonoBehaviour
     
     public void Die()
     {
+        GameObject lol = Instantiate(DeathEffect,transform.position, transform.rotation);
         Destroy(gameObject);
     }
 

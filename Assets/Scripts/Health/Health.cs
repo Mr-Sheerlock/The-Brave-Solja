@@ -8,7 +8,9 @@ public class Health : MonoBehaviour
     [SerializeField] int Maxhealth=100;
     [SerializeField]  float CurrentHealth=100;
     [SerializeField] float healregen=0;
-    
+
+    [SerializeField] bool fiftypercent = false;  
+
     [Header("Events")]
     public UnityEvent OnDeath;
     public UnityEvent On50percent;
@@ -19,7 +21,9 @@ public class Health : MonoBehaviour
     void Start()
     {
 
-        HB = gameObject.GetComponentInChildren<HealthbarScript>();      
+        HB = gameObject.GetComponentInChildren<HealthbarScript>();
+
+        
         //if(gameObject.CompareTag("Enemies"))
         //{
             
@@ -38,7 +42,11 @@ public class Health : MonoBehaviour
         timer += Time.fixedDeltaTime;
         if (timer >=1 )
         {
-            CurrentHealth += healregen;
+            if(CurrentHealth< Maxhealth)
+            {
+                CurrentHealth += healregen;
+            }
+
             timer=0; 
             if(HB)
             (HB)?.SetSize((float)CurrentHealth / Maxhealth);
@@ -52,12 +60,12 @@ public class Health : MonoBehaviour
         //Debug.Log("Damage Taken is" + damage);
         
         (HB)?.SetSize((float)CurrentHealth / Maxhealth);
-        if (CurrentHealth / Maxhealth <= 0.5f)
+        if (CurrentHealth / Maxhealth <= 0.5f && !fiftypercent)
         {
+            fiftypercent = true;
             On50percent.Invoke();
-            //gets invoked once.
-            On50percent.RemoveAllListeners();
         }
+
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;

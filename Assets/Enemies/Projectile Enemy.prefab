@@ -203,6 +203,7 @@ MonoBehaviour:
   Shootinpoint: {fileID: 8317232110437029463}
   weapontype: {fileID: 3336290982689687542, guid: 9b394b0f7011c6548977bc45de675e2c, type: 3}
   CurrentWeapon: {fileID: 0}
+  DeathEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
   BoundaryPoints:
   - {fileID: 8317232110194368327}
   - {fileID: 8317232111378125339}
@@ -336,6 +337,7 @@ MonoBehaviour:
   Maxhealth: 100
   CurrentHealth: 100
   healregen: 0
+  fiftypercent: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls:
@@ -346,6 +348,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4920573993241221796, guid: e31307e9be058ef439287cf21dafff5e, type: 3}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

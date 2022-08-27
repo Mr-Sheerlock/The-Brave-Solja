@@ -12,6 +12,7 @@ public class BossController : MonoBehaviour
     [SerializeField] Weapon weapontype2;
     public Weapon[] Weapons;
     [SerializeField]GameObject Mine;
+    [SerializeField] GameObject DeathEffect;
     #endregion
 
     #region Movement&Direction
@@ -53,6 +54,7 @@ public class BossController : MonoBehaviour
     bool SpawnedMines=false;
 
     [SerializeField] bool DropsMines = false;   // false for bombs, true for mines
+    [SerializeField] float RotationIncrease = 1f;
     //Memory time ??
     #endregion
 
@@ -295,6 +297,7 @@ public class BossController : MonoBehaviour
 
     public void Die()
     {
+        GameObject lol = Instantiate(DeathEffect,transform.position,transform.rotation);
         Destroy(gameObject);
     }
 
@@ -327,7 +330,7 @@ public class BossController : MonoBehaviour
 
     public void IncRotation()
     {
-        AmountOfRotation += 0.1f;
+        AmountOfRotation += RotationIncrease;
     }
 
     IEnumerator SpawnMines()
@@ -353,5 +356,10 @@ public class BossController : MonoBehaviour
         {
             Destroy(Weapons[i].gameObject);
         }
+    }
+
+    public void ToggleDropMines()
+    {
+        DropsMines=!DropsMines;
     }
 }

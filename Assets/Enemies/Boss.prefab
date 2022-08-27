@@ -195,6 +195,7 @@ MonoBehaviour:
   weapontype2: {fileID: 5998821449281549036, guid: 536ecef0d0c3cfd43900990ff91752de, type: 3}
   Weapons: []
   Mine: {fileID: 5803422418907014285, guid: 160d3fc1688625945adcfa57143d5f26, type: 3}
+  DeathEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
   BoundaryPoints:
   - {fileID: 8737526475982381961}
   - {fileID: 8737526475331002104}
@@ -213,6 +214,7 @@ MonoBehaviour:
   Delay_Between_Waves: 1
   MineDelay: 2
   DropsMines: 0
+  RotationIncrease: 1
 --- !u!114 &8737526475050153244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,6 +282,7 @@ MonoBehaviour:
   Maxhealth: 500
   CurrentHealth: 500
   healregen: 0
+  fiftypercent: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls:

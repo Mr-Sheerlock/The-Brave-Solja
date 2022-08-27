@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e54415997f21544d95d6964750395c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 5
   Shootinpoints:
   - {fileID: 4013680943189200608}
   - {fileID: 4013680942198498588}
@@ -113,6 +114,7 @@ MonoBehaviour:
   - {fileID: 4013680942043231630}
   weapontype: {fileID: 3336290982689687542, guid: 9b394b0f7011c6548977bc45de675e2c, type: 3}
   gunController: {fileID: 4013680941695174323}
+  DeathEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
 --- !u!114 &4013680941695174323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +145,7 @@ MonoBehaviour:
   Maxhealth: 100
   CurrentHealth: 100
   healregen: 0
+  fiftypercent: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls:
