@@ -195,7 +195,7 @@ MonoBehaviour:
   weapontype2: {fileID: 5998821449281549036, guid: 536ecef0d0c3cfd43900990ff91752de, type: 3}
   Weapons: []
   Mine: {fileID: 5803422418907014285, guid: 160d3fc1688625945adcfa57143d5f26, type: 3}
-  DeathEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
+  DeathEffect: {fileID: 4499953751088056899, guid: 85632d1060806794d9db443314426720, type: 3}
   BoundaryPoints:
   - {fileID: 8737526475982381961}
   - {fileID: 8737526475331002104}
