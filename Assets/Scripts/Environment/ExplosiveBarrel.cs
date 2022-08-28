@@ -9,6 +9,7 @@ public class ExplosiveBarrel : MonoBehaviour
     [SerializeField]int ExplosionDamage = 50;
     [SerializeField]float  ExplosionRadius= 5;  //5 to 7 bkteero
     [SerializeField] GameObject [] ExplosionEffects;
+    [SerializeField] AudioClip ExplosionSound;
 
 
     public void Explode()
@@ -29,7 +30,7 @@ public class ExplosiveBarrel : MonoBehaviour
             Instantiate(ExplosionEffects[i],transform.position,transform.rotation);
             //Set Particle Sizes
         }
-
+        AudioSource.PlayClipAtPoint(ExplosionSound, transform.position);
         Destroy(gameObject);
     }
 

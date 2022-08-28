@@ -13,6 +13,7 @@ public class BossController : MonoBehaviour
     public Weapon[] Weapons;
     [SerializeField]GameObject Mine;
     [SerializeField] GameObject DeathEffect;
+    [SerializeField] AudioClip DeathSound;
     #endregion
 
     #region Movement&Direction
@@ -299,6 +300,7 @@ public class BossController : MonoBehaviour
     {
         GameObject lol = Instantiate(DeathEffect,transform.position,transform.rotation);
         lol.transform.localScale = new Vector3(10, 10, 1);
+        AudioSource.PlayClipAtPoint(DeathSound, transform.position);
         Destroy(gameObject);
     }
 

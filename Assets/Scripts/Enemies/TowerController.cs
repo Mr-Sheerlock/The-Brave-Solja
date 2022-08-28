@@ -20,6 +20,7 @@ public class TowerController : MonoBehaviour
     float AmountOfRotation = 50f;
 
     [SerializeField] GameObject DeathEffect;
+    [SerializeField] AudioClip DeathSound;
 
     void Start()
     {
@@ -47,6 +48,7 @@ public class TowerController : MonoBehaviour
             {
                 ((LaserGun)Weapons[i]).SetLaserName("LaserTower"+lasercount.ToString());
                 lasercount++;
+                ((LaserGun)Weapons[i]).gameObject.GetComponent<AudioSource>().enabled=false;
             }
         }
     }
@@ -101,6 +103,8 @@ public class TowerController : MonoBehaviour
     public void  Die()
     {
         GameObject lol = Instantiate(DeathEffect, transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(DeathSound, transform.position);
+
         Destroy(gameObject);
     }
 

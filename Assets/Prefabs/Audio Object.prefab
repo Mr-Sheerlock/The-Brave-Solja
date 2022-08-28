@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5998821449281549037
+--- !u!1 &4121571332111469323
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,66 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5998821449281549039}
-  - component: {fileID: 5998821449281549036}
-  - component: {fileID: 3867939019903837400}
+  - component: {fileID: 4121571332111469321}
+  - component: {fileID: 4121571332111469322}
   m_Layer: 0
-  m_Name: PLaser Gun
+  m_Name: Audio Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5998821449281549039
+--- !u!4 &4121571332111469321
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998821449281549037}
+  m_GameObject: {fileID: 4121571332111469323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.103525, y: 0.494393, z: -0.039474808}
+  m_LocalPosition: {x: 50.78852, y: -69.176384, z: 0.7369507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5998821449281549036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998821449281549037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fdc21fdd9075504bb4e4ab7fd73ab17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  LaserWidth: 0
-  lineRenderer: {fileID: 0}
-  HitEffects:
-  - {fileID: 4023985159046190781, guid: f0b52ae04cc1e69439cd93a1fba0af48, type: 3}
-  - {fileID: 2269690565481716316, guid: 8bb28f4826247e1479648f859d3ddca3, type: 3}
-  ShootEffects:
-  - {fileID: 1765884408335156549, guid: eece84c7b88906341b2b660a668731b6, type: 3}
-  - {fileID: 4288109552701660961, guid: e8f0897c2e931df4d8cbfcb45d96ab0a, type: 3}
-  Laser: {fileID: 1906686868115551529, guid: 23ac5efc10916ba41b25a2ef27ea51ba, type: 3}
---- !u!82 &3867939019903837400
+--- !u!82 &4121571332111469322
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998821449281549037}
+  m_GameObject: {fileID: 4121571332111469323}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 273019bafa504e44b9f9b1d5a5964d52, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.26
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

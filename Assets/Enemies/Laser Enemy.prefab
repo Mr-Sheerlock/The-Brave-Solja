@@ -212,6 +212,7 @@ MonoBehaviour:
   weapontype: {fileID: 5998821449281549036, guid: 536ecef0d0c3cfd43900990ff91752de, type: 3}
   CurrentWeapon: {fileID: 0}
   DeathEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
+  DeathSound: {fileID: 8300000, guid: c9ef7f2139f756a4f97cd1df60ad2d73, type: 3}
   BoundaryPoints:
   - {fileID: 4416160274829843833}
   - {fileID: 4416160273948037157}
@@ -219,6 +220,7 @@ MonoBehaviour:
   - {fileID: 4416160273892615536}
   TargetPosition: {x: 0, y: 0}
   OriginalPos: {x: 0, y: 0}
+  InitiallyMoves: 1
   gunController: {fileID: 4416160275682481662}
   SpottedPlayer: 0
   timer: 0
@@ -308,7 +310,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

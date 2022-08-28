@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4013680941695174321}
   m_Layer: 9
   m_Name: BulletTower
-  m_TagString: Towers
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +115,7 @@ MonoBehaviour:
   weapontype: {fileID: 3336290982689687542, guid: 9b394b0f7011c6548977bc45de675e2c, type: 3}
   gunController: {fileID: 4013680941695174323}
   DeathEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
+  DeathSound: {fileID: 8300000, guid: c9ef7f2139f756a4f97cd1df60ad2d73, type: 3}
 --- !u!114 &4013680941695174323
 MonoBehaviour:
   m_ObjectHideFlags: 0

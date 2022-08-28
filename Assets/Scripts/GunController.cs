@@ -45,8 +45,6 @@ public class GunController : MonoBehaviour
         if (weapon)
             weapon.Shoot(shootingpoint, aimDirection);
 
-        //Debug.Log(shootingpoint.position);
-
     }
 
     public void DontShootWeapon()
@@ -65,8 +63,13 @@ public class GunController : MonoBehaviour
             Destroy(weapon.gameObject);
 
         }
+
         weapon = collectedweapon;
+
+        weapon.gameObject.transform.position = transform.position;
+        weapon.gameObject.tag = gameObject.tag;
         weapon.SetDamage(Damage);
+        
         if (gameObject.tag == "Player" && bullet!=null)
         {
             if (weapon.GetComponent<ProjectileGun>())

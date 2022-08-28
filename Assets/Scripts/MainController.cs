@@ -18,7 +18,7 @@ public class MainController : MonoBehaviour
     public Rigidbody2D rb;
     float Horizontal, Vertical;
     public Transform Shootinpoint;
-    
+    [SerializeField] AudioClip DieSound;
     #endregion
 
     #region Shooting&Aiming
@@ -27,15 +27,23 @@ public class MainController : MonoBehaviour
     public GunController gunController;
     float aimOffset=130f;
     #endregion
-    //shooting and aiming 
-    
 
-    //Vector2 offset;
-    // Start is called before the first frame update
+
+    //shooting and aiming 
+    #region Dashing
+    [SerializeField] private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 24f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
+    [SerializeField] private TrailRenderer tr;
+    #endregion
+
+
     void Start()
     {
         gunController.SetGCDamage((int)damage);
-
+        tr.emitting = false;
     }
 
     // Update is called once per frame
@@ -60,9 +68,9 @@ public class MainController : MonoBehaviour
             gunController.DontShootWeapon();
         }
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Space) && canDash)
         {
-
+            StartCoroutine(Dash());
         }
 
 
@@ -88,6 +96,7 @@ public class MainController : MonoBehaviour
     {
         Instantiate(DieEffect, transform.position, transform.rotation);
         Instantiate(PlayerLight, transform.position,transform.rotation);
+        AudioSource.PlayClipAtPoint(DieSound, transform.position);
         Destroy(gameObject);
     }
 
@@ -106,5 +115,19 @@ public class MainController : MonoBehaviour
         }
 
         gunController.SetNprojectiles(numberofProjectiles);
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        speed *= 2;
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        speed /= 2;
+        tr.emitting = false;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 }

@@ -196,6 +196,7 @@ MonoBehaviour:
   Weapons: []
   Mine: {fileID: 5803422418907014285, guid: 160d3fc1688625945adcfa57143d5f26, type: 3}
   DeathEffect: {fileID: 4499953751088056899, guid: 85632d1060806794d9db443314426720, type: 3}
+  DeathSound: {fileID: 8300000, guid: 78410ca453b49c047a8affa7a4624070, type: 3}
   BoundaryPoints:
   - {fileID: 8737526475982381961}
   - {fileID: 8737526475331002104}
@@ -746,7 +747,7 @@ GameObject:
   - component: {fileID: 8737526476155603565}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

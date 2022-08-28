@@ -10,6 +10,9 @@ public class BulletBehaviour : MonoBehaviour
 
     public int damage;
 
+    [SerializeField] AudioClip audioclip;
+    
+
     public void SetDamage(int x)
     {
         damage = x;
@@ -18,8 +21,10 @@ public class BulletBehaviour : MonoBehaviour
    
     private void Awake()
     {
+        Debug.Log("Awoke");
         TimeSinceShot = 0f;
         damage = 1;
+        AudioSource.PlayClipAtPoint(audioclip, transform.position);
     }
 
     void Update()
@@ -45,6 +50,7 @@ public class BulletBehaviour : MonoBehaviour
         {
             other.collider.GetComponent<Health>().TakeDamage(damage);
         }
+        
         Destroy(gameObject);  
     }
 

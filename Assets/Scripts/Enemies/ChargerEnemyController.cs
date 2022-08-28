@@ -5,45 +5,49 @@ using UnityEngine;
 public class ChargerEnemyController : MonoBehaviour
 {
 
-
-    int damage;
-    public float speed;
+    #region Logic Handling
     public Rigidbody2D rb;
-
     //color
     public SpriteRenderer SR;
     Color C;
-
-    //Movement & Direction
-    Vector2 MovingDirection;
     public Transform[] BoundaryPoints; //UP DOWN RIGHT LEFT
+
+    #endregion
+
+    #region Movement
+    Vector2 MovingDirection;
     Vector2 randomDirections;
     Vector2 Offset;
-    public Vector2 TargetPosition;
-    float LenghtOfBoundingSquare;
+    Vector2 TargetPosition;
+    [SerializeField] float LenghtOfBoundingSquare=20f;
     Vector2 OriginalPos;
 
+    #endregion
+
+    #region Aiming & Charging
+    [SerializeField]float damage=10f;
+    [SerializeField] float speed=5;
     //shooting and aiming 
     GameObject Player;
     Vector2 PlayerPosition;
     Vector2 aimDirection;
-    public float RangeOfSight;
-    bool SpottedPlayer;
-    public  float timer;
-    float TimeStampIdle;
-    float TimeStampCharging;
-
-    float aimOffset;
-
-    bool Shot;
-    float CheckhitDistance;
-
+    [SerializeField] float RangeOfSight=10f;
+    bool SpottedPlayer=false;
+    [SerializeField] float timer;
+    [SerializeField] float TimeStampIdle=10f;
+    [SerializeField] float TimeStampCharging=4f;
+    float aimOffset=130f;
+    bool Shot=false;
+    [SerializeField]float CheckhitDistance=2f;
     Collider2D EnemyCollider;
 
-    float timeToReachTarget;
+    float timeToReachTarget=0;
+
+    #endregion
 
     //Memory time ??
     [SerializeField] GameObject DeathEffect;
+    [SerializeField] AudioClip DeathSound;
 
     enum State
     {
@@ -57,29 +61,16 @@ public class ChargerEnemyController : MonoBehaviour
 
     void Start()
     {
-        CheckhitDistance = 2f;
         EnemyCollider = gameObject.GetComponent<Collider2D>();
         C = SR.color;
         Player = GameObject.FindGameObjectWithTag("Player");
-        damage = 10;
-        speed = 5;
         CurrentState = State.MOVE;
-        SpottedPlayer = false;
         timer = 0f;
-        RangeOfSight = 10f;
-        LenghtOfBoundingSquare = 20f;
         GetBoundsFromParent();
         SetUpBounds();
         TargetPosition = transform.position;
         Offset = new Vector2(0, 0);
-        aimOffset = 130f;
         OriginalPos = transform.position;
-        Shot = false;
-
-        ///TimeStamps/////
-        TimeStampCharging = 4f;
-        TimeStampIdle = 10f;
-        timeToReachTarget = 0;
     }
 
    
@@ -187,6 +178,7 @@ public class ChargerEnemyController : MonoBehaviour
     public void Die()
     {
         GameObject lol = Instantiate(DeathEffect,transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(DeathSound, transform.position);
         Destroy(gameObject);
     }
 

@@ -20,7 +20,8 @@ public class ProjectileGun : Weapon
     Vector3 AnglesOffset=new Vector3(0, 0, Zrotaion);
     Quaternion BulletRotation;
 
-
+    static int PlayerProjectiles=0;
+    static int EnemyProjectiles=0;
 
     
     private void Awake()
@@ -41,6 +42,7 @@ public class ProjectileGun : Weapon
     }
     public override void Shoot(Transform ShootingPoint, Vector2 AimDirection)
     {
+        
         TimeSinceLastShoot = Time.time - timer;
     
         if (TimeSinceLastShoot >= PeriodicTime)
@@ -91,6 +93,7 @@ public class ProjectileGun : Weapon
 
     void ShootSingle(Vector2 ShootingPoint, Vector2 AimDirection)
     {
+        Debug.Log("ShootGunn");
         GameObject currentbullet = Instantiate(bullet, ShootingPoint, BulletRotation);
         //set Damage
         BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();

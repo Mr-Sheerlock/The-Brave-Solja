@@ -16,8 +16,22 @@ public class Health : MonoBehaviour
     public UnityEvent On50percent;
 
     public HealthbarScript HB;
-    //GameObject Healthbar;
     
+
+    public void IncMaxHealhth(int Addend)
+    {
+        Maxhealth += Addend;
+    }
+
+    public void IncCurrentHealth (float Addend)
+    {
+        if(CurrentHealth < Maxhealth)
+        {
+            CurrentHealth += Addend;
+        }
+
+    }
+
     void Start()
     {
 

@@ -10,6 +10,7 @@ public class Mine : MonoBehaviour
     [SerializeField] MineLight light;
     [SerializeField] SpriteRenderer MineSquareRenderer;
     [SerializeField] GameObject MineEffect;
+    [SerializeField] AudioClip MineSound;
 
     [SerializeField] float TimeIdle = 0f;
     bool isMine=true;
@@ -67,6 +68,7 @@ public class Mine : MonoBehaviour
 
         //spawn effect
         Instantiate(MineEffect, transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(MineSound, transform.position);
         //destroy
         Destroy(gameObject);
     }

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DmgUpgrade : Upgrade
+public class MaxhealthUpgrade : Upgrade
 {
 
 
 
-    [SerializeField] int DamagetoAdd = 5;
+    [SerializeField] int MxHealthToAdd = 10;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -32,7 +32,7 @@ public class DmgUpgrade : Upgrade
         {
             Sr.enabled = false;
             collider.enabled = false;
-            mainController.IncDamage(DamagetoAdd);
+            PlayerHealth.IncMaxHealhth(MxHealthToAdd);
             Destroy(gameObject);
         }
         else

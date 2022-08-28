@@ -15,6 +15,8 @@ public class LaserGun : Weapon
 
     Quaternion rotationoffset;
 
+    bool PlayingSound=false;
+
     public void AddHitEffect(string PrefName)
     {
         HitEffects.Add( GameObject.Find(PrefName));
@@ -57,7 +59,12 @@ public class LaserGun : Weapon
     }
     public override void Shoot(Transform ShootingPoint, Vector2 AimDirection)
     {
-
+        if (!PlayingSound)
+        {
+            GetComponent<AudioSource>().Play();
+            PlayingSound = true;
+        }
+        
         //Shoot Effects
         for (int i = 0; i < ShootEffects.Count; i++)
         {
@@ -108,7 +115,8 @@ public class LaserGun : Weapon
     }
 
     public override void DontShoot() {
-
+        GetComponent<AudioSource>().Stop();
+        PlayingSound = false;
         if (lineRenderer)
         lineRenderer.enabled = false;
     }

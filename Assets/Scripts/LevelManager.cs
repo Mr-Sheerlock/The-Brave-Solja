@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject PauseMenu;
     [SerializeField] AudioClip BossClip;
 
+    
     public void PauseToggle()
     {
         if (PauseMenu.active == false)
@@ -53,5 +55,23 @@ public class LevelManager : MonoBehaviour
         AS.Stop();
         AS.clip = BossClip;
         AS.Play();
+    }
+
+    public void NextLevel()
+    {
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentIndex < SceneManager.sceneCountInBuildSettings - 1)
+        {
+            SceneManager.LoadScene(currentIndex+1);
+        }
+        else
+        {
+            //last level
+
+            //set game finish to true
+            PlayerPrefs.SetInt("FinishGame", 1);
+            SceneManager.LoadScene(0);
+
+        }
     }
 }

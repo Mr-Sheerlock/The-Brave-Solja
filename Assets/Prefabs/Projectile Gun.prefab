@@ -49,4 +49,3 @@ MonoBehaviour:
   gunWidth: 0
   timer: 0
   bullet: {fileID: 7394238884734281542, guid: e79f09fe96771174ba0706ca593c1080, type: 3}
-  FireForce: 20

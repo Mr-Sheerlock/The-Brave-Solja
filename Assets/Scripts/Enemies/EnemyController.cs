@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Weapon weapontype;
     [SerializeField] Weapon CurrentWeapon;
     [SerializeField] GameObject DeathEffect;
+    [SerializeField] AudioClip DeathSound;
 
 
     //Movement & Direction
@@ -21,6 +22,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Vector2 TargetPosition;
     public Vector2 OriginalPos;
 
+    [SerializeField] bool canMove=true;
     #endregion
 
 
@@ -121,6 +123,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
+            canMove=true;
             rb.velocity = new Vector2(0, 0);
             AimTowardsPlayer();
             CurrentState = State.SHOOT;
@@ -143,19 +146,22 @@ public class EnemyController : MonoBehaviour
         {
             case State.MOVE:
                 //randomize,validate
-                gunController.DontShootWeapon(); 
-                if (Vector2.Distance(TargetPosition ,(Vector2)transform.position )<=0.1f)
+                gunController.DontShootWeapon();
+                if (canMove)
                 {
-                    if (checkboundary()) { 
-                    while (!RandomizeValidPosition()) ;
-                    }
-                    else
+                    if (Vector2.Distance(TargetPosition ,(Vector2)transform.position )<=0.1f)
                     {
-                        //y7awl yrg3 el mohem 
-                        Move(OriginalPos);
+                        if (checkboundary()) { 
+                        while (!RandomizeValidPosition()) ;
+                        }
+                        else
+                        {
+                            //y7awl yrg3 el mohem 
+                            Move(OriginalPos);
+                        }
                     }
+                    Move(TargetPosition);
                 }
-                Move(TargetPosition);
                 break;
             case State.SHOOT:
                 gunController.ShootWeapon(Shootinpoint, aimDirection);
@@ -243,6 +249,7 @@ public class EnemyController : MonoBehaviour
     public void Die()
     {
         GameObject lol = Instantiate(DeathEffect, transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(DeathSound, transform.position);
         Destroy(gameObject);
     }
 
