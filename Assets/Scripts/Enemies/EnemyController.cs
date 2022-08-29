@@ -34,7 +34,7 @@ public class EnemyController : MonoBehaviour
     public GunController gunController;
     [SerializeField] bool SpottedPlayer=false;
     public float timer;
-    float aimOffset=130f;
+    [SerializeField] float aimOffset=130f;    //originally was 130
     #endregion
 
     public static int laserCount=0;
@@ -53,6 +53,9 @@ public class EnemyController : MonoBehaviour
     #endregion
 
 
+    #region
+    bool awlmarra = false;
+    #endregion
     enum State
     {
         IDLE = 0,
@@ -120,6 +123,7 @@ public class EnemyController : MonoBehaviour
             timer = 0;
             //MovingTimer+=Time.fixedDeltaTime;
             CurrentState = State.MOVE;
+            awlmarra = true;
         }
         else
         {
@@ -164,7 +168,25 @@ public class EnemyController : MonoBehaviour
                 }
                 break;
             case State.SHOOT:
+
+                //Logic 1:  (Faulted)
                 gunController.ShootWeapon(Shootinpoint, aimDirection);
+
+                //Logic 2: 
+
+                //if (!awlmarra)
+                //{
+                //    gunController.ShootWeapon(Shootinpoint, aimDirection);
+
+                //}
+                //else
+                //{
+                //    awlmarra = false;
+                //}
+
+                //Trial 3:
+                //StartCoroutine(ShootItBoy());
+
                 break;
 
             case State.IDLE:
@@ -181,21 +203,19 @@ public class EnemyController : MonoBehaviour
     void AimTowardsPlayer()
     {
         PlayerPosition = Player.transform.position;
-        aimDirection = PlayerPosition - rb.position;
+        aimDirection = PlayerPosition - (Vector2)transform.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        rb.rotation = aimAngle- aimOffset;
-        rb.angularVelocity = 0;
-
+        aimAngle = aimAngle - aimOffset;
+        transform.rotation = Quaternion.Euler(0, 0, aimAngle);
     }
 
 
     void AimTowardsPosition()
     {
-
-        aimDirection = TargetPosition - rb.position;
+        aimDirection = TargetPosition - (Vector2)transform.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        rb.rotation = aimAngle - aimOffset;
-        rb.angularVelocity = 0;
+        aimAngle = aimAngle - aimOffset;
+        transform.rotation = Quaternion.Euler(0, 0, aimAngle);
 
     }
     void Move(Vector2 newPosition)
@@ -233,7 +253,7 @@ public class EnemyController : MonoBehaviour
             if (collider.tag == "Player")
             {
                 SpottedPlayer = true;
-                Debug.Log("Spotted Player");
+                //Debug.Log("Spotted Player");
             }
         }
     }
@@ -282,5 +302,15 @@ public class EnemyController : MonoBehaviour
     private void OnDestroy()
     {
         Destroy(CurrentWeapon);
+    }
+
+    IEnumerator ShootItBoy()
+    {
+        if (awlmarra)
+        {
+            yield return new WaitForSeconds(3f);
+        }
+        awlmarra = false;
+        gunController.ShootWeapon(Shootinpoint, aimDirection);
     }
 }

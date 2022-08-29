@@ -48,7 +48,12 @@ public class ProjectileGun : Weapon
         if (TimeSinceLastShoot >= PeriodicTime)
         {
             timer = Time.time;
+            //Attempt 1: (Working, kinda)
             BulletRotation.eulerAngles = AnglesOffset + ShootingPoint.rotation.eulerAngles;
+            
+            //Debug.Log("Shooting Point rot is " + ShootingPoint.rotation.eulerAngles);
+            //Debug.Log("Bullet Rot hence is " + BulletRotation.eulerAngles);
+            //BulletRotation.eulerAngles = new Vector3(0,0,0.5f) + ShootingPoint.rotation.eulerAngles;
             
             if (numberofProjectiles == 1)
             {

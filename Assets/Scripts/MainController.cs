@@ -13,12 +13,14 @@ public class MainController : MonoBehaviour
 
 
     #region Logic Handling
-    public GameObject DieEffect;
-    public GameObject PlayerLight;
-    public Rigidbody2D rb;
+    [SerializeField] GameObject DieEffect;
+    [SerializeField] GameObject PlayerLight;
+    [SerializeField] Rigidbody2D rb;
     float Horizontal, Vertical;
-    public Transform Shootinpoint;
+    [SerializeField] Transform Shootinpoint;
     [SerializeField] AudioClip DieSound;
+
+    [SerializeField] GameObject GameOverScreen;
     #endregion
 
     #region Shooting&Aiming
@@ -94,6 +96,8 @@ public class MainController : MonoBehaviour
 
     public void Die()
     {
+        if(GameOverScreen)
+        GameOverScreen.active = true;
         Instantiate(DieEffect, transform.position, transform.rotation);
         Instantiate(PlayerLight, transform.position,transform.rotation);
         AudioSource.PlayClipAtPoint(DieSound, transform.position);

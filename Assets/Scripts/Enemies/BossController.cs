@@ -44,7 +44,6 @@ public class BossController : MonoBehaviour
     [SerializeField] int damage=5;
     public float speed=5;
     float TimeIdle =0;
-    [SerializeField]float AmountOfRotation= 0.5f;
     int numberofBullets=1;
     //Mines
     int Max_N_Mines=3;
@@ -55,11 +54,11 @@ public class BossController : MonoBehaviour
     bool SpawnedMines=false;
 
     [SerializeField] bool DropsMines = false;   // false for bombs, true for mines
-    [SerializeField] float RotationIncrease = 1f;
     //Memory time ??
     #endregion
 
-
+    [SerializeField] float RotationIncrease = 1f;
+    [SerializeField]float AmountOfRotation= 0.5f;
     enum State
     {
         IDLE = 0,
@@ -197,25 +196,18 @@ public class BossController : MonoBehaviour
     {
         PlayerPosition = Player.transform.position;
         aimDirection = PlayerPosition - (Vector2)transform.position;
-        Quaternion toRotation = Quaternion.LookRotation(transform.up, aimDirection);
-      
-        //Debug.Log("transform.up is " + (transform.up));
-        //Debug.Log("aimDirection.normalized is " + (aimDirection.normalized));
-
-        //Debug.Log("Differnce is "+ (Mathf.Abs(((Vector2)transform.up-aimDirection.normalized).magnitude)));
-       
+        //working:
+        //////////////////////////Quaternion.LookRotation(forward, upwards);
+        Quaternion toRotation = Quaternion.LookRotation(transform.up, aimDirection); //from, to?
+        toRotation.x = 0;
+        toRotation.y = 0;
         if (((Vector2)transform.up - aimDirection.normalized).magnitude > 0.025)
         {
             toRotation.x = 0;
             toRotation.y = 0;
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, AmountOfRotation * Time.fixedDeltaTime);
         }
-        else
-        {
-            //Debug.Log("d5lt gowa :3 UwU w ana mw2f");
-
-        }
-
+        
 
     }
 
@@ -357,6 +349,7 @@ public class BossController : MonoBehaviour
     {
         for (int i = 0; i < Weapons.Length; i++)
         {
+            if(Weapons[i] != null)
             Destroy(Weapons[i].gameObject);
         }
     }

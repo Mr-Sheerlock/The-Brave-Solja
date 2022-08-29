@@ -42,6 +42,7 @@ public class GunController : MonoBehaviour
 
     public void ShootWeapon(Transform shootingpoint,Vector2 aimDirection)
     {
+        
         if (weapon)
             weapon.Shoot(shootingpoint, aimDirection);
 

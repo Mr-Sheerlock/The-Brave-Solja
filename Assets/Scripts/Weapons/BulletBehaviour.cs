@@ -21,7 +21,6 @@ public class BulletBehaviour : MonoBehaviour
    
     private void Awake()
     {
-        Debug.Log("Awoke");
         TimeSinceShot = 0f;
         damage = 1;
         AudioSource.PlayClipAtPoint(audioclip, transform.position);

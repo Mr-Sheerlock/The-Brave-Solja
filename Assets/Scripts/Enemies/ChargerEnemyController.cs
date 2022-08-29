@@ -237,23 +237,23 @@ public class ChargerEnemyController : MonoBehaviour
     void AimTowardsPosition()
     {
 
-        aimDirection = TargetPosition - rb.position;
+        aimDirection = TargetPosition - (Vector2)transform.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        rb.rotation = aimAngle - aimOffset;
-        rb.angularVelocity = 0;
+        aimAngle = aimAngle - aimOffset;
+        transform.rotation = Quaternion.Euler(0, 0, aimAngle);
 
     }
 
     void AimTowardsPlayer()
     {
-        //mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         PlayerPosition = Player.transform.position;
-        aimDirection = PlayerPosition - rb.position;
+        aimDirection = PlayerPosition - (Vector2)transform.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        rb.rotation = aimAngle - aimOffset;
-        rb.angularVelocity = 0;
+        aimAngle = aimAngle - aimOffset;
+        transform.rotation = Quaternion.Euler(0, 0, aimAngle);
 
     }
+
     void Move(Vector2 newPosition)
     {
         AimTowardsPosition();

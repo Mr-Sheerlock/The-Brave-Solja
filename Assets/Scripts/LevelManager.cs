@@ -74,4 +74,9 @@ public class LevelManager : MonoBehaviour
 
         }
     }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2599250500352610569}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.12, y: -31.45, z: -0.29245102}
+  m_LocalPosition: {x: 41.12, y: -31.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -176,7 +176,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8317232109912184771}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -212,9 +212,11 @@ MonoBehaviour:
   - {fileID: 8317232111400036174}
   TargetPosition: {x: 0, y: 0}
   OriginalPos: {x: 0, y: 0}
+  canMove: 1
   gunController: {fileID: 8317232109912184768}
   SpottedPlayer: 0
   timer: 0
+  aimOffset: 130
   damage: 5
   speed: 5
   RangeOfSight: 15
@@ -300,8 +302,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -456,7 +458,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8317232110437029456}
   m_LocalRotation: {x: -0, y: -0, z: 0.38936576, w: 0.9210832}
-  m_LocalPosition: {x: -1.61, y: 1.6, z: -0.014436156}
+  m_LocalPosition: {x: -1.61, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
