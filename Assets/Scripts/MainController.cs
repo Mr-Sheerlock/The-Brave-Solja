@@ -20,7 +20,6 @@ public class MainController : MonoBehaviour
     [SerializeField] Transform Shootinpoint;
     [SerializeField] AudioClip DieSound;
 
-    [SerializeField] GameObject GameOverScreen;
     #endregion
 
     #region Shooting&Aiming
@@ -96,8 +95,6 @@ public class MainController : MonoBehaviour
 
     public void Die()
     {
-        if(GameOverScreen)
-        GameOverScreen.active = true;
         Instantiate(DieEffect, transform.position, transform.rotation);
         Instantiate(PlayerLight, transform.position,transform.rotation);
         AudioSource.PlayClipAtPoint(DieSound, transform.position);

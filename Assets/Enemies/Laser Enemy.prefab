@@ -224,9 +224,10 @@ MonoBehaviour:
   gunController: {fileID: 4416160275682481662}
   SpottedPlayer: 0
   timer: 0
+  aimOffset: 130
   damage: 5
   speed: 5
-  RangeOfSight: 15
+  RangeOfSight: 20
   LenghtOfBoundingSquare: 5
 --- !u!114 &4416160275682481662
 MonoBehaviour:
@@ -364,6 +365,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   On50percent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakingDamage:
     m_PersistentCalls:
       m_Calls: []
   HB: {fileID: 0}

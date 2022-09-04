@@ -161,31 +161,34 @@ public class EnemyController : MonoBehaviour
                         else
                         {
                             //y7awl yrg3 el mohem 
+                            AimTowardsPosition();
                             Move(OriginalPos);
                         }
                     }
+                    AimTowardsPosition();
                     Move(TargetPosition);
                 }
                 break;
             case State.SHOOT:
 
-                //Logic 1:  (Faulted)
                 gunController.ShootWeapon(Shootinpoint, aimDirection);
 
-                //Logic 2: 
-
-                //if (!awlmarra)
-                //{
-                //    gunController.ShootWeapon(Shootinpoint, aimDirection);
-
-                //}
-                //else
-                //{
-                //    awlmarra = false;
-                //}
-
-                //Trial 3:
-                //StartCoroutine(ShootItBoy());
+                if (Vector2.Distance(TargetPosition, (Vector2)transform.position) <= 0.1f)
+                {
+                    if (checkboundary())
+                    {
+                        while (!RandomizeValidPosition()) ;
+                    }
+                    else
+                    {
+                        //y7awl yrg3 el mohem 
+                        Move(OriginalPos);
+                    }
+                }
+                else
+                {
+                    Move(TargetPosition);
+                }
 
                 break;
 
@@ -220,7 +223,7 @@ public class EnemyController : MonoBehaviour
     }
     void Move(Vector2 newPosition)
     {
-        AimTowardsPosition();
+        //AimTowardsPosition();
         MovingDirection = newPosition - (Vector2)transform.position;
         rb.velocity = MovingDirection.normalized * speed;
     }

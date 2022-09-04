@@ -8,8 +8,9 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] GameObject Player;
     [SerializeField] GameObject PauseMenu;
+    [SerializeField] GameObject GameOverMenu;
     [SerializeField] AudioClip BossClip;
-
+    bool gameOver=false;
     
     public void PauseToggle()
     {
@@ -32,7 +33,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !gameOver)
         {
             PauseToggle();
         }
@@ -78,5 +79,11 @@ public class LevelManager : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GameOver()
+    {
+        GameOverMenu.SetActive(true);
+        gameOver = true;
     }
 }

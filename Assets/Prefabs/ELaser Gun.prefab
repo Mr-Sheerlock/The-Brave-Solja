@@ -47,6 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   LaserWidth: 0
+  LaserLayer:
+    serializedVersion: 2
+    m_Bits: 264
   lineRenderer: {fileID: 0}
   HitEffects:
   - {fileID: 4023985159046190781, guid: ba7ffc0698d992f4c8f8c9efe2625c9a, type: 3}

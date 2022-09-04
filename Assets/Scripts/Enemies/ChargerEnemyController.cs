@@ -11,7 +11,7 @@ public class ChargerEnemyController : MonoBehaviour
     public SpriteRenderer SR;
     Color C;
     public Transform[] BoundaryPoints; //UP DOWN RIGHT LEFT
-
+    [SerializeField] private TrailRenderer tr;
     #endregion
 
     #region Movement
@@ -27,6 +27,7 @@ public class ChargerEnemyController : MonoBehaviour
     #region Aiming & Charging
     [SerializeField]float damage=10f;
     [SerializeField] float speed=5;
+    [SerializeField] float speedInc=10;
     //shooting and aiming 
     GameObject Player;
     Vector2 PlayerPosition;
@@ -71,6 +72,7 @@ public class ChargerEnemyController : MonoBehaviour
         TargetPosition = transform.position;
         Offset = new Vector2(0, 0);
         OriginalPos = transform.position;
+        tr.emitting = false;
     }
 
    
@@ -156,12 +158,15 @@ public class ChargerEnemyController : MonoBehaviour
                 break;
 
             case State.IDLE:
-                if(Vector2.Distance(TargetPosition, (Vector2)transform.position) <= CheckhitDistance)
+                //stops either by hitting the target or waiting for the supposed time to hit the position
+                if (Vector2.Distance(TargetPosition, (Vector2)transform.position) <= CheckhitDistance)
                 {
+                    tr.emitting = false;
                     rb.velocity = Vector3.zero;
                 }
                 if(timer> TimeStampCharging+ timeToReachTarget)
                 {
+                    tr.emitting = false;
                     rb.velocity = Vector3.zero;
                 }
                 ChangeHuetoOriginal(timer);
@@ -200,10 +205,11 @@ public class ChargerEnemyController : MonoBehaviour
     }
     void Shoot()
     {
+        tr.emitting = true;
         ((CircleCollider2D)EnemyCollider).radius += 0.4f;
 
         //SpawnSprite
-        speed += 10f;
+        speed += speedInc;
         TargetPosition= Player.transform.position;
 
         //calculate time to reach that position
@@ -212,7 +218,7 @@ public class ChargerEnemyController : MonoBehaviour
         Move(TargetPosition);
 
 
-        speed -= 10f;
+        speed -= speedInc;
         ((CircleCollider2D)EnemyCollider).radius -= 0.4f;
     }
 

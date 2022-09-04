@@ -11,6 +11,7 @@ public class BossController : MonoBehaviour
     [SerializeField] Weapon weapontype1;
     [SerializeField] Weapon weapontype2;
     public Weapon[] Weapons;
+    [SerializeField] LayerMask LaserMask;
     [SerializeField]GameObject Mine;
     [SerializeField] GameObject DeathEffect;
     [SerializeField] AudioClip DeathSound;
@@ -285,6 +286,7 @@ public class BossController : MonoBehaviour
         Weapons[i] = lol;
         Weapons[i].SetDamage(damage);
         ((LaserGun)Weapons[i]).SetLaserName("BossLaser" + Bosslasercount.ToString());
+        ((LaserGun)Weapons[i]).SetMask(LaserMask);
         DontShootWeapons();
     }
 

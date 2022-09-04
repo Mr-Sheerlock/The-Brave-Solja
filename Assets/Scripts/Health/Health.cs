@@ -14,6 +14,7 @@ public class Health : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnDeath;
     public UnityEvent On50percent;
+    public UnityEvent OnTakingDamage;
 
     public HealthbarScript HB;
     
@@ -72,7 +73,7 @@ public class Health : MonoBehaviour
         CurrentHealth -= damage;
 
         //Debug.Log("Damage Taken is" + damage);
-        
+        OnTakingDamage.Invoke();
         (HB)?.SetSize((float)CurrentHealth / Maxhealth);
         if (CurrentHealth / Maxhealth <= 0.5f && !fiftypercent)
         {

@@ -219,8 +219,8 @@ MonoBehaviour:
   aimOffset: 130
   damage: 5
   speed: 5
-  RangeOfSight: 15
-  LenghtOfBoundingSquare: 5
+  RangeOfSight: 17
+  LenghtOfBoundingSquare: 10
 --- !u!114 &8317232109912184768
 MonoBehaviour:
   m_ObjectHideFlags: 0
