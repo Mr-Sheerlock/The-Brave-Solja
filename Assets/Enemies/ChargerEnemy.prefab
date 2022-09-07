@@ -350,10 +350,10 @@ MonoBehaviour:
   damage: 10
   speed: 5
   speedInc: 20
-  RangeOfSight: 15
+  RangeOfSight: 30
   timer: 0
-  TimeStampIdle: 10
-  TimeStampCharging: 4
+  TimeStampIdle: 3
+  TimeStampCharging: 2.5
   CheckhitDistance: 2
   DeathEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
   DeathSound: {fileID: 8300000, guid: c9ef7f2139f756a4f97cd1df60ad2d73, type: 3}

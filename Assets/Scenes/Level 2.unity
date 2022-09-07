@@ -2625,7 +2625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d5170f9b70e304e8589d0e66f9ec4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelFinish:
+  LevelFinishEnter:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 325479396}
@@ -2640,6 +2640,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  LevelFinishExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &481968287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4832921229777043215, guid: 577d84a7f8138e743a07e0ef98a6f3b8, type: 3}

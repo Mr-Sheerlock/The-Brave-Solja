@@ -9,11 +9,17 @@ public class FinishBoundary : MonoBehaviour
 
 
     [Header("Events")]
-    public UnityEvent LevelFinish;
+    public UnityEvent LevelFinishEnter;
+    public UnityEvent LevelFinishExit;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        LevelFinish.Invoke();
+        LevelFinishEnter.Invoke();
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        LevelFinishExit.Invoke();
     }
 }
