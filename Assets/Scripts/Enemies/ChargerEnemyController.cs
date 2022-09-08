@@ -37,6 +37,7 @@ public class ChargerEnemyController : MonoBehaviour
     [SerializeField] float timer;
     [SerializeField] float TimeStampIdle=10f;
     [SerializeField] float TimeStampCharging=4f;
+    float TimeIdle;
     float aimOffset=130f;
     bool Shot=false;
     [SerializeField]float CheckhitDistance=2f;
@@ -62,6 +63,7 @@ public class ChargerEnemyController : MonoBehaviour
 
     void Start()
     {
+        TimeIdle = TimeStampIdle - TimeStampCharging;
         EnemyCollider = gameObject.GetComponent<Collider2D>();
         C = SR.color;
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -166,7 +168,8 @@ public class ChargerEnemyController : MonoBehaviour
                 if(timer> TimeStampCharging+ timeToReachTarget)
                 {
                     tr.emitting = false;
-                    rb.velocity = Vector3.zero;
+                    //rb.velocity = Vector3.zero;
+                    rb.velocity -= 0.1f*(speed+speedInc)*rb.velocity.normalized*Time.deltaTime* TimeIdle;
                     //Debug.Log("Time reached");
                 }
                 ChangeHuetoOriginal(timer);

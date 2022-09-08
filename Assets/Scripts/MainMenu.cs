@@ -47,4 +47,12 @@ public class MainMenu : MonoBehaviour
         FinishPrompt.active = false;
         MainMenuu.active = true;
     }
+
+
+    public void ClearData()
+    {
+        PlayerPrefs.DeleteKey("FinishGame");
+        //PlayerPrefs.DeleteKey("KilledBosses");
+
+    }
 }

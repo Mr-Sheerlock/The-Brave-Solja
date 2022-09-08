@@ -347,9 +347,9 @@ MonoBehaviour:
   - {fileID: 1429626459267941220}
   tr: {fileID: 4720569495124025862}
   LenghtOfBoundingSquare: 20
-  damage: 10
+  damage: 20
   speed: 5
-  speedInc: 20
+  speedInc: 25
   RangeOfSight: 30
   timer: 0
   TimeStampIdle: 3

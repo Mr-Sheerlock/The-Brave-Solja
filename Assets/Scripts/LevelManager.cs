@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject PauseMenu;
     [SerializeField] GameObject GameOverMenu;
     [SerializeField] AudioClip BossClip;
+    [SerializeField] AudioClip MainBGClip;
+    [SerializeField] AudioClip RoomSongClip;
     bool gameOver=false;
     
     public void PauseToggle()
@@ -91,5 +93,24 @@ public class LevelManager : MonoBehaviour
     private void OnDestroy()
     {
         Time.timeScale = 1;
+    }
+
+
+    public void EnterRoomMusicChange()
+    {
+        var AS = gameObject.GetComponent<AudioSource>();
+        AS.Stop();
+        AS.clip = RoomSongClip;
+        AS.Play();
+        AS.volume = 0.5f;
+    }
+
+    public void ExitRoomMusicChange()
+    {
+        var AS = gameObject.GetComponent<AudioSource>();
+        AS.Stop();
+        AS.clip = MainBGClip;
+        AS.Play();
+        AS.volume = 0.2f;
     }
 }
