@@ -135,7 +135,7 @@ MonoBehaviour:
   light: {fileID: 6911790919076572064}
   MineSquareRenderer: {fileID: 231066170741071957}
   MineEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
-  MineSound: {fileID: 8300000, guid: c9ef7f2139f756a4f97cd1df60ad2d73, type: 3}
+  MineSound: {fileID: 8300000, guid: 66929c34b3cd0e1498b4b92a7e695c76, type: 3}
   TimeIdle: 0
 --- !u!58 &5969631276102643613
 CircleCollider2D:

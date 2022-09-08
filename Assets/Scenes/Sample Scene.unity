@@ -224,11 +224,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 953436783547277129, guid: 3ef03e3c3e00bc34ebca5857ed010107, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.57
+      value: 38.33
       objectReference: {fileID: 0}
     - target: {fileID: 953436783547277129, guid: 3ef03e3c3e00bc34ebca5857ed010107, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.51
+      value: -5.14
       objectReference: {fileID: 0}
     - target: {fileID: 953436783547277129, guid: 3ef03e3c3e00bc34ebca5857ed010107, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2005,7 +2005,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 03136f8ad46c48c4884e14384f4ad21f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4230,7 +4230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4013680941695174327, guid: 40f0995a3d6e0b644a3f991ae10f9425, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40f0995a3d6e0b644a3f991ae10f9425, type: 3}
@@ -4517,7 +4517,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 470540668}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: MusicChange
+        m_MethodName: BossMusicChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5318,7 +5318,7 @@ MonoBehaviour:
     m_Bits: 0
   Mine: {fileID: 5803422418907014285, guid: 160d3fc1688625945adcfa57143d5f26, type: 3}
   DeathEffect: {fileID: 4499953751088056899, guid: 85632d1060806794d9db443314426720, type: 3}
-  DeathSound: {fileID: 8300000, guid: 78410ca453b49c047a8affa7a4624070, type: 3}
+  DeathSound: {fileID: 8300000, guid: d4197a372d525634cbc9058a7a997887, type: 3}
   BoundaryPoints:
   - {fileID: 313220693}
   - {fileID: 2072486692}
@@ -5753,7 +5753,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.2976744, y: 1}
+    m_SensorSize: {x: 2.0626304, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5870,6 +5870,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1429626459686221272, guid: 7ca543bbab7c1b0448ddaf6c59f6f631, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429626459686221276, guid: 7ca543bbab7c1b0448ddaf6c59f6f631, type: 3}
+      propertyPath: m_Mass
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 1429626459686221279, guid: 7ca543bbab7c1b0448ddaf6c59f6f631, type: 3}
       propertyPath: RangeOfSight
       value: 25
@@ -5953,6 +5961,10 @@ PrefabInstance:
     - target: {fileID: 6656846315403439417, guid: 7ca543bbab7c1b0448ddaf6c59f6f631, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920307692169181867, guid: 7ca543bbab7c1b0448ddaf6c59f6f631, type: 3}
+      propertyPath: CurrentHealth
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ca543bbab7c1b0448ddaf6c59f6f631, type: 3}

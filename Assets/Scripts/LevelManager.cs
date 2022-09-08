@@ -50,12 +50,13 @@ public class LevelManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
-    public void MusicChange()
+    public void BossMusicChange()
     {
         var AS = gameObject.GetComponent<AudioSource>();
         AS.Stop();
         AS.clip = BossClip;
         AS.Play();
+        AS.volume = 0.4f;
     }
 
     public void NextLevel()
@@ -85,5 +86,10 @@ public class LevelManager : MonoBehaviour
     {
         GameOverMenu.SetActive(true);
         gameOver = true;
+    }
+
+    private void OnDestroy()
+    {
+        Time.timeScale = 1;
     }
 }

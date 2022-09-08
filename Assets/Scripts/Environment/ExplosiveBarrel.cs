@@ -28,11 +28,13 @@ public class ExplosiveBarrel : MonoBehaviour
                     collider.GetComponent<Health>().TakeDamage(ExplosionDamage);
                 }
             }
-
+            ParticleSystem ps;
             for (int i = 0; i < ExplosionEffects.Length; i++)
             {
                 Instantiate(ExplosionEffects[i], transform.position, transform.rotation);
                 //Set Particle Sizes
+                ps = ExplosionEffects[i].GetComponent<ParticleSystem>();
+                ps.startSize =ExplosionRadius;
             }
             AudioSource.PlayClipAtPoint(ExplosionSound, transform.position);
             Destroy(gameObject);

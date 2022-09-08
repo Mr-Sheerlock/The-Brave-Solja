@@ -105,7 +105,7 @@ MonoBehaviour:
   ExplosionEffects:
   - {fileID: 8520582542022464836, guid: c0c5f28b3e3a5844dbd6d5278df5c275, type: 3}
   - {fileID: 9118492525815192555, guid: 21508b9fd797e6f4a8aa8420e1b1e2a8, type: 3}
-  ExplosionSound: {fileID: 8300000, guid: 78410ca453b49c047a8affa7a4624070, type: 3}
+  ExplosionSound: {fileID: 8300000, guid: d4197a372d525634cbc9058a7a997887, type: 3}
   ExplosionLayer:
     serializedVersion: 2
     m_Bits: 1920
@@ -141,6 +141,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   On50percent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakingDamage:
     m_PersistentCalls:
       m_Calls: []
   HB: {fileID: 5282867683243394542}

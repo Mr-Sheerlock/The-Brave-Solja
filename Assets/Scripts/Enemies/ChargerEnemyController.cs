@@ -104,8 +104,6 @@ public class ChargerEnemyController : MonoBehaviour
             if (timer < TimeStampCharging)
             {
                 CurrentState = State.CHARGE;
-                Debug.Log("I am charging");
-                
             }
             else
             {
@@ -163,11 +161,13 @@ public class ChargerEnemyController : MonoBehaviour
                 {
                     tr.emitting = false;
                     rb.velocity = Vector3.zero;
+                    Debug.Log("Distance reached");
                 }
                 if(timer> TimeStampCharging+ timeToReachTarget)
                 {
                     tr.emitting = false;
                     rb.velocity = Vector3.zero;
+                    //Debug.Log("Time reached");
                 }
                 ChangeHuetoOriginal(timer);
                 break;
@@ -328,7 +328,8 @@ public class ChargerEnemyController : MonoBehaviour
                 return;
             }
         }
-        Move(TargetPosition);
+        //????
+        //Move(TargetPosition);
     }
 
 

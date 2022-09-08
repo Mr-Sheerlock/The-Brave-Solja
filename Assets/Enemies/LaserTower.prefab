@@ -226,7 +226,7 @@ MonoBehaviour:
   weapontype: {fileID: 5998821449281549036, guid: 536ecef0d0c3cfd43900990ff91752de, type: 3}
   gunController: {fileID: 3614787183475191405}
   DeathEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
-  DeathSound: {fileID: 8300000, guid: c9ef7f2139f756a4f97cd1df60ad2d73, type: 3}
+  DeathSound: {fileID: 8300000, guid: 66929c34b3cd0e1498b4b92a7e695c76, type: 3}
 --- !u!114 &3614787183475191405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +274,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   On50percent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakingDamage:
     m_PersistentCalls:
       m_Calls: []
   HB: {fileID: 1934534252804237195}

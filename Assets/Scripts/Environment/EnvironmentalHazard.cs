@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class EnvironmentalHazard : MonoBehaviour
 {
-    public int Damage;
+    [SerializeField] int Damage=20;
     float timer;
 
     void Start()
     {
         timer = 0;
-        Damage = 20;
     }
 
     // Update is called once per frame

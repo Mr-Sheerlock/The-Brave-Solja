@@ -98,7 +98,6 @@ public class ProjectileGun : Weapon
 
     void ShootSingle(Vector2 ShootingPoint, Vector2 AimDirection)
     {
-        Debug.Log("ShootGunn");
         GameObject currentbullet = Instantiate(bullet, ShootingPoint, BulletRotation);
         //set Damage
         BulletBehaviour lol = currentbullet.GetComponent<BulletBehaviour>();

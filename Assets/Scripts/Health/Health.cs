@@ -22,6 +22,8 @@ public class Health : MonoBehaviour
     public void IncMaxHealhth(int Addend)
     {
         Maxhealth += Addend;
+        CurrentHealth += Addend;
+        (HB)?.SetSize((float)CurrentHealth / Maxhealth);
     }
 
     public void IncCurrentHealth (float Addend)
@@ -29,6 +31,7 @@ public class Health : MonoBehaviour
         if(CurrentHealth < Maxhealth)
         {
             CurrentHealth += Addend;
+            (HB)?.SetSize((float)CurrentHealth / Maxhealth);
         }
 
     }
