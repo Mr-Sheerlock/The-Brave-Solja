@@ -50,6 +50,7 @@ public class MainController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log(Time.fixedDeltaTime);
         Move();
         Aim();
         if (Input.GetMouseButton(0))

@@ -14,6 +14,8 @@ public class LaserGun : Weapon
     public GameObject Laser;
 
     Quaternion rotationoffset;
+    float LaserDamage=1;
+    [SerializeField]float LaserFactor = 5;
 
     bool PlayingSound=false;
 
@@ -96,7 +98,7 @@ public class LaserGun : Weapon
 
             if (hit.collider.GetComponent<Health>())
             {
-                float LaserDamage = damage*Time.deltaTime*2;
+                LaserDamage = damage*LaserFactor*Time.fixedDeltaTime;
                 hit.collider.GetComponent<Health>().TakeDamage(LaserDamage);
             }
             if (hit.collider.tag == "Projectile")

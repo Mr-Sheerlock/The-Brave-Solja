@@ -58,6 +58,8 @@ MonoBehaviour:
   - {fileID: 1765884408335156549, guid: 287058ec0614ef04a9ec2f27a81a0241, type: 3}
   - {fileID: 4288109552701660961, guid: 1f18397f6b7edcd47acd6df9c6c7ed46, type: 3}
   Laser: {fileID: 1316547944353504146, guid: d252cab7bb3e5ff489616f0539dfc3d1, type: 3}
+  LaserFactor: 2
+  range: 0
 --- !u!82 &6923424566908577941
 AudioSource:
   m_ObjectHideFlags: 0
