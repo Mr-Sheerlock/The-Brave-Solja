@@ -51,8 +51,11 @@ public class MainMenu : MonoBehaviour
 
     public void ClearData()
     {
-        PlayerPrefs.DeleteKey("FinishGame");
-        //PlayerPrefs.DeleteKey("KilledBosses");
+        //Does Mine Bug
+        //PlayerPrefs.DeleteKey("FinishGame");
+        //PlayerPrefs.DeleteKey("SecretBoss");
 
+        PlayerPrefs.SetInt("FinishGame", 0);
+        //PlayerPrefs.SetInt("SecretBoss", 0);
     }
 }
