@@ -50,7 +50,7 @@ public class ChargerEnemyController : MonoBehaviour
     //Memory time ??
     [SerializeField] GameObject DeathEffect;
     [SerializeField] AudioClip DeathSound;
-
+    [SerializeField] float DragValue=0;
     enum State
     {
         IDLE = 0,
@@ -102,9 +102,10 @@ public class ChargerEnemyController : MonoBehaviour
         {
             AimTowardsPlayer();
             //CurrentState = State.CHARGE;
-
+            
             if (timer < TimeStampCharging)
             {
+                
                 CurrentState = State.CHARGE;
             }
             else
@@ -131,7 +132,7 @@ public class ChargerEnemyController : MonoBehaviour
         {
             case State.MOVE:
                 //randomize,validate
-                
+                rb.drag = 0;
                 if (Vector2.Distance(TargetPosition, (Vector2)transform.position) <= 0.1f)
                 {
                     if (checkboundary())
@@ -148,11 +149,14 @@ public class ChargerEnemyController : MonoBehaviour
                 break;
 
             case State.CHARGE:
-                rb.velocity = Vector2.zero;
+                //34an matra7 el random move
+                rb.drag = DragValue;
+                //rb.velocity = Vector2.zero;
                 ChangeHuetoRed(timer);
                 break;
 
             case State.SHOOT:
+                rb.drag = 0;
                 Shot = true;
                 Shoot();
                 break;
@@ -162,14 +166,15 @@ public class ChargerEnemyController : MonoBehaviour
                 if (Vector2.Distance(TargetPosition, (Vector2)transform.position) <= CheckhitDistance)
                 {
                     tr.emitting = false;
-                    rb.velocity = Vector3.zero;
-                    Debug.Log("Distance reached");
+                    //rb.velocity = Vector3.zero;
+                    rb.drag = DragValue;
+                    //Debug.Log("Distance reached");
                 }
                 if(timer> TimeStampCharging+ timeToReachTarget)
                 {
                     tr.emitting = false;
                     //rb.velocity = Vector3.zero;
-                    rb.velocity -= 0.1f*(speed+speedInc)*rb.velocity.normalized*Time.deltaTime* TimeIdle;
+                    rb.drag = DragValue ;
                     //Debug.Log("Time reached");
                 }
                 ChangeHuetoOriginal(timer);
@@ -335,6 +340,6 @@ public class ChargerEnemyController : MonoBehaviour
         //Move(TargetPosition);
     }
 
-
+    
 
 }

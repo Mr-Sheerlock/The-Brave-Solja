@@ -357,6 +357,7 @@ MonoBehaviour:
   CheckhitDistance: 2
   DeathEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
   DeathSound: {fileID: 8300000, guid: 66929c34b3cd0e1498b4b92a7e695c76, type: 3}
+  DragValue: 2
 --- !u!50 &1429626459686221276
 Rigidbody2D:
   serializedVersion: 4

@@ -33,12 +33,15 @@ public class BossController : MonoBehaviour
     Vector2 PlayerPosition;
     Vector2 aimDirection;
     public GunController gunController;
-    float RangeOfSight=60f;
     public bool SpottedPlayer;
+    bool Moved=false;
     public float timer;
-    float TimeActiveShooting=5f;
     float aimOffset=90f;
-    float PeriodicTime=0.6f;
+    [Header ("Shooting")]
+    [SerializeField] float TimeActiveShooting=5f;
+    [SerializeField] float PeriodicTime=0.6f;
+    [SerializeField] float RangeOfSight=60f;
+    [SerializeField] float LaserRange=20f;
     #endregion
 
     #region Stats
@@ -60,6 +63,9 @@ public class BossController : MonoBehaviour
 
     [SerializeField] float RotationIncrease = 1f;
     [SerializeField]float AmountOfRotation= 0.5f;
+
+    [SerializeField] GameObject BossMoveEffect;
+    [SerializeField] float MoveDelay=4f;
     enum State
     {
         IDLE = 0,
@@ -133,6 +139,12 @@ public class BossController : MonoBehaviour
             {
                 timer = 0;
             }
+
+            if (!Moved)
+            {
+                StartCoroutine(MoveBoss());
+            }
+            
         }
 
         //Search for player
@@ -172,6 +184,22 @@ public class BossController : MonoBehaviour
 
     }
 
+    IEnumerator MoveBoss()
+    {
+        Moved = true;
+        if (checkboundary())
+        {
+            while (!RandomizeValidPosition()) ;
+            Move(TargetPosition);
+        }
+        else
+        {
+            //y7awl yrg3 el mohem 
+            Move(OriginalPos);
+        }
+        yield return new WaitForSeconds(MoveDelay);
+        Moved = false;
+    }
     void ShootWeapons()
     {
         for (int i = 0; i <12; i++)
@@ -212,7 +240,16 @@ public class BossController : MonoBehaviour
 
     }
 
+    void InitialAim()
+    {
 
+        PlayerPosition = Player.transform.position;
+        aimDirection = PlayerPosition - (Vector2)transform.position;
+        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+        aimAngle = aimAngle - aimOffset;
+        transform.rotation = Quaternion.Euler(0, 0, aimAngle);
+
+    }
     void AimTowardsPosition()
     {
 
@@ -224,10 +261,9 @@ public class BossController : MonoBehaviour
     }
     void Move(Vector2 newPosition)
     {
-        AimTowardsPosition();
-        MovingDirection = newPosition - (Vector2)transform.position;
-        rb.velocity = MovingDirection.normalized * speed;
-
+        transform.position = newPosition;
+        //InitialAim();
+        Instantiate(BossMoveEffect, transform.position,transform.rotation);
     }
 
     bool RandomizeValidPosition()
@@ -287,6 +323,7 @@ public class BossController : MonoBehaviour
         Weapons[i].SetDamage(damage);
         ((LaserGun)Weapons[i]).SetLaserName("BossLaser" + Bosslasercount.ToString());
         ((LaserGun)Weapons[i]).SetMask(LaserMask);
+        ((LaserGun)Weapons[i]).SetRange(LaserRange);
         DontShootWeapons();
     }
 

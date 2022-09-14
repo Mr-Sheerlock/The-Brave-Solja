@@ -6,8 +6,9 @@ using UnityEngine.Rendering.Universal;
 
 public class MineLight : MonoBehaviour
 {
-    [SerializeField] float FadingRate=0.1f;
+    [SerializeField] float FadingDelay=0.1f;
     [SerializeField] float FadingAmount=0.4f;
+    [SerializeField] float MaxAlpha=1f;
     [SerializeField] Light2D light;
     bool fading = true;
     float alpha = 1;
@@ -35,18 +36,18 @@ public class MineLight : MonoBehaviour
             {
                 alpha -= FadingAmount * Time.deltaTime;
                 light.intensity = alpha;
-                yield return new WaitForSeconds(FadingRate);
+                yield return new WaitForSeconds(FadingDelay);
             }
             
             fading = false;
         }
         else
         {
-            while (alpha < 1)
+            while (alpha < MaxAlpha)
             {
                 alpha += FadingAmount * Time.deltaTime;
                 light.intensity = alpha;
-                yield return new WaitForSeconds(FadingRate);
+                yield return new WaitForSeconds(FadingDelay);
             }
             
             fading =true;

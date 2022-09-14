@@ -36,7 +36,7 @@ public class LaserGun : Weapon
 
 
 
-    float range;
+    [SerializeField] float range;
     private void Awake()
     {
         range = 20;
@@ -130,4 +130,8 @@ public class LaserGun : Weapon
         LaserLayer = newMask;
     }
 
+    public void SetRange(float newrange)
+    {
+        range = newrange;
+    }
 }

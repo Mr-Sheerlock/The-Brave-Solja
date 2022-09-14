@@ -211,6 +211,10 @@ MonoBehaviour:
   gunController: {fileID: 8737526475050153244}
   SpottedPlayer: 0
   timer: 0
+  TimeActiveShooting: 5
+  PeriodicTime: 0.6
+  RangeOfSight: 60
+  LaserRange: 20
   damage: 5
   speed: 0
   Delay_Between_Mines: 0.2
@@ -219,6 +223,7 @@ MonoBehaviour:
   DropsMines: 0
   RotationIncrease: 1
   AmountOfRotation: 0.5
+  BossMoveEffect: {fileID: 2926682524019957267, guid: d02eef3c2ed9316489cf8c1e649f5b3a, type: 3}
 --- !u!114 &8737526475050153244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +267,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100000
   m_LinearDrag: 0
   m_AngularDrag: 0.21
   m_GravityScale: 0

@@ -131,4 +131,21 @@ public class MainController : MonoBehaviour
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
     }
+
+    public void IncreaseSpeed(int ExtraSpeed)
+    {
+        speed += ExtraSpeed;
+    }
+
+    public void SetSpeed(int newSpeed)
+    {
+        if (isDashing)
+        {
+            speed = newSpeed * 2;
+        }
+        else
+        {
+            speed = newSpeed;
+        }
+    }
 }

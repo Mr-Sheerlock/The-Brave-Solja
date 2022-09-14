@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class FinishBoundary : MonoBehaviour
+public class TriggerBoundary : MonoBehaviour
 {
 
 

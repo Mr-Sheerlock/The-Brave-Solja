@@ -81,7 +81,7 @@ public class Mine : MonoBehaviour
     public void SetTimeIdle(float newTime)
     {
         TimeIdle = newTime;
-        Debug.Log("Time Idle inside function is " + TimeIdle);
+        //Debug.Log("Time Idle inside function is " + TimeIdle);
     }
 
     public void SetDamage(float damage)

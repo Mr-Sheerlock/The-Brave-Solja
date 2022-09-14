@@ -6,6 +6,10 @@ using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
+    [Header("Events")]
+    public UnityEvent LevelStart;
+    public UnityEvent SecretBossFinished;
+
     [SerializeField] GameObject Player;
     [SerializeField] GameObject PauseMenu;
     [SerializeField] GameObject GameOverMenu;
@@ -29,7 +33,11 @@ public class LevelManager : MonoBehaviour
     }
     void Start()
     {
-        
+        LevelStart.Invoke();
+        if (PlayerPrefs.GetInt("SecretBoss") != 0)
+        {
+            SecretBossFinished.Invoke();
+        }
     }
 
     // Update is called once per frame
@@ -112,5 +120,11 @@ public class LevelManager : MonoBehaviour
         AS.clip = MainBGClip;
         AS.Play();
         AS.volume = 0.2f;
+    }
+
+
+    public void SecretBossFinish()
+    {
+        PlayerPrefs.SetInt("SecretBoss", 1);
     }
 }

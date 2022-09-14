@@ -161,6 +161,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5803422418907014284}
     m_Modifications:
     - target: {fileID: 4937115555377163120, guid: dceb6d8dfea4780408716aa54e27aa1a, type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937115555377163120, guid: dceb6d8dfea4780408716aa54e27aa1a, type: 3}
       propertyPath: m_PointLightInnerRadius
       value: 2.6
       objectReference: {fileID: 0}
@@ -244,8 +248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653fa1ac0ee0e85419dea851ed3a5c39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadingRate: 0.1
+  FadingDelay: 0.1
   FadingAmount: 0.4
+  MaxAlpha: 5
   light: {fileID: 4773514989877460711}
 --- !u!114 &4773514989877460711 stripped
 MonoBehaviour:

@@ -1005,6 +1005,10 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1429626459686221279, guid: 7ca543bbab7c1b0448ddaf6c59f6f631, type: 3}
+      propertyPath: DragValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429626459686221279, guid: 7ca543bbab7c1b0448ddaf6c59f6f631, type: 3}
       propertyPath: TimeStampIdle
       value: 1.5
       objectReference: {fileID: 0}
@@ -1773,10 +1777,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3106850e58e61346a9756e13402bc6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SecretBossFinished:
+    m_PersistentCalls:
+      m_Calls: []
   Player: {fileID: 976081379}
   PauseMenu: {fileID: 537249202}
   GameOverMenu: {fileID: 1619050229}
   BossClip: {fileID: 8300000, guid: 43c72b106fb02b643a323cd356a8a655, type: 3}
+  MainBGClip: {fileID: 0}
+  RoomSongClip: {fileID: 0}
 --- !u!1 &340674275
 GameObject:
   m_ObjectHideFlags: 0
@@ -2931,9 +2940,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 5.42}
   serializedVersion: 2
-  m_Radius: 155.17
+  m_Radius: 145.63
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4548,6 +4557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec525efcaf627144a18157a37f0cf18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Condition1: 0
+  Condition2: 0
 --- !u!60 &894704351
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -11023,7 +11034,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0626304, y: 1}
+    m_SensorSize: {x: 2.2976744, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
