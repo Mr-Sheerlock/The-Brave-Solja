@@ -372,9 +372,13 @@ public class BossController : MonoBehaviour
         SpawnedMines = true;
         for (int i=0; i < Max_N_Mines; i++)
         {
-            GameObject lol = Instantiate(Mine, Player.position, Player.rotation);
-            lol.GetComponent<Mine>().SetTimeIdle(MineDelay);
-            lol.GetComponent<Mine>().SetIsMine(DropsMines);
+            if (Player!= null)
+            {
+                GameObject lol = Instantiate(Mine, Player.position, Player.rotation);
+                lol.GetComponent<Mine>().SetTimeIdle(MineDelay);
+                lol.GetComponent<Mine>().SetIsMine(DropsMines);
+
+            }
 
             yield return new WaitForSeconds(Delay_Between_Mines);
         }

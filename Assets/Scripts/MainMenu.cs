@@ -56,6 +56,6 @@ public class MainMenu : MonoBehaviour
         //PlayerPrefs.DeleteKey("SecretBoss");
 
         PlayerPrefs.SetInt("FinishGame", 0);
-        //PlayerPrefs.SetInt("SecretBoss", 0);
+        PlayerPrefs.SetInt("SecretBoss", 0);
     }
 }

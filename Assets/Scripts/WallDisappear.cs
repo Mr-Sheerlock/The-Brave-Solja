@@ -19,8 +19,8 @@ public class WallDisappear : MonoBehaviour
     }
     public void Disappear()
     {
-        if(Condition1 && Condition2)
-        gameObject.active = false;
+        if (Condition1 && Condition2)
+            Destroy(gameObject);
     }
 
 }
