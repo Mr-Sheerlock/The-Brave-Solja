@@ -122,7 +122,10 @@ public class LevelManager : MonoBehaviour
         AS.volume = 0.2f;
     }
 
-
+    public void LoadMaze()
+    {
+        SceneManager.LoadScene(4);
+    }
     public void SecretBossFinish()
     {
         PlayerPrefs.SetInt("SecretBoss", 1);

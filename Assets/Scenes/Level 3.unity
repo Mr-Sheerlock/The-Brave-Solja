@@ -6034,7 +6034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998241, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.96972305
+      value: 0.9787423
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998241, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_LocalRotation.x
@@ -6046,7 +6046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998241, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.24420741
+      value: 0.20509398
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998241, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6058,7 +6058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998241, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 28.27
+      value: 23.67
       objectReference: {fileID: 0}
     - target: {fileID: 879289817440998252, guid: 66a56e316eeabfe4497879b5615c4e19, type: 3}
       propertyPath: m_Name
@@ -10181,7 +10181,7 @@ MonoBehaviour:
   weapontype: {fileID: 3336290982689687542, guid: 9b394b0f7011c6548977bc45de675e2c, type: 3}
   CurrentWeapon: {fileID: 0}
   DeathEffect: {fileID: 6846094128511388167, guid: a0ff7cf8f22f0764d8054aadc8a61bb3, type: 3}
-  DeathSound: {fileID: 8300000, guid: c9ef7f2139f756a4f97cd1df60ad2d73, type: 3}
+  DeathSound: {fileID: 8300000, guid: 66929c34b3cd0e1498b4b92a7e695c76, type: 3}
   BoundaryPoints:
   - {fileID: 1904373725}
   - {fileID: 1904373724}

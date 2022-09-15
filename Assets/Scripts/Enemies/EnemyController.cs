@@ -272,7 +272,7 @@ public class EnemyController : MonoBehaviour
     public void Die()
     {
         GameObject lol = Instantiate(DeathEffect, transform.position, transform.rotation);
-        AudioSource.PlayClipAtPoint(DeathSound, transform.position);
+        if(DeathSound != null) AudioSource.PlayClipAtPoint(DeathSound, transform.position);
         Destroy(gameObject);
     }
 

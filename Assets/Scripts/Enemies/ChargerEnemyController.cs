@@ -315,7 +315,7 @@ public class ChargerEnemyController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.name == "Player")
+        if (collision.collider.name == "Player" || collision.collider.tag == "Barrel")
         {
             if (collision.collider.GetComponent<Health>())
             {
