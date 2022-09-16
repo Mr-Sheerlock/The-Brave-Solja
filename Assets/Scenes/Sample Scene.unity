@@ -2262,9 +2262,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.25
+    x: 0
     y: 0
-    width: 0.5
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -5935,7 +5935,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.1510516, y: 1}
+    m_SensorSize: {x: 2.3021033, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

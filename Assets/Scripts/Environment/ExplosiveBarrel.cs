@@ -25,7 +25,22 @@ public class ExplosiveBarrel : MonoBehaviour
             {
                 if (collider.GetComponent<Health>())
                 {
-                    collider.GetComponent<Health>().TakeDamage(ExplosionDamage);
+                    if (collider.tag == "Player")
+                    {
+                        float MaxPlayerHealth = collider.GetComponent<Health>().GetMaxHealth();
+                        if (MaxPlayerHealth < ExplosionDamage)
+                        {
+                            collider.GetComponent<Health>().TakeDamage(MaxPlayerHealth*0.5f);
+                        }
+                        else
+                        {
+                            collider.GetComponent<Health>().TakeDamage(ExplosionDamage);
+                        }
+                    }
+                    else
+                    {
+                        collider.GetComponent<Health>().TakeDamage(ExplosionDamage);
+                    }
                 }
             }
             ParticleSystem ps;

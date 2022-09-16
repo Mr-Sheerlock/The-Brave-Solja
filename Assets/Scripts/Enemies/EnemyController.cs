@@ -87,7 +87,7 @@ public class EnemyController : MonoBehaviour
     void SetUpBounds()
     {   
 
-        BoundaryPoints[0].position= transform.position +new Vector3(0,LenghtOfBoundingSquare);
+        BoundaryPoints[0].position= transform.position + new Vector3(0,LenghtOfBoundingSquare);
         BoundaryPoints[1].position= transform.position + new Vector3(0, -LenghtOfBoundingSquare);
         BoundaryPoints[2].position= transform.position + new Vector3(LenghtOfBoundingSquare,0);
         BoundaryPoints[3].position= transform.position + new Vector3(-LenghtOfBoundingSquare,0);
@@ -153,7 +153,7 @@ public class EnemyController : MonoBehaviour
                 gunController.DontShootWeapon();
                 if (canMove)
                 {
-                    if (Vector2.Distance(TargetPosition ,(Vector2)transform.position )<=0.1f)
+                    if (Vector2.Distance(TargetPosition ,(Vector2)transform.position )<=0.15f)
                     {
                         if (checkboundary()) { 
                         while (!RandomizeValidPosition()) ;
@@ -173,7 +173,7 @@ public class EnemyController : MonoBehaviour
 
                 gunController.ShootWeapon(Shootinpoint, aimDirection);
 
-                if (Vector2.Distance(TargetPosition, (Vector2)transform.position) <= 0.1f)
+                if (Vector2.Distance(TargetPosition, (Vector2)transform.position) <= 0.15f)
                 {
                     if (checkboundary())
                     {

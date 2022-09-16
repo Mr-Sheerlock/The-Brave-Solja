@@ -14,8 +14,13 @@ public class Mine : MonoBehaviour
 
     [SerializeField] float TimeIdle = 0f;
     bool isMine=true;
+    bool SpawnedMine = false;
+    float MineTime = 40f;
 
-
+    public void SetisSpawned(bool value)
+    {
+        SpawnedMine = value;
+    }
     private void Awake()
     {
          ;
@@ -51,6 +56,11 @@ public class Mine : MonoBehaviour
     {
         yield return new WaitForSeconds(TimeIdle);
         Collider.enabled = true;
+        if (SpawnedMine)
+        {
+            yield return new WaitForSeconds(MineTime);
+            Explode();
+        }
     }
 
     void Explode()

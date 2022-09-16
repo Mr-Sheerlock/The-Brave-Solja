@@ -377,6 +377,7 @@ public class BossController : MonoBehaviour
                 GameObject lol = Instantiate(Mine, Player.position, Player.rotation);
                 lol.GetComponent<Mine>().SetTimeIdle(MineDelay);
                 lol.GetComponent<Mine>().SetIsMine(DropsMines);
+                lol.GetComponent<Mine>().SetisSpawned(DropsMines);
 
             }
 
